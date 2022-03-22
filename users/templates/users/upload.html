@@ -1,0 +1,51 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block masthead %}
+<!-- Masthead-->
+<header class="mastheadOther">
+    <div class="container justify-content-center">
+        <div class="mastheadOther-heading text-uppercase" style="padding-top: 5%;">
+            <h1 style="text-align: center;">Upload Plant Photo</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block upload_photo %}
+<section class="py-5">
+    <div class="text-center" style="line-height: 0.5rem;">
+        <p class="lead" style="font-size: 1rem;">           
+            PLANTITA utilizes Convolutional Neural Network Models to identify 
+            the features of Philippine Indigenous Plants and classify it.
+        </p>
+        <a href="#user_guide" style="scroll-behavior: smooth; text-decoration: none;">
+            <small class="text-muted" style="font-size: 0.5rem; text-decoration: underline;">
+                What to Upload?
+            </small>  
+        </a>
+    </div>
+    <br>
+    <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
+
+    <div class="container px-4 px-lg-5 my-5">
+
+            <div class="container px-4 px-lg-5 my-5">
+                <h5> Plant Location </h5>
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!--- PH Plant Map  --->
+                    <div class="col-md-6">
+                        <!--- The Map  --->
+                        <div id="mapuserlocator" style="height: 300px; width: 600px;"></div>
+                        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                        <script src="{% static 'users/script/map_user_locator.js' %}"></script>
+                        <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
+                            async
+                        ></script>
+                    </div>
+                </div>
+            </div>
+    </div>
+</section>
+{% endblock %}

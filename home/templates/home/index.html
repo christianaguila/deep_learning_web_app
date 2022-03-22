@@ -1,0 +1,90 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block masthead %}
+<!-- hero area -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 text-center mb-5 mb-md-0">
+                <img src="{% static '/home/images/plant.png' %}" alt="">
+            </div>
+            <div class="col-md-6 align-self-center text-center text-md-left">
+                <div class="block">
+                    <h1 class="font-weight-bold mb-4 font-size-60">Know Your Plant Better</h1>
+                    <p class="mb-4">
+                        Take a picture of your plant, upload, then wait for the initial
+                        identification!
+                    </p>
+                    <a class="btn btn-main" href="#about" role="button">Upload</a>
+                </div>
+            </div>
+        </div><!-- .row close -->
+    </div><!-- .container close -->
+</section><!-- header close -->
+{% endblock %}
+
+{% block register_login %}
+<section class="feature-list section" style="background-color: rgba(45, 124, 108, 0.444);">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-1 order-2 align-self-center text-center text-md-left">
+                <div class="content">
+                    <h4 class="subheading">Be a contributor and help the Philippine flora grow.</h4>
+                    <p>Save your plant photos and landmarks, register now!</p>
+                    <div class="row">
+                        <div class="col">
+                            <a id="register" href="{% url 'register' %}" class="btn btn-main btn-main-sm">Register</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'login' %}" class="btn btn-main btn-main-sm">Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-2 order-1 text-center mb-5 mb-lg-0">
+                <img class="img-fluid" src="{% static '/home/images/phone.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block gallery_grid %}
+<section class="section">
+    <div class="container">
+        <div class="heading">
+            <h2>Philippine Indigenous Plants</h2>
+        </div>
+       
+            <div class="row justify-content-center" style="text-align: center;">
+                    {% for home_item in home %}
+                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0 ">
+                        <!-- gallery item 1-->
+                        <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                            <div class="card" style="width: 18rem;">
+                                <img class="img-fluid" src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}"/> 
+                                <div class="card-body" style="padding-bottom: 0%;">
+                                    <h5 class="card-title">{{ home_item.title }}</h5>
+                                    <p><small><i>{{ home_item.scientific_name }}</i></small></p>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
+                                    <li class="list-group-item"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
+                                    <li class="list-group-item"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
+                                  </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 %}
+            </div><!-- .row close -->
+                        
+                        <div class="row mt-4 justify-content-center" style="text-align: center;">
+                        {% endif %}
+                        <br>
+                        {% endfor %}
+                        </div> <!-- row2 -->
+            
+    </div><!-- .container close -->
+</section><!-- header close -->
+{% endblock %}
