@@ -8,3 +8,4 @@ class HomeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 admin.site.register(Plantsgallery, HomeAdmin)
+

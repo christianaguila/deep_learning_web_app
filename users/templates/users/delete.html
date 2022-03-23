@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block masthead %}
+<!-- Masthead-->
+<header class="mastheadOther">
+    <div class="container justify-content-center">
+        <div class="mastheadOther-heading text-uppercase" style="padding-top: 5%;">
+            <h1 style="text-align: center;">Delete Post</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block upload_photo %}
+<div class="row">
+	<div class="col-md-6">
+		<div class="card card-body">
+			<p>Are you sure you want to delete "{{post}}"?</p>
+			<form action="{% url 'delete_post' post.id  %}" method="POST">
+				{% csrf_token %}
+				<a class="btn btn-warning" href="{% url 'uploadplant' %}">Cancel</a>
+				<input class="btn btn-danger" type="submit" name="Confirm">
+			</form>
+		</div>
+	</div>
+</div>

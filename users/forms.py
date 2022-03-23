@@ -1,6 +1,8 @@
 from django import forms
-from django.contrib.auth.models import User, Predictpost
+from django.forms import ModelForm
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from .models import Post
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
@@ -10,8 +12,8 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-#------------Trying--------
-# class ImageUploadForm(forms.Form):
-#    class Meta:
-#        model = Predictpost
-#        fields = ['title', 'city']
+
+class ImageUploadForm(forms.ModelForm):
+   class Meta:
+       model = Post
+       fields = ['plant_name', 'city', 'plantimage']

@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, ImageUploadForm
+from .models import Post
 
 from PIL import Image
 
 import os
-import numpy as np
-import tensorflow as tf
-from keras.preprocessing.image import load_img, img_to_array
-from tensorflow.python.keras.models import load_model
+# import numpy as np
+# import tensorflow as tf
+# from keras.preprocessing.image import load_img, img_to_array
+# from tensorflow.python.keras.models import load_model
 
 # Create your views here.
 def register(request):
@@ -28,14 +29,10 @@ def register(request):
 def profile(request):
     return render(request,'users/profile.html')
 
-@login_required
-def uploadplant(request):
-    return render(request,'users/upload.html')
 
 #------------Trying--------
-#Load Model
+# #Load Model
 # def ImageModel(plantimage):
-#     try:
 #         model_graph = tf.compat.v1.Graph()
 #         with model_graph.as_default():
 #             tf_session = tf.compat.v1.Session()
@@ -52,14 +49,49 @@ def uploadplant(request):
 #                             'Tangisang-Bayawak',
 #                             'Tayabak']
 
-#Predict
-# def ImagePredict(request):
-#     if request.user.is_authenticated:
-#         #if something refer to jack's code
-#         if request.method == 'POST':
-#             predict_form = ImageUploadForm(request.POST, request.FILES)
-#             #if something refer to jack's code
-#                 if predict_form.is_valid()
-#                     plantimage = predict_form.cleaned_data['image']
-#                     image_bytes = plantimage.file.read()
-#     return render(request, 'users/upload.html', {'form':form})
+    # original = load_img(plantimage, target_size=(224, 224))
+    # numpy_image = img_to_array(original)
+    # image_batch = np.expand_dims(numpy_image, axis=0)
+    # processed_image = image_batch.copy()
+
+    # with model_graph.as_default():
+    #     with tf_session.as_default():
+    #         predictions=mobilenet_model.predict(processed_image)
+
+    # label = np.argmax(predictions)
+    # label = class_names[label]
+
+    # return label
+
+
+# # Predict
+@login_required
+def uploadplant(request):
+    postsss = Post.objects.all()
+    print('test')
+    if request.method == 'POST':
+        predict_form = ImageUploadForm(request.POST, request.FILES)
+        print('test')
+        if predict_form.is_valid():
+            predict_form.save(commit=False)
+            predict_form.user = request.user
+            predict_form.save()
+            print(predict_form)
+            return redirect('/')
+    else:
+        predict_form = ImageUploadForm()
+    return render(request, 'users/upload.html', {'predict_form':predict_form, 'postsss':postsss})
+
+def deletepost(request, pk):
+    post = Post.objects.get(id=pk)
+    if request.method == 'POST':
+        post.delete()
+        return redirect('/')
+
+    else:
+        predict_form = ImageUploadForm()
+    return render(request, 'users/delete.html', {'post':post})
+
+
+
+    

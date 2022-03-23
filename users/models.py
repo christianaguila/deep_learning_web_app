@@ -4,19 +4,21 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-#------------Trying--------
-# #Folder per User - Upload
+# ------------Trying--------
+#Folder per User - Upload
 # def get_upload_file_name(user, filename):
 #     return u'photos/%s/%s_%s' % (str(userpic.user.id),
 #                                  str(time()).replace('.', '_'),
 #                                  filename)
 
-# #Posting Predictions   
-# class Predictpost(models.Model):
-#     title = models.CharField(max_length=100)
-#     city = models.TextField()
-#     date_posted = models.DateTimeField(default=timezone.now)
-#     author = models.ForeignKey(User, editable=False, on_delete=models.CASCADE)
+#Posting Predictions   
+class Post(models.Model):
+    plant_name = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    plantimage = models.ImageField(upload_to='user_uploads/%Y/%m/')
+    date_posted = models.DateTimeField(default=timezone.now)
+    submitted = models.BooleanField(default=False)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.author.username
