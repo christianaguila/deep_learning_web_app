@@ -1,5 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block masthead %}
 <!-- Masthead-->
@@ -52,9 +53,9 @@
                     <a class="btn btn-sm btn-danger" href="{% url 'delete_post' post.id %}">Delete</a>
                 </button>
             {% endfor %} -->
-            <form action="{% url 'uploadplant'  %}" method="post">
+            <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{predict_form}}
+                {{predict_form | crispy}}
                 <button class="btn btn-dark my-4" type="submit" name="plant_submit">Submit</button>
             </form>
             
