@@ -68,10 +68,8 @@ def profile(request):
 @login_required
 def uploadplant(request):
     postsss = Post.objects.all()
-    print('test')
     if request.method == 'POST':
         predict_form = ImageUploadForm(request.POST, request.FILES)
-        print('test2')
         if predict_form.is_valid():
             instance = predict_form.save(commit=False)
             instance.author = request.user
