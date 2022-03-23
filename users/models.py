@@ -15,10 +15,20 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     plant_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
-    plantimage = models.ImageField(upload_to='user_uploads/%Y/%m/')
+    plantimage = models.ImageField(upload_to='user_uploads/')
     date_posted = models.DateTimeField(auto_now_add=True)
     submitted = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.author.username}'s {self.plant_name}"
+
+
+class PredictedPlant(models.Model):
+    class Meta:
+        verbose_name_plural = "Predicted Plants"
+    prediction_label = models.CharField(max_length=100)
+    post_prediction = models.ForeignKey(Post, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.prediction_label
