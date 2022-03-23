@@ -25,5 +25,10 @@ class Post(models.Model):
 
 
 class PredictedPlant(models.Model):
+    class Meta:
+        verbose_name_plural = "Predicted Plants"
     prediction_label = models.CharField(max_length=100)
     post_prediction = models.ForeignKey(Post, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.prediction_label

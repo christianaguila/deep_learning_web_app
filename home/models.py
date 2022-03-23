@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Plantsgallery(models.Model):
+    class Meta:
+        verbose_name_plural = "Plant Galleries"
+
     title = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=200, default='')
     slug = models.SlugField(unique=True)
