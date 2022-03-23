@@ -16,9 +16,9 @@ class Post(models.Model):
     plant_name = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     plantimage = models.ImageField(upload_to='user_uploads/%Y/%m/')
-    date_posted = models.DateTimeField(default=timezone.now)
+    date_posted = models.DateTimeField(auto_now_add=True)
     submitted = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.author.username
+        return f"{self.author.username}'s {self.plant_name}"

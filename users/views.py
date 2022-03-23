@@ -68,15 +68,12 @@ def profile(request):
 @login_required
 def uploadplant(request):
     postsss = Post.objects.all()
-    print('test')
     if request.method == 'POST':
         predict_form = ImageUploadForm(request.POST, request.FILES)
-        print('test')
         if predict_form.is_valid():
-            predict_form.save(commit=False)
-            predict_form.user = request.user
-            predict_form.save()
-            print(predict_form)
+            instance = predict_form.save(commit=False)
+            instance.author = request.user
+            instance.save()
             return redirect('/')
     else:
         predict_form = ImageUploadForm()
