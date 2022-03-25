@@ -1,0 +1,183 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block masthead %}
+<!-- Masthead-->
+<header class="mastheadOther">
+    <div class="container justify-content-center">
+        <div class="mastheadOther-heading text-uppercase" style="padding-top: 5%;">
+            <h1 style="text-align: center;">Philippine Plant Map</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block map %}
+<section style="padding: 0rem;">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <!--- PH Plant Map  --->
+            <div class="col-md-8">
+                <!--- The Map  --->
+                <div id="map" style=" height: 600px;"></div>
+                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                <script src="{% static 'home/script/script_map.js' %}"></script>
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
+                    async
+                ></script>
+            </div>
+
+            <div class="col-md-4 align-items-center">
+
+                <!-- - Category Filter  -->
+                <div class="row align-items-center" style="margin-top: 2%;"> 
+                    <div class="col-md-12" style="margin: 2% auto; width: 340px;">
+                        <select class="form-select" style="text-align: center;" onchange="filterMarkers(this.value);">
+                            <option value="">Filter by Category</option>
+                            <option value="Anahaw">Anahaw</option>
+                            <option value="Agi">Agi</option>
+                            <option value="Bignay">Bignay</option>
+                            <option value="Bagawak Morado">Bagawak Morado</option>
+                            <option value="Kalingag">Kalingag</option>
+                            <option value="Katmon">Katmon</option>
+                            <option value="Kris Plant">Kris Plant</option>
+                            <option value="Payau">Payau</option>
+                            <option value="Copeland's Pitcher">Copeland's Pitcher</option>
+                            <option value="Tayabak">Tayabak</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Legend Card -->
+                <div class="row gx-6 gx-lg-5 align-items-center" style="margin-top: 2%;"> 
+                    <div class="card card-with-shadow card-rounded-max card-without-border" style="width: auto;">
+                        <div class="card-body text-center" style="padding-top: 5%; height: auto;">                                
+                            <h5>Legend</h5>
+                            <hr style="border: solid 2px round;">
+                            <div class="row gx-4 gx-lg-5 align-items-center" style="margin: 0; font-size: 14px;">
+                                <!-- Agi Legend -->
+                                <div class="col-md-6" style="text-align: center;">
+                                    <img src="{% static 'home/images/icons/map_agi.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center;">
+                                    <p>Agi</p>
+                                </div>
+        
+                                <!-- -- Anahaw Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_anahaw.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Anahaw</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_bagawakmorado.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Bagawak Morado</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_pitcher.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Copeland's Pitcher</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_katmon.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Katmon</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_Kalingag.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Kalingag</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_krisplant.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Kris Plant</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'home/images/icons/map_tayabak.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Tayabak</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Legend Card -->
+            </div>
+
+            
+
+            <!-- User Guide -->
+            <div style="margin: 2% 2%;">
+                <h5>PLANTITA GUIDE</h5>
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!-- Question 1  -->
+                    <div class="col-md-12" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            1. Why are plants' locations are <b>NOT EXACT</b>? 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                                (Bakit hindi husto ang kinaroroonan ng mga halaman?)
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            In order to protect the plants from threats such as overexploitation, its exact location cannot be disclosed to the public. 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                            (Upang mapangalagaan ang mga halaman mula sa mga banta sa buhay nito katulad ng labis na pagsasamantala, 
+                            ang kinaroroonan nito ay hindi maaaring ihayag sa publiko.)
+                            </i>
+                        </p>
+                    </div>
+                    <!-- End Question 1  -->
+
+                    <!-- Question 2  -->
+                    <div class="col-md-12" style="text-align: justify; margin-top: 1%;">
+                        <p style="line-height: 0.3in;">
+                            2. Does the PLANTITA site also shows the indigenous plants of other countries? 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                                (Kaya ba ng PLANTITA site na maipakita ang indigenous plants ng ibang bansa?)
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            No, the PLANTITA site is solely for the indigenous plants that can be found in the <b>Philippines</b>.
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                            (Hindi, ang PLANTITA site ay para lamang sa indigenous plants na makikita sa Pilipinas.)
+                            </i>
+                        </p>
+                    </div>
+                <!-- End Question 2  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %} 

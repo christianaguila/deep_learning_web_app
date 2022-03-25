@@ -1,0 +1,140 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block masthead %}
+<!-- Masthead-->
+<header class="mastheadOther">
+    <div class="container justify-content-center">
+        <div class="mastheadOther-heading text-uppercase" style="padding-top: 5%;">
+            <h1 style="text-align: center;">Upload Plant Photo</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block upload_photo %}
+<section class="py-5">
+    <div class="text-center" style="line-height: 0.5rem;">
+        <p class="lead" style="font-size: 1rem;">           
+            PLANTITA utilizes Convolutional Neural Network Models to identify 
+            the features of Philippine Indigenous Plants and classify it.
+        </p>
+        <a href="#user_guide" style="scroll-behavior: smooth; text-decoration: none;">
+            <small class="text-muted" style="font-size: 0.5rem; text-decoration: underline;">
+                What to Upload?
+            </small>  
+        </a>
+    </div>
+    <br>
+    <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
+
+    <div class="container px-4 px-lg-5 my-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <h5> Plant Location </h5>
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!--- PH Plant Map  --->
+                    <div class="col">
+                        <!--- The Map  --->
+                        <div id="mapuserlocator" style="height: 300px; width: 600px;"></div>
+                        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                        <script src="{% static 'users/script/map_user_locator.js' %}"></script>
+                        <script
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
+                            async
+                        ></script>
+                    </div>
+                    <div class="col">
+                        <div class="container">
+                            <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{predict_form|crispy}}
+                                <button class="btn btn-dark my-4" type="submit" name="plant_submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+                <hr>
+
+                {% if prediction %}
+                <h5 style="padding-top: 2%; text-align: center;"> Plant Identification </h5>
+                <br>
+                <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+                    <div class="col">
+                        <div class="container justify-content-center text-center">
+                            {% if plant_image %}
+                                <img class="img-fluid" src="{{ plant_image.url }}" alt="{{ plant_image.title }}" style="max-width: 50%; height: auto; align-items: center;"/> 
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="container">
+                            <div class="card">
+                                <div class="card-body" style="text-align: center;">
+                                                <p style="align-items: center;">The plant is identified as
+                                                    <br> 
+                                                    <b>{{prediction}}</b>
+                                                </p>
+                                
+                                    {% if postsss %}
+                                            {% for i in postsss %}
+                                                {% if forloop.last %}
+                                                    <p style="align-items: center;">Found at {{i.city}}</p>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% else %}
+                                            <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>  
+    </div>
+</section>
+
+
+<section class="py-5">
+    <!-- Card History Predictions -->
+    <div class="container-fluid px-4 px-lg-5 my-5 mb-lg-0" style="padding-top: 5%;">
+        <div class="container">
+            <hr>
+            <h3 style="text-align: center;">Your Identified Plants</h3>
+            <br>
+            <div class="row mt-2" style="text-align: center;">
+                    {% for k in complete_pred %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                            <div>
+                                                <img class="card-img-top img-responsive" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; max-width: 50%; height: 185;" alt="Card image cap">
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <small class="text-muted"><b>Personal Identification: </b>{{ k.post_prediction.plant_name }}</small>
+                                                    <small class="text-muted"><b>Place Found: </b>{{ k.post_prediction.city }}, PH</small>
+                                                </li>
+                                                    <li class="list-group-item"><small class="text-muted">
+                                                            <b>Identification:</b> {{ k.prediction_label }} </small>
+                                                    </li>
+                                            </ul>     
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                    {% endfor %}
+                        </div><!-- row2 -->
+
+        </div> <!-- .container close -->
+    </div> 
+</section>
+{% endblock %}
