@@ -57,7 +57,14 @@
                 <div class="content">
                     <h4 class="subheading">Be a contributor and help the Philippine flora grow.</h4>
                     <p>Save your plant photos and landmarks, register now!</p>
-                    <a href="#" class="btn btn-main btn-main-sm">Register</a>
+                    <div class="row">
+                        <div class="col">
+                            <a id="register" href="{% url 'register' %}" class="btn btn-main btn-main-sm">Register</a>
+                        </div>
+                        <div class="col">
+                            <a href="{% url 'login' %}" class="btn btn-main btn-main-sm">Login</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 order-md-2 order-1 text-center mb-5 mb-lg-0">
