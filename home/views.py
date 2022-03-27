@@ -1,7 +1,19 @@
 from django.shortcuts import render
-from .models import Plantsgallery
+from django.views.decorators.csrf import csrf_exempt
+from .models import Plantsgallery, Prediction
 
 # Create your views here.
+@csrf_exempt
+def insert(request):
+    if request.method == 'POST':
+        prediction = Prediction(plant = 'Payau', latitude = request.POST['latitude'], longitude = request.POST['longitude'])
+        # prediction.plant = request.POST['plant']
+        # prediction.latitude = request.POST['latitude']
+        # prediction.longitude = request.POST['longitude']
+        prediction.save()
+    #     message = 'insert successful'
+    return render(request, 'home/index.html' )
+
 def index(request):
     home = Plantsgallery.objects.all()
     return render(request, 'home/index.html', {'home':home})

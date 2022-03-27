@@ -11,12 +11,37 @@
             </div>
             <div class="col-md-6 align-self-center text-center text-md-left">
                 <div class="block">
-                    <h1 class="font-weight-bold mb-4 font-size-60">Know Your Plant Better</h1>
+                    <h1 class="font-weight-bold mb-4 font-size-60">Know Your <span style="color:rgba(3, 139, 3, 0.849)">Plant</span> Better</h1>
                     <p class="mb-4">
                         Take a picture of your plant, upload, then wait for the initial
                         identification!
                     </p>
-                    <a class="btn btn-main" href="#about" role="button">Upload</a>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                    <script>
+                        $(document).ready(function(){
+                            $("#upload").click(function(){
+                                if(!navigator.geolocation){
+                                    console.log("Your browser doesn't support geolocation feature")
+                                }else{
+                                    navigator.geolocation.getCurrentPosition(getPosition)
+                                }
+                                
+                                function getPosition(pos){
+                                    let lat = pos.coords.latitude;
+                                    let long = pos.coords.longitude;
+
+                                    $.ajax({
+                                        url: "/insert/",
+                                        data: { latitude: lat, longitude: long },
+                                        type: "POST"
+                                    })
+                                }
+                            })
+                        })
+                    </script>
+
+
+                    <a class="btn btn-main" id="upload" href="#about" role="button">Upload</a>
                 </div>
             </div>
         </div><!-- .row close -->

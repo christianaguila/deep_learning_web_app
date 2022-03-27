@@ -63,4 +63,12 @@ class Plantsgallery(models.Model):
 
     def __str__(self):
             return f'{self.title}, {self.slug}'
+        
 
+class Prediction(models.Model):
+    plant = models.CharField(max_length=30)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+
+    def __str__(self):
+        return self.plant
