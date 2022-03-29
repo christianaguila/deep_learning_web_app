@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plantsgallery
+from .models import Plantsgallery, Location
 # Register your models here.
 
 class HomeAdmin(admin.ModelAdmin):
@@ -8,4 +8,14 @@ class HomeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 admin.site.register(Plantsgallery, HomeAdmin)
+
+@admin.register(Location)
+class LocationAdmin(admin.ModelAdmin):
+    list_display = [
+        'latitude',
+        'longitude',
+    ]
+
+
+
 

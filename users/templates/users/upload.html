@@ -32,32 +32,39 @@
     <div class="container px-4 px-lg-5 my-5">
             <div class="container px-4 px-lg-5 my-5">
                 <h5> Plant Location </h5>
+                <br>
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <!--- PH Plant Map  --->
+                    <!--------- PH Plant Map --------------->
                     <div class="col">
+                        <div class="container">
                         <!--- The Map  --->
-                        <div id="mapuserlocator" style="height: 300px; width: 600px;"></div>
+                        <div id="mapuserlocator" style="margin: auto; height: 50vh; width: 40vw;"></div>
                         <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
                         <script src="{% static 'users/script/map_user_locator.js' %}"></script>
                         <script
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
                             async
                         ></script>
+                        </div>
                     </div>
-                    <div class="col">
+                    
+                    <!-- Form Submit Plant Image by User  -->
+                    <div class="col mb-5 mb-md-0">
                         <div class="container">
+                            <br>
                             <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 {{predict_form|crispy}}
-                                <button class="btn btn-dark my-4" type="submit" name="plant_submit">Submit</button>
+                                <button class="btn btn-dark my-4" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
                 </div>
-                
-                <hr>
 
-                {% if prediction %}
+                <br>
+                <hr>
+                
+                <!-- Previews Plant Image by User & Prediction -->
                 <h5 style="padding-top: 2%; text-align: center;"> Plant Identification </h5>
                 <br>
                 <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
@@ -68,41 +75,52 @@
                             {% endif %}
                         </div>
                     </div>
+                    {% if prediction %}
                     <div class="col">
                         <div class="container">
                             <div class="card">
                                 <div class="card-body" style="text-align: center;">
-                                                <p style="align-items: center;">The plant is identified as
-                                                    <br> 
-                                                    <b>{{prediction}}</b>
-                                                </p>
-                                
-                                    {% if postsss %}
-                                            {% for i in postsss %}
-                                                {% if forloop.last %}
-                                                    <p style="align-items: center;">Found at {{i.city}}</p>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% else %}
-                                            <p></p>
-                                    {% endif %}
+                                    <p style="align-items: center;">The plant is identified as
+                                        <br> 
+                                        <b>{{prediction}}</b>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    {% else%}
+                    <div class="col">
+                        <div class="container" style="padding-top: 5%;">
+                            <div class="card card-with-shadow card-rounded-max card-without-border" style="width: auto;">
+                                <div class="card-body text-center" style="padding-top: 5%; height: auto;">      
+                                    <p>Indigenous Plants</p>
+                                    <div class="row">
+                                        {% for g in gallery %}
+                                        <div class="col">
+                                            <a style="color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </div>  
     </div>
 </section>
 
 
 <section class="py-5">
-    <!-- Card History Predictions -->
+    <!-------------------- Card Plant History Predictions ------------------------------->
     <div class="container-fluid px-4 px-lg-5 my-5 mb-lg-0" style="padding-top: 5%;">
         <div class="container">
             <hr>
             <h3 style="text-align: center;">Your Identified Plants</h3>
+            <br>
+            <h5 style="text-align: center;">Total Number of Plants Predicted: {{totalpred}}</h4>
             <br>
             <div class="row mt-2" style="text-align: center;">
                     {% for k in complete_pred %}
@@ -110,18 +128,21 @@
                                     <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
                                         <div class="card" style="width: 18rem;">
                                             <div>
-                                                <img class="card-img-top img-responsive" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; max-width: 50%; height: 185;" alt="Card image cap">
+                                                <img class="card-img-top img-responsive" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: 30vh; height: 40vh;" alt="Card image cap">
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item">
-                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
-                                                    <small class="text-muted"><b>Personal Identification: </b>{{ k.post_prediction.plant_name }}</small>
-                                                    <small class="text-muted"><b>Place Found: </b>{{ k.post_prediction.city }}, PH</small>
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small> 
+                                                    <small class="text-muted"><b>Place Found: </b></small>
                                                 </li>
-                                                    <li class="list-group-item"><small class="text-muted">
-                                                            <b>Identification:</b> {{ k.prediction_label }} </small>
-                                                    </li>
-                                            </ul>     
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> {{ k.prediction_label }} </small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                             
                                         </div>
                                     </div>
                                 </div>
@@ -131,10 +152,11 @@
                         <div class="row mt-2" style="text-align: center;">
                             {% endif %}
                             <br>
+                            
                     {% endfor %}
                         </div><!-- row2 -->
 
         </div> <!-- .container close -->
     </div> 
 </section>
-{% endblock %}
+{%endblock%}

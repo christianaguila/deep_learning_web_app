@@ -64,3 +64,11 @@ class Plantsgallery(models.Model):
     def __str__(self):
             return f'{self.title}, {self.slug}'
 
+class Location(models.Model):
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    # post_loc = models.ForeignKey(to='users.Post', on_delete=models.CASCADE, blank=False)
+
+    def __str__(self):
+        return f'{self.latitude}, {self.longitude}'
+

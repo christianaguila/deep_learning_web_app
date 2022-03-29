@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Manila'
 
 USE_I18N = True
 
@@ -138,4 +138,3 @@ LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
 
-TIME_ZONE = 'Asia/Manila'

@@ -14,8 +14,8 @@ class UserRegisterForm(UserCreationForm):
 
 
 class ImageUploadForm(forms.ModelForm):
-    plant_image = forms.ImageField()
+    plant_image = forms.ImageField(label='Plant Image')
     class Meta:
         model = Post
-        fields = ['plant_name', 'city', 'plant_image']
+        fields = ['plant_image']
         readonly_fields = ['author', 'submitted', 'date_posted']
