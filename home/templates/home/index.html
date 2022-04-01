@@ -16,37 +16,12 @@
                         Take a picture of your plant, upload, then wait for the initial
                         identification!
                     </p>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function(){
-                            $("#upload").click(function(){
-                                if(!navigator.geolocation){
-                                    console.log("Your browser doesn't support geolocation feature")
-                                }else{
-                                    navigator.geolocation.getCurrentPosition(getPosition)
-                                }
-                                
-                                function getPosition(pos){
-                                    let lat = pos.coords.latitude;
-                                    let long = pos.coords.longitude;
-
-                                    $.ajax({
-                                        url: "/insert/",
-                                        data: { latitude: lat, longitude: long },
-                                        type: "POST"
-                                    })
-                                }
-                            })
-                        })
-                    </script>
-
-
-                    <a class="btn btn-main" id="upload" href="#about" role="button">Upload</a>
+                    <a class="btn btn-main" href="{% url 'uploadplant' %}" role="button">Upload</a>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
-</section><!-- header close -->
+</section><!-- header close --> 
 {% endblock %}
 
 {% block register_login %}
@@ -71,6 +46,84 @@
                 <img class="img-fluid" src="{% static '/home/images/phone.png' %}" alt="">
             </div>
         </div>
+    </div>
+</section>
+
+<section class="feature-list section">
+    <div class="container justify-content-center">
+        <div class="row"> 
+                <div class="col">
+                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 90vh; width: 50vw; border-radius: 5%;">
+                        <div class="row justify-content-center"> <!---- Overall Count of Predicted Plants --->
+                            <div class="col mt-5 order-1 text-center">
+                                <div class="container">
+                                    <h3 class="subheading" style="border-radius: 50%; 
+                                                                            width: 200px; 
+                                                                            height: 200px; 
+                                                                            padding: 80px 50px; 
+                                                                            background-color: rgb(204, 187, 161);;
+                                                                            border: 1px #666;
+                                                                            color: rgb(255, 255, 255);
+                                                                            text-align: center;
+                                                                            margin: auto;">
+                                    {{totalpred}}
+                                    </h3>
+                                </div>
+                            </div>
+                        </div> <!---- End .row - Overall Count of Predicted Plants --->
+                        <div class="row justify-content-center"> <!---- row2 Overall Count of Predicted Plants --->
+                            <div class="col mt-5 order-2 text-center" >
+                                    <h3 class="subheading">Overall Predicted Plants</h3>
+                                    <p><small class="text-muted">by Plantita</small></p>
+                            </div> 
+                        </div> <!---- End .row2 - Overall Count of Predicted Plants --->
+                    </div> <!---- End .card - Overall Count of Predicted Plants --->
+                </div>
+                <div class="col">
+                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
+                        <div class="row justify-content-center"> <!---- Plant Count --->
+                            <div class="col mt-5 order-1 text-center">
+                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
+                                        Anahaw: {{anhw_totalpred}}
+                                        <br>
+                                        Bignay: {{bgny_totalpred}}
+                                        <br>
+                                        Kalingag: {{klngg_totalpred}}
+                                        <br>
+                                        Katmon: {{ktmn_totalpred}}
+                                    </h3>
+                            </div>
+                        </div> <!---- End .row Count --->
+                    </div>
+                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
+                        <div class="row justify-content-center"> <!---- Plant Count --->
+                            <div class="col mt-5 order-1 text-center">
+                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
+                                        Kris Plant: {{krsp_totalpred}}
+                                        <br>
+                                        Payau: {{payau_totalpred}}
+                                        <br>
+                                        Tayabak: {{tybk_totalpred}}
+                                        <br>
+                                        Tangisang Bayawak: {{tngbywk_totalpred}}
+                                    </h3>
+                            </div>
+                        </div> <!---- End .row Count --->
+                    </div>
+                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
+                        <div class="row justify-content-center"> <!---- Plant Count --->
+                            <div class="col mt-5 order-1 text-center">
+                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
+                                        Bagawak Morado: {{bm_totalpred}}
+                                        <br>
+                                        Copeland's Pitcher: {{cp_totalpred}}
+                                    </h3>
+                            </div>
+                        </div> <!---- End .row Count --->
+                    </div>
+                </div>
+            </div> <!---- End .row1 ---->
+        </div> 
     </div>
 </section>
 {% endblock %}
@@ -109,7 +162,6 @@
                         <br>
                         {% endfor %}
                         </div> <!-- row2 -->
-            
     </div><!-- .container close -->
 </section><!-- header close -->
 {% endblock %}

@@ -16,15 +16,17 @@ function initMap() {
   function getPosition(pos){
     let lat = pos.coords.latitude
     let long = pos.coords.longitude
-    /* newCoord = [];
-    newCoord.push(lat);
-    newCoord.push(long);
-    return newCoord */
+    
+    $.ajax({
+      url: "/coordinates/",
+      data: { latitude: lat, longitude: long },
+      type: "POST"
+  })
 
     marker = new google.maps.Marker({
         position: {lat: lat, lng: long},
         map,
-        title: "Anahaw",
+        // title: "Anahaw",
       });
       
     map.panTo({lat : lat, lng: long}); 

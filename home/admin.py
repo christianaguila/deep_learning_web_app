@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plantsgallery, Prediction
+from .models import Plantsgallery
 # Register your models here.
 
 class HomeAdmin(admin.ModelAdmin):
@@ -8,4 +8,9 @@ class HomeAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title', )}
 
 admin.site.register(Plantsgallery, HomeAdmin)
-admin.site.register(Prediction)
+
+
+
+
+
+

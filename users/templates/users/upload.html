@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %}
-{% load static %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block masthead %}
 <!-- Masthead-->
@@ -30,41 +30,241 @@
     <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
 
     <div class="container px-4 px-lg-5 my-5">
-
-            <div class="container px-4 px-lg-5 my-5">
-                <h5> Plant Location </h5>
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <!--- PH Plant Map  --->
-                    <div class="col-md-6">
-                        <!--- The Map  --->
-                        <div id="mapuserlocator" style="height: 300px; width: 600px;"></div>
-                        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-                        <script src="{% static 'users/script/map_user_locator.js' %}"></script>
-                        <script
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
-                            async
-                        ></script>
+        <div class="container px-4 px-lg-5 my-5">
+            <h5> Plant Location </h5>
+            <br>
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <!--------- PH Plant Map --------------->
+                <div class="col">
+                    <div class="container">
+                    <!--- The Map  --->
+                        <div id="mapuserlocator"  class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="margin: auto; height: 50vh; width: 40vw;"></div>
+                    </div>
+                    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                    <script src="{% static 'users/script/map_user_locator.js' %}"></script>
+                    <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
+                        async
+                    ></script>
+                </div>
+                
+                <!-- Form Submit Plant Image by User  -->
+                <div class="col mb-5 mb-md-0">
+                    <div class="container" style="margin: auto;">
+                        <br>
+                        <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{predict_form|crispy}}
+                            <button class="btn btn-dark my-4" type="submit">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <!-- {% for post in post %}
-                <button>
-                    <a class="btn btn-sm btn-danger" href="{% url 'delete_post' post.id %}">Delete</a>
-                </button>
-            {% endfor %} -->
-            <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{predict_form | crispy}}
-                <button class="btn btn-dark my-4" type="submit" name="plant_submit">Submit</button>
-            </form>
-            {% if plant_image %}
-            <img class="img-fluid" src="{{ plant_image.url }}" alt="{{ plant_image.title }}"/> 
-            {% endif %}
-            {% if prediction %}
-                {{prediction}}
-            {% endif %}
+        </div>
+            <br>
+            <hr>
             
+        <!-- Previews Plant Image by User & Prediction -->
+        <h3 style="padding-top: 2%; text-align: center;"> Plant Identification Result </h3>
+        <br>
+        <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+            <div class="col">
+                <div class="container justify-content-center text-center">
+                    {% if plant_image %}
+                        <img class="img-fluid" src="{{ plant_image.url }}" alt="{{ plant_image.title }}" style="object-fit: cover; width: 50vh; height: 40vh; align-items: center;"/> 
+                    {% endif %}
+                </div>
+            </div>
+            {% if prediction %}
+            <div class="col">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body" style="text-align: center;">
+                            <p style="align-items: center;">The plant is identified as
+                                <br> 
+                                <b>{{prediction}}</b>
+                                {% if error_pred %}
+                                <p>Check your Image</p>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+            <div class="col">
+            <div class="gallery-item" style="align-items: center; justify-content: center;">
+                <div class="card" style="width: 18rem; margin: auto; align-items: center;">    
+                        <p>Indigenous Plants</p>
+                        <p><small class="text-muted">Click for More Info</small></p>
+                        {% for g in gallery %}
+                        <div class="row">
+                            <div class="col">
+                                <a style="color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+        </div>
+        {% else %}
+    </div>  <!----- end .row prediction result ----->
+
+    <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+        <div class="col">
+        <div class="gallery-item" style="align-items: center; justify-content: center;">
+            <div class="card" style="width: 18rem; margin: auto; align-items: center;">    
+                    <p>Indigenous Plants</p>
+                    <p><small class="text-muted">Click for More Info</small></p>
+                    {% for g in gallery %}
+                    <div class="row">
+                        <div class="col">
+                            <a style="color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        </div>
     </div>
+        {% endif %}   
 </section>
-{% endblock %}
+
+
+<section class="py-5">
+    <!-------------------- Card Plant History Predictions ------------------------------->
+    <div class="container-fluid px-lg-5 my-5 mb-lg-0" style="padding-top: 5%;">
+        <hr>
+        <div class="container">
+            <h3 style="text-align: center;">Your Identified Plants</h3>
+            <br>
+            <!------------- Display the total predictions --------->
+            <div class="container">
+                <div class="row mt-2 justify-content-center " style="padding-top: 3%;">
+                    <h5 style="text-align: center;">Total Number of Plants Predicted: {{totalpred}} {{total_plantpred}}</h4>
+                </div> <!-- .row 1-->
+                
+                <div class="row mt-2 justify-content-center">
+                    <div class="col justify-content-center">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{anhw_totalpred}}</p>
+                            <label><small class="text-muted">Anahaw</small></label>
+                        </div>
+                    </div>
+                    <div class="col justify-content-center">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{bm_totalpred}}</p>
+                            <label><small class="text-muted">Bagawak Morado</small></label>
+                        </div>
+                    </div>
+                    <div class="col justify-content-center">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{bgny_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Bignay</small></label>
+                        </div>
+                    </div>
+                    
+                </div> <!-- .row 2-->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col justify-content-center">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{cp_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Copeland's Pitcher</small></label>
+                        </div>
+                    </div>
+                    <div class="col justify-content-center">
+                        <div class="card" style=" height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{klngg_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Kalingag</small></label>
+                        </div>
+                    </div>
+                    <div class="col justify-content-center">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{ktmn_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Katmon</small></label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-2 justify-content-center">
+                    <div class="col">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{krsp_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Kris Plant</small></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{payau_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Payau</small></label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+                            <p>{{tngbywk_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Tangisang Bayawak</small></label>
+                        </div>
+                    </div>
+                </div> <!-- .row 3-->
+                <div class="row mt-2 justify-content-center">
+                    <div class="col-4">
+                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
+                            <br>
+
+                            <p>{{tybk_totalpred}}</p>
+                            <label style="padding: auto;"><small class="text-muted">Tayabak</small></label>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- .container -->
+            
+            <br>
+
+            <!------------- Users History Predictions --------->
+            <div class="row mt-2" style="text-align: center;">
+                    {% for k in complete_pred %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: </b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> {{ k.prediction_label }} </small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+
+        </div> <!-- .container close -->
+    </div> 
+</section>
+{%endblock%}
