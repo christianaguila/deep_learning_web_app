@@ -16,6 +16,7 @@ import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
 from tensorflow.python.keras.models import load_model
 
+#get user location
 coords = {'latitude': [], 'longitude': []}
 
 # Create your views here.
