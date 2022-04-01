@@ -7,7 +7,6 @@ from .models import Post
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
 
-
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
@@ -18,4 +17,4 @@ class ImageUploadForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['plant_image']
-        readonly_fields = ['author', 'submitted', 'date_posted']
+        readonly_fields = ['author', 'date_posted']

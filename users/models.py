@@ -7,6 +7,14 @@ from PIL import Image
 # Create your models here.
 
 # ------------Trying--------
+class Location(models.Model):
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    date_loc = models.DateTimeField(default=timezone.now, blank=False)
+
+    def __str__(self):
+        return f'{self.latitude}, {self.longitude}'
+
 #Folder per User - Upload
 def get_upload_file_name(Post, filename):
     return u'user_uploads/%s/%s_%s' %(Post.author.username, str(ctime()).replace('.','_'), str(filename.replace(' ','_')))
@@ -18,13 +26,11 @@ class Post(models.Model):
                                     default='', 
                                     null=False)
     date_posted = models.DateTimeField(default=timezone.now, blank=False)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
-
-    latitude = models.FloatField(blank=False, default=0)
-    longitude = models.FloatField(blank=False, default=0)
-
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=True)
+    post_loc = models.ForeignKey(Location, on_delete=models.CASCADE, blank=False, null=True)
+    
     def __str__(self):
-        return self.author.username
+        return f'{self.author.username}, {self.date_posted}'
 
 class PredictedPlant(models.Model):
     class Meta:
@@ -35,4 +41,5 @@ class PredictedPlant(models.Model):
     post_prediction = models.ForeignKey(Post, on_delete=models.CASCADE, blank=False)
 
     def __str__(self):
-        return self.prediction_label
+        return f'{self.prediction_label}, {self.post_prediction.author}, {self.post_prediction.date_posted}'
+

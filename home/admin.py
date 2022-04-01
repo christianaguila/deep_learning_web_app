@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plantsgallery, Location
+from .models import Plantsgallery
 # Register your models here.
 
 class HomeAdmin(admin.ModelAdmin):
@@ -9,12 +9,7 @@ class HomeAdmin(admin.ModelAdmin):
 
 admin.site.register(Plantsgallery, HomeAdmin)
 
-@admin.register(Location)
-class LocationAdmin(admin.ModelAdmin):
-    list_display = [
-        'latitude',
-        'longitude',
-    ]
+
 
 
 

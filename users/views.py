@@ -2,15 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, ImageUploadForm
-from users.models import Post, PredictedPlant
-
-from home.models import Plantsgallery, Location
-
-# from home.views import coordinates
+from users.models import Post, PredictedPlant, Location
 
 from django.views.decorators.csrf import csrf_exempt
 
-from django.http import JsonResponse
+from home.models import Plantsgallery
 
 from PIL import Image
 
@@ -19,6 +15,8 @@ import numpy as np
 import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
 from tensorflow.python.keras.models import load_model
+
+coords = {'latitude': [], 'longitude': []}
 
 # Create your views here.
 def register(request):
@@ -37,26 +35,37 @@ def register(request):
 def profile(request):
     return render(request,'users/profile.html')
 
+#----------Get Coordinates----
+@csrf_exempt
+@login_required
+def coordinates(request):
+    if request.method == 'POST':
+        coords['latitude'] = request.POST['latitude']
+        coords['longitude'] = request.POST['longitude']
+        return render(request, 'users/upload.html' )
+
 
 #------------CNN Model--------
-# #Load Model
+#Load Model
+model_graph = tf.compat.v1.Graph()
+with model_graph.as_default():
+    tf_session = tf.compat.v1.Session()
+    with tf_session.as_default():
+        mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
+        class_names = [
+            'Anahaw - Saribus rotundifolius',
+            'Bagawak Morado - Clerodendrum quadriloculare',
+            'Bignay - Antidesma bunius',
+            "Copeland's Pitcher - Nepenthes copelandii",
+            'Kalingag - Cinnamomum mercadoi',
+            'Katmon - Dillenia philippinensis',
+            'Kris Plant - Alocasia sanderiana',
+            'Payau - Homalomena philippinensis',
+            'Tangisang-Bayawak - Ficus variegata',
+            'Tayabak - Strongylodon macrobotrys']
+                
+#Run Model
 def ImageModel(plant_image):
-    model_graph = tf.compat.v1.Graph()
-    with model_graph.as_default():
-        tf_session = tf.compat.v1.Session()
-        with tf_session.as_default():
-            mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
-            class_names = [
-                'Anahaw - Saribus rotundifolius',
-                'Bagawak Morado - Clerodendrum quadriloculare',
-                'Bignay - Antidesma bunius',
-                "Copeland's Pitcher - Nepenthes copelandii",
-                'Kalingag - Cinnamomum mercadoi',
-                'Katmon - Dillenia philippinensis',
-                'Kris Plant - Alocasia sanderiana',
-                'Payau - Homalomena philippinensis',
-                'Tangisang-Bayawak - Ficus variegata',
-                'Tayabak - Strongylodon macrobotrys']
 
     original = load_img(plant_image, target_size=(224, 224))
     numpy_image = img_to_array(original)
@@ -71,18 +80,16 @@ def ImageModel(plant_image):
     if max >= 0.925:
         label = np.argmax(predictions)
         label = class_names[label]
-        # print(coordinates())
-        # coord = Location(latitude = loc_lat_lng[0], longitude = loc_lat_lng[1])
-        # coord.save()
 
+        if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
+            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'])
+            userLoc.save()
+            Post.objects.create(post_loc=userLoc)
         return label
-
-        
 
     else:
-        label = "Not Included in Our Prediction Database"
+        label = "Sorry, Plantita cannot recognize the Plant"
         return label
-
 
 
 
@@ -101,34 +108,95 @@ def uploadplant(request):
             plant_image = instance.plant_image
             PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
-            context = {'predict_form':predict_form, 'postsss': postsss, 
-                        'prediction': prediction, 'complete_pred': complete_pred, 'plant_image': plant_image}
+            gallery = Plantsgallery.objects.all()
+
+            error_pred = PredictedPlant.objects.filter(prediction_label='Sorry, Plantita cannot recognize by Plantita')
+
+             # --------- Gets Total Number of Predictions per User Only ---------------- #
+            totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).count()
+
+            # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+            anhw_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Anahaw - Saribus rotundifolius').count()
+            bm_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bagawak Morado - Clerodendrum quadriloculare').count()
+            bgny_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bignay - Antidesma bunius').count()
+            cp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = "Copeland's Pitcher - Nepenthes copelandii").count()
+            klngg_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kalingag - Cinnamomum mercadoi').count()
+            ktmn_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Katmon - Dillenia philippinensis').count()
+            krsp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kris Plant - Alocasia sanderiana').count()
+            payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
+            tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
+            tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+
+            context = {'predict_form':predict_form, 
+                        'postsss': postsss, 
+                        'prediction': prediction, 
+                        'complete_pred': complete_pred, 
+                        'plant_image': plant_image,
+                        'gallery':gallery,
+                        'error_pred': error_pred,
+
+                        # --------- Gets Total Number of Predictions per User Only ---------------- #
+                        'totalpred': totalpred, 
+
+                        # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+                        'anhw_totalpred': anhw_totalpred, #Anahaw
+                        'bm_totalpred': bm_totalpred, #Bagawak Morado
+                        'bgny_totalpred': bgny_totalpred, #Bignay
+                        'cp_totalpred': cp_totalpred, #Copeland's Pitcher
+                        'klngg_totalpred': klngg_totalpred, #Kalingag
+                        'ktmn_totalpred': ktmn_totalpred, #Katmon
+                        'krsp_totalpred': krsp_totalpred, #Kris Plant
+                        'payau_totalpred': payau_totalpred, #Payau
+                        'tngbywk_totalpred': tngbywk_totalpred, #Tangisang Bayawak
+                        'tybk_totalpred': tybk_totalpred, #Tayabak
+                        }
             messages.success(request, f'Image Succesfully Uploaded')
             return render(request, 'users/upload.html', context)
+            
     else:
         predict_form = ImageUploadForm()
-        postsss = Post.objects.all()
         gallery = Plantsgallery.objects.all()
+        postsss = Post.objects.all()
         complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
-        totalpred = PredictedPlant.objects.count()
+
+        # --------- Gets Total Number of Predictions per User Only ---------------- #
+        totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).count()
+
+        # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+        anhw_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Anahaw - Saribus rotundifolius').count()
+        bm_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bagawak Morado - Clerodendrum quadriloculare').count()
+        bgny_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bignay - Antidesma bunius').count()
+        cp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = "Copeland's Pitcher - Nepenthes copelandii").count()
+        klngg_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kalingag - Cinnamomum mercadoi').count()
+        ktmn_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Katmon - Dillenia philippinensis').count()
+        krsp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kris Plant - Alocasia sanderiana').count()
+        payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
+        tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
+        tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+
+        
         context = {'predict_form':predict_form, 
-                    'postsss':postsss, 
-                    'gallery':gallery,
+                    'postsss':postsss,
+                    'gallery': gallery,
                     'complete_pred':complete_pred,
-                    'totalpred': totalpred
+
+                    # --------- Gets Total Number of Predictions per User Only ---------------- #
+                    'totalpred': totalpred, 
+
+                    # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+                    'anhw_totalpred': anhw_totalpred, #Anahaw
+                    'bm_totalpred': bm_totalpred, #Bagawak Morado
+                    'bgny_totalpred': bgny_totalpred, #Bignay
+                    'cp_totalpred': cp_totalpred, #Copeland's Pitcher
+                    'klngg_totalpred': klngg_totalpred, #Kalingag
+                    'ktmn_totalpred': ktmn_totalpred, #Katmon
+                    'krsp_totalpred': krsp_totalpred, #Kris Plant
+                    'payau_totalpred': payau_totalpred, #Payau
+                    'tngbywk_totalpred': tngbywk_totalpred, #Tangisang Bayawak
+                    'tybk_totalpred': tybk_totalpred, #Tayabak
                     }
     return render(request, 'users/upload.html', context)
 
-@login_required
-@csrf_exempt
-def coordinates(request):
-    print(request.POST['latitude'])
-    if request.method == 'POST':
-        # loc_lat_lng = [request.POST['latitude'], request.POST['longitude']]
-        # print(loc_lat_lng)
-        # coord = Location(latitude = request.POST['latitude'], longitude = request.POST['longitude'])
-        # coord.save()
-        return render(request, 'users/upload.html' )
 
 def deletepost(request, pk):
     predicted_post =  complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user).get(id=pk)
