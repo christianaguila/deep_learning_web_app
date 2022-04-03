@@ -13,20 +13,28 @@ function initMap() {
       navigator.geolocation.getCurrentPosition(getPosition)
     }
 
-  function getPosition(pos){
+  async function getPosition(pos){
     let lat = pos.coords.latitude
     let long = pos.coords.longitude
     
+    const response = await fetch(
+      "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&featureTypes=&location=" + `${long},${lat}`
+    );
+
+    const data = await response.json();
+    console.log(data.address.Match_addr);
+    let userAddress = data.address.Match_addr;
+
     $.ajax({
       url: "/coordinates/",
-      data: { latitude: lat, longitude: long },
+      data: { latitude: lat, longitude: long , address: userAddress},
       type: "POST"
   })
 
     marker = new google.maps.Marker({
         position: {lat: lat, lng: long},
         map,
-        // title: "Anahaw",
+        title: address,
       });
       
     map.panTo({lat : lat, lng: long}); 
