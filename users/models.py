@@ -10,6 +10,7 @@ from PIL import Image
 class Location(models.Model):
     latitude = models.FloatField(default=0)
     longitude = models.FloatField(default=0)
+    matched_address = models.CharField(max_length=100, default='', blank=False)
     date_loc = models.DateTimeField(default=timezone.now, blank=False)
 
     def __str__(self):
@@ -42,4 +43,3 @@ class PredictedPlant(models.Model):
 
     def __str__(self):
         return f'{self.prediction_label}, {self.post_prediction.author}, {self.post_prediction.date_posted}'
-
