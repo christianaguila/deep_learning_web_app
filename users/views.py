@@ -16,8 +16,8 @@ import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
 from tensorflow.python.keras.models import load_model
 
-#get user location
 coords = {'latitude': [], 'longitude': []}
+user_address = {'address': []}
 
 # Create your views here.
 def register(request):
@@ -41,8 +41,10 @@ def profile(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
+        print(request.POST['address'])
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
+        user_address['address'] = request.POST['address']
         return render(request, 'users/upload.html' )
 
 
@@ -83,7 +85,7 @@ def ImageModel(plant_image):
         label = class_names[label]
 
         if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
-            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'])
+            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
             userLoc.save()
             Post.objects.create(post_loc=userLoc)
         return label
@@ -206,9 +208,5 @@ def deletepost(request, pk):
         predicted_post.delete()
         return render(request, 'users/upload.html', {'predicted_post':predicted_post})
     return render(request, 'users/delete.html', {'predicted_post':predicted_post})
-        
-    
-
-
 
     
