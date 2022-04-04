@@ -1,23 +1,9 @@
 from django.shortcuts import render
 
-from django.contrib.auth.decorators import login_required
-
 from users.models import PredictedPlant
 
 from home.models import Plantsgallery
 
-from django.views.decorators.csrf import csrf_exempt
-
-# Create your views here
-# @login_required
-# @csrf_exempt
-# def coordinates(request):
-#     print(request.POST)
-#     if request.method == 'POST':
-#         loc_lat_lng = [request.POST['latitude'], request.POST['longitude']]
-#         print(loc_lat_lng)
-#         return loc_lat_lng
-#     # return render(request, 'users/upload.html' )
 
 def index(request):
     home = Plantsgallery.objects.all()

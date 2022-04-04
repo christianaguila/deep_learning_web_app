@@ -25,7 +25,7 @@
                 What to Upload?
             </small>  
         </a>
-    </div>
+    </div> 
     <br>
     <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
 
@@ -85,6 +85,9 @@
                                 <b>{{prediction}}</b>
                                 {% if error_pred %}
                                 <p>Check your Image</p>
+                                {% endif %}
+                                {% if pred_loc %}
+                                <p>Found at {{pred_loc}}</p>
                                 {% endif %}
                             </p>
                         </div>
@@ -242,10 +245,10 @@
                                                 <li class="list-group-item">
                                                     <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
                                                     <br> 
-                                                    <small class="text-muted"><b>Place Found: </b></small>
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
                                                 </li>
                                                 <li class="list-group-item"><small class="text-muted">
-                                                    <b>Identification:</b> {{ k.prediction_label }} </small>
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }} </small>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <a href="{% url 'delete_post' k.id %}">Delete Post</a>
