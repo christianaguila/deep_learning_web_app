@@ -34,7 +34,7 @@ function initMap() {
     marker = new google.maps.Marker({
         position: {lat: lat, lng: long},
         map,
-        title: address,
+        title: userAddress,
       });
       
     map.panTo({lat : lat, lng: long}); 
