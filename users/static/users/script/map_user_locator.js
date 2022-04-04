@@ -22,7 +22,6 @@ function initMap() {
     );
 
     const data = await response.json();
-    console.log(data.address.Match_addr);
     let userAddress = data.address.Match_addr;
 
     $.ajax({
