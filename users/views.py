@@ -133,11 +133,15 @@ def uploadplant(request):
             payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+            try:
+                pred_loc = prediction['userLoc'].matched_address
+            except AttributeError:
+                pred_loc = ""
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
                         'prediction': prediction['label'], 
-                        'pred_loc': prediction['userLoc'].matched_address,
+                        'pred_loc': pred_loc,
                         'complete_pred': complete_pred, 
                         'plant_image': plant_image,
                         'gallery':gallery,
