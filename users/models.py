@@ -31,7 +31,7 @@ class Post(models.Model):
     post_loc = models.ForeignKey(Location, on_delete=models.CASCADE, blank=False, null=True)
     
     def __str__(self):
-        return f'{self.author.username}, {self.date_posted}'
+        return f'{self.date_posted}'
 
 class PredictedPlant(models.Model):
     class Meta:
