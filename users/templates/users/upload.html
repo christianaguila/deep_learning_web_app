@@ -25,7 +25,7 @@
                 What to Upload?
             </small>  
         </a>
-    </div>
+    </div> 
     <br>
     <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
 
@@ -86,6 +86,9 @@
                                 {% if error_pred %}
                                 <p>Check your Image</p>
                                 {% endif %}
+                                {% if pred_loc %}
+                                <p>Found at {{pred_loc}}</p>
+                                {% endif %}
                             </p>
                         </div>
                     </div>
@@ -133,106 +136,85 @@
 </section>
 
 
-<section class="py-5">
+<section class="py-2">
     <!-------------------- Card Plant History Predictions ------------------------------->
     <div class="container-fluid px-lg-5 my-5 mb-lg-0" style="padding-top: 5%;">
         <hr>
         <div class="container">
-            <h3 style="text-align: center;">Your Identified Plants</h3>
             <br>
             <!------------- Display the total predictions --------->
             <div class="container">
-                <div class="row mt-2 justify-content-center " style="padding-top: 3%;">
-                    <h5 style="text-align: center;">Total Number of Plants Predicted: {{totalpred}} {{total_plantpred}}</h4>
-                </div> <!-- .row 1-->
-                
-                <div class="row mt-2 justify-content-center">
-                    <div class="col justify-content-center">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{anhw_totalpred}}</p>
-                            <label><small class="text-muted">Anahaw</small></label>
+                <div class="container-count">
+                    <h2 style="text-align: center;">Your Identified Plants</h2>
+                    <br>
+                    <div class="row">
+                        <div class="four col-md-3">
+                            <div class="counter-box colored"><span class="counter">{{totalpred}}</span>
+                                <p>Total Predicted Plants</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{anhw_totalpred}}</span>
+                                <p>Anahaw</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{bm_totalpred}}</span>
+                                <p>Bagawak Morado</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{bgny_totalpred}}</span>
+                                <p>Bignay</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col justify-content-center">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{bm_totalpred}}</p>
-                            <label><small class="text-muted">Bagawak Morado</small></label>
+                    <div class="row mt-2">
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{cp_totalpred}}</span>
+                                <p>Copeland's Pitcher</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{krsp_totalpred}}</span>
+                                <p>Kris Plant</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{klngg_totalpred}}</span>
+                                <p>Kalingag</p>
+                            </div>
+                        </div>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{ktmn_totalpred}}</span>
+                                <p>Katmon</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col justify-content-center">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{bgny_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Bignay</small></label>
+                    <div class="row mt-2">
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{payau_totalpred}}</span>
+                                <p>Payau</p>
+                            </div>
                         </div>
-                    </div>
-                    
-                </div> <!-- .row 2-->
-                <div class="row mt-2 justify-content-center">
-                    <div class="col justify-content-center">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{cp_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Copeland's Pitcher</small></label>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{tngbywk_totalpred}}</span>
+                                <p>Tangisang Bayawak</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col justify-content-center">
-                        <div class="card" style=" height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{klngg_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Kalingag</small></label>
-                        </div>
-                    </div>
-                    <div class="col justify-content-center">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{ktmn_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Katmon</small></label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-2 justify-content-center">
-                    <div class="col">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{krsp_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Kris Plant</small></label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{payau_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Payau</small></label>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-                            <p>{{tngbywk_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Tangisang Bayawak</small></label>
-                        </div>
-                    </div>
-                </div> <!-- .row 3-->
-                <div class="row mt-2 justify-content-center">
-                    <div class="col-4">
-                        <div class="card" style="height: 20vh; text-align: center; border-radius: 10px; background-color: blanchedalmond;">
-                            <br>
-
-                            <p>{{tybk_totalpred}}</p>
-                            <label style="padding: auto;"><small class="text-muted">Tayabak</small></label>
+                        <div class="four col-md-3">
+                            <div class="counter-box"><span class="counter">{{tybk_totalpred}}</span>
+                                <p>Tayabak</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> <!-- .container -->
+            </div>
             
             <br>
 
             <!------------- Users History Predictions --------->
-            <div class="row mt-2" style="text-align: center;">
+            <div class="row mt-5" style="text-align: center;">
                     {% for k in complete_pred %}
                                 <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
                                     <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
@@ -242,10 +224,10 @@
                                                 <li class="list-group-item">
                                                     <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
                                                     <br> 
-                                                    <small class="text-muted"><b>Place Found: </b></small>
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
                                                 </li>
                                                 <li class="list-group-item"><small class="text-muted">
-                                                    <b>Identification:</b> {{ k.prediction_label }} </small>
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }} </small>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <a href="{% url 'delete_post' k.id %}">Delete Post</a>

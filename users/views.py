@@ -69,7 +69,6 @@ with model_graph.as_default():
                 
 #Run Model
 def ImageModel(plant_image):
-
     original = load_img(plant_image, target_size=(224, 224))
     numpy_image = img_to_array(original)
     image_batch = np.expand_dims(numpy_image, axis=0)
@@ -80,19 +79,24 @@ def ImageModel(plant_image):
             predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
+    results = {
+            "label": "",
+            "userLoc": "",
+        }
     if max >= 0.925:
         label = np.argmax(predictions)
         label = class_names[label]
-
+        results['label'] = label
         if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
             userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
             userLoc.save()
-            Post.objects.create(post_loc=userLoc)
-        return label
+            results['userLoc'] = userLoc
+        return results
 
     else:
-        label = "Sorry, Plantita cannot recognize the Plant"
-        return label
+        results['label'] = "Sorry, Plantita cannot recognize the Plant"
+        results['userLoc'] = None
+        return results
 
 
 
@@ -109,7 +113,7 @@ def uploadplant(request):
             instance.save()
             prediction = ImageModel(f'uploads/{str(instance.plant_image)}')
             plant_image = instance.plant_image
-            PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
+            PredictedPlant.objects.create(prediction_label=prediction['label'], predicted_image=plant_image, post_prediction=instance, post_loc=prediction['userLoc'])
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
 
@@ -129,10 +133,15 @@ def uploadplant(request):
             payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+            try:
+                pred_loc = prediction['userLoc'].matched_address
+            except AttributeError:
+                pred_loc = ""
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
-                        'prediction': prediction, 
+                        'prediction': prediction['label'], 
+                        'pred_loc': pred_loc,
                         'complete_pred': complete_pred, 
                         'plant_image': plant_image,
                         'gallery':gallery,
