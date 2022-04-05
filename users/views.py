@@ -18,6 +18,17 @@ from tensorflow.python.keras.models import load_model
 
 coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
+class_names = [
+            'Anahaw - Saribus rotundifolius',
+            'Bagawak Morado - Clerodendrum quadriloculare',
+            'Bignay - Antidesma bunius',
+            "Copeland's Pitcher - Nepenthes copelandii",
+            'Kalingag - Cinnamomum mercadoi',
+            'Katmon - Dillenia philippinensis',
+            'Kris Plant - Alocasia sanderiana',
+            'Payau - Homalomena philippinensis',
+            'Tangisang-Bayawak - Ficus variegata',
+            'Tayabak - Strongylodon macrobotrys']
 
 # Create your views here.
 def register(request):
@@ -41,7 +52,6 @@ def profile(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
-        print(request.POST['address'])
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
@@ -49,35 +59,21 @@ def coordinates(request):
 
 
 #------------CNN Model--------
-                
+# #Load Model
+# model_graph = tf.compat.v1.Graph()
+# with model_graph.as_default():
+#     tf_session = tf.compat.v1.Session()
+#     with tf_session.as_default():
+#         mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
+        
+mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT')              
 #Run Model
 def ImageModel(plant_image):
-    model_graph = tf.compat.v1.Graph()
-    with model_graph.as_default():
-        tf_session = tf.compat.v1.Session()
-        with tf_session.as_default():
-            mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
-            class_names = [
-                'Anahaw - Saribus rotundifolius',
-                'Bagawak Morado - Clerodendrum quadriloculare',
-                'Bignay - Antidesma bunius',
-                "Copeland's Pitcher - Nepenthes copelandii",
-                'Kalingag - Cinnamomum mercadoi',
-                'Katmon - Dillenia philippinensis',
-                'Kris Plant - Alocasia sanderiana',
-                'Payau - Homalomena philippinensis',
-                'Tangisang-Bayawak - Ficus variegata',
-                'Tayabak - Strongylodon macrobotrys']
-
-
     original = load_img(plant_image, target_size=(224, 224))
     numpy_image = img_to_array(original)
     image_batch = np.expand_dims(numpy_image, axis=0)
     processed_image = image_batch.copy()
-
-    with model_graph.as_default():
-        with tf_session.as_default():
-            predictions=mobilenet_model.predict(processed_image)
+    predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
     if max >= 0.925:
