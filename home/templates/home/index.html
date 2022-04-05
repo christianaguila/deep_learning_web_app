@@ -3,7 +3,7 @@
 
 {% block masthead %}
 <!-- hero area -->
-<section class="section">
+<section class="section" style="padding-bottom: 0px;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center mb-5 mb-md-0">
@@ -72,6 +72,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2">
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{tngbywk_totalpred}}</span>
+                        <p>Tangisang Bayawak</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{bm_totalpred}}</span>
+                        <p>Bagawak Morado</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{cp_totalpred}}</span>
+                        <p>Copeland's Pitcher</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -113,85 +130,6 @@
             </div>
         </div>
     </div>
-</section>
-
-<section class="feature-list section">
-    <div class="container justify-content-center">
-        <div class="row"> 
-                <div class="col">
-                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 90vh; width: 50vw; border-radius: 5%;">
-                        <div class="row justify-content-center"> <!---- Overall Count of Predicted Plants --->
-                            <div class="col mt-5 order-1 text-center">
-                                <div class="container">
-                                    <h3 class="subheading" style="border-radius: 50%; 
-                                                                            width: 200px; 
-                                                                            height: 200px; 
-                                                                            padding: 80px 50px; 
-                                                                            background-color: rgb(204, 187, 161);;
-                                                                            border: 1px #666;
-                                                                            color: rgb(255, 255, 255);
-                                                                            text-align: center;
-                                                                            margin: auto;">
-                                    {{totalpred}}
-                                    </h3>
-                                </div>
-                            </div>
-                        </div> <!---- End .row - Overall Count of Predicted Plants --->
-                        <div class="row justify-content-center"> <!---- row2 Overall Count of Predicted Plants --->
-                            <div class="col mt-5 order-2 text-center" >
-                                    <h3 class="subheading">Overall Predicted Plants</h3>
-                                    <p><small class="text-muted">by Plantita</small></p>
-                            </div> 
-                        </div> <!---- End .row2 - Overall Count of Predicted Plants --->
-                    </div> <!---- End .card - Overall Count of Predicted Plants --->
-                </div>
-                <div class="col">
-                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
-                        <div class="row justify-content-center"> <!---- Plant Count --->
-                            <div class="col mt-5 order-1 text-center">
-                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
-                                        Anahaw: {{anhw_totalpred}}
-                                        <br>
-                                        Bignay: {{bgny_totalpred}}
-                                        <br>
-                                        Kalingag: {{klngg_totalpred}}
-                                        <br>
-                                        Katmon: {{ktmn_totalpred}}
-                                    </h3>
-                            </div>
-                        </div> <!---- End .row Count --->
-                    </div>
-                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
-                        <div class="row justify-content-center"> <!---- Plant Count --->
-                            <div class="col mt-5 order-1 text-center">
-                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
-                                        Kris Plant: {{krsp_totalpred}}
-                                        <br>
-                                        Payau: {{payau_totalpred}}
-                                        <br>
-                                        Tayabak: {{tybk_totalpred}}
-                                        <br>
-                                        Tangisang Bayawak: {{tngbywk_totalpred}}
-                                    </h3>
-                            </div>
-                        </div> <!---- End .row Count --->
-                    </div>
-                    <div class="card justify-content-center shadow p-3 mb-5 bg-white rounded" style="height: 35vh; width: 20vw; margin: auto; border-radius: 5%;">
-                        <div class="row justify-content-center"> <!---- Plant Count --->
-                            <div class="col mt-5 order-1 text-center">
-                                    <h3 style=" color: rgb(99, 105, 80); text-align: center; font-size: 13px; padding-bottom: 35px;">
-                                        Bagawak Morado: {{bm_totalpred}}
-                                        <br>
-                                        Copeland's Pitcher: {{cp_totalpred}}
-                                    </h3>
-                            </div>
-                        </div> <!---- End .row Count --->
-                    </div>
-                </div>
-            </div> <!---- End .row1 ---->
-        </div> 
-    </div>
-</div>
 </section>
 {% endblock %}
 

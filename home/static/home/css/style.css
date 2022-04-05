@@ -97,8 +97,7 @@ a:active {
 }
 
 .section {
-  padding-top: 100px;
-  padding-bottom: 0px;
+  padding: 100px 0px;
 }
 
 .font-size-60 {

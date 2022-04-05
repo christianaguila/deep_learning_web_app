@@ -7,6 +7,7 @@ from home.models import Plantsgallery
 
 def index(request):
     home = Plantsgallery.objects.all()
+
     # Total Predictions of All Users
     totalpred = PredictedPlant.objects.count()
 
