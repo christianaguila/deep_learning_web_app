@@ -18,17 +18,6 @@ from tensorflow.python.keras.models import load_model
 
 coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
-class_names = [
-            'Anahaw - Saribus rotundifolius',
-            'Bagawak Morado - Clerodendrum quadriloculare',
-            'Bignay - Antidesma bunius',
-            "Copeland's Pitcher - Nepenthes copelandii",
-            'Kalingag - Cinnamomum mercadoi',
-            'Katmon - Dillenia philippinensis',
-            'Kris Plant - Alocasia sanderiana',
-            'Payau - Homalomena philippinensis',
-            'Tangisang-Bayawak - Ficus variegata',
-            'Tayabak - Strongylodon macrobotrys']
 
 # Create your views here.
 def register(request):
@@ -52,6 +41,7 @@ def profile(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
+        print(request.POST['address'])
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
@@ -59,36 +49,54 @@ def coordinates(request):
 
 
 #------------CNN Model--------
-# #Load Model
-# model_graph = tf.compat.v1.Graph()
-# with model_graph.as_default():
-#     tf_session = tf.compat.v1.Session()
-#     with tf_session.as_default():
-#         mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
-        
-mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT')              
+#Load Model
+model_graph = tf.compat.v1.Graph()
+with model_graph.as_default():
+    tf_session = tf.compat.v1.Session()
+    with tf_session.as_default():
+        mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
+        class_names = [
+            'Anahaw - Saribus rotundifolius',
+            'Bagawak Morado - Clerodendrum quadriloculare',
+            'Bignay - Antidesma bunius',
+            "Copeland's Pitcher - Nepenthes copelandii",
+            'Kalingag - Cinnamomum mercadoi',
+            'Katmon - Dillenia philippinensis',
+            'Kris Plant - Alocasia sanderiana',
+            'Payau - Homalomena philippinensis',
+            'Tangisang-Bayawak - Ficus variegata',
+            'Tayabak - Strongylodon macrobotrys']
+                
 #Run Model
 def ImageModel(plant_image):
     original = load_img(plant_image, target_size=(224, 224))
     numpy_image = img_to_array(original)
     image_batch = np.expand_dims(numpy_image, axis=0)
     processed_image = image_batch.copy()
-    predictions=mobilenet_model.predict(processed_image)
+
+    with model_graph.as_default():
+        with tf_session.as_default():
+            predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
+    results = {
+            "label": "",
+            "userLoc": "",
+        }
     if max >= 0.925:
         label = np.argmax(predictions)
         label = class_names[label]
-
+        results['label'] = label
         if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
-            userLoc = Location(plant = label, latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
+            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
             userLoc.save()
-            # Post.objects.create(post_loc=userLoc)
-        return label
+            results['userLoc'] = userLoc
+        return results
 
     else:
-        label = "Sorry, Plantita cannot recognize the Plant"
-        return label
+        results['label'] = "Sorry, Plantita cannot recognize the Plant"
+        results['userLoc'] = None
+        return results
 
 
 
@@ -105,7 +113,7 @@ def uploadplant(request):
             instance.save()
             prediction = ImageModel(f'uploads/{str(instance.plant_image)}')
             plant_image = instance.plant_image
-            PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
+            PredictedPlant.objects.create(prediction_label=prediction['label'], predicted_image=plant_image, post_prediction=instance, post_loc=prediction['userLoc'])
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
 
@@ -125,10 +133,15 @@ def uploadplant(request):
             payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+            try:
+                pred_loc = prediction['userLoc'].matched_address
+            except AttributeError:
+                pred_loc = ""
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
-                        'prediction': prediction, 
+                        'prediction': prediction['label'], 
+                        'pred_loc': pred_loc,
                         'complete_pred': complete_pred, 
                         'plant_image': plant_image,
                         'gallery':gallery,
