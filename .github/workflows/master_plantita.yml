@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'plantita'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_08E684FC51954B12931A7248F836E119 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_154F385880E94E7EA47902B547861A98 }}
