@@ -49,26 +49,26 @@ def coordinates(request):
 
 
 #------------CNN Model--------
-#Load Model
-model_graph = tf.compat.v1.Graph()
-with model_graph.as_default():
-    tf_session = tf.compat.v1.Session()
-    with tf_session.as_default():
-        mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
-        class_names = [
-            'Anahaw - Saribus rotundifolius',
-            'Bagawak Morado - Clerodendrum quadriloculare',
-            'Bignay - Antidesma bunius',
-            "Copeland's Pitcher - Nepenthes copelandii",
-            'Kalingag - Cinnamomum mercadoi',
-            'Katmon - Dillenia philippinensis',
-            'Kris Plant - Alocasia sanderiana',
-            'Payau - Homalomena philippinensis',
-            'Tangisang-Bayawak - Ficus variegata',
-            'Tayabak - Strongylodon macrobotrys']
                 
 #Run Model
 def ImageModel(plant_image):
+    model_graph = tf.compat.v1.Graph()
+    with model_graph.as_default():
+        tf_session = tf.compat.v1.Session()
+        with tf_session.as_default():
+            mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
+            class_names = [
+                'Anahaw - Saribus rotundifolius',
+                'Bagawak Morado - Clerodendrum quadriloculare',
+                'Bignay - Antidesma bunius',
+                "Copeland's Pitcher - Nepenthes copelandii",
+                'Kalingag - Cinnamomum mercadoi',
+                'Katmon - Dillenia philippinensis',
+                'Kris Plant - Alocasia sanderiana',
+                'Payau - Homalomena philippinensis',
+                'Tangisang-Bayawak - Ficus variegata',
+                'Tayabak - Strongylodon macrobotrys']
+
 
     original = load_img(plant_image, target_size=(224, 224))
     numpy_image = img_to_array(original)
@@ -85,9 +85,9 @@ def ImageModel(plant_image):
         label = class_names[label]
 
         if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
-            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
+            userLoc = Location(plant = label, latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
             userLoc.save()
-            Post.objects.create(post_loc=userLoc)
+            # Post.objects.create(post_loc=userLoc)
         return label
 
     else:
