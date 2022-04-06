@@ -41,7 +41,6 @@ def profile(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
-        print(request.POST['address'])
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
