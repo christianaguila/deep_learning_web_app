@@ -693,6 +693,7 @@ a:active {
   font-weight: 700;
   color: #666;
   line-height: 28px
+<<<<<<< HEAD
 }
 
 .counter-box.colored {
@@ -705,3 +706,18 @@ a:active {
   color: #fff
 }
 
+=======
+}
+
+.counter-box.colored {
+  background: #3acf87
+}
+
+.counter-box.colored p,
+.counter-box.colored i,
+.counter-box.colored .counter {
+  color: #fff
+}
+
+
+>>>>>>> f53aff3e495429cf1b90cec6ad08df2cb00e464d
