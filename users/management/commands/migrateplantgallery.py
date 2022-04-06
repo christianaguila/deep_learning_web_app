@@ -115,4 +115,3 @@ class Command(BaseCommand):
 
         User.objects.create_superuser('climatita','clima.thesis@gmail.com','P7@ntita01')
         self.stdout.write('Done migrating plant gallery')
-
