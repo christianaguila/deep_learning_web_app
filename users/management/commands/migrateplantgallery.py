@@ -1,5 +1,6 @@
 from django.core.management.utils import get_random_secret_key  
 from django.core.management.base import BaseCommand, CommandError
+from django.contrib.auth.models import User
 from home.models import Plantsgallery
 
 # LIST FIELDS OF MODEL
@@ -112,4 +113,5 @@ class Command(BaseCommand):
                 ar_link=ar_link[i],
                 ) for i in range(len(title))]
 
+        User.objects.create_superuser('climatita','clima.thesis@gmail.com','P7@ntita01')
         self.stdout.write('Done migrating plant gallery')
