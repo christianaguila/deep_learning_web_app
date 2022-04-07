@@ -7,14 +7,6 @@ from PIL import Image
 # Create your models here.
 
 # ------------Trying--------
-class Location(models.Model):
-    latitude = models.FloatField(default=0)
-    longitude = models.FloatField(default=0)
-    matched_address = models.CharField(max_length=100, default='', blank=False)
-    date_loc = models.DateTimeField(default=timezone.now, blank=False)
-
-    def __str__(self):
-        return f'{self.latitude}, {self.longitude}, {self.matched_address}'
 
 #Folder per User - Upload
 def get_upload_file_name(Post, filename):
@@ -31,6 +23,16 @@ class Post(models.Model):
     
     def __str__(self):
         return f'{self.author.username}, {self.date_posted}'
+
+class Location(models.Model):
+    predicted_plant_label = models.CharField(max_length=100, default='', blank=False)
+    latitude = models.FloatField(default=0)
+    longitude = models.FloatField(default=0)
+    matched_address = models.CharField(max_length=100, default='', blank=False)
+    date_loc = models.DateTimeField(default=timezone.now, blank=False)
+
+    def __str__(self):
+        return f'{self.predicted_plant_label}, {self.latitude}, {self.longitude}, {self.matched_address}'
 
 #Posting Prediction
 class PredictedPlant(models.Model):

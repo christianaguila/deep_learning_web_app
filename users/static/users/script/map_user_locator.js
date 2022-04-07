@@ -22,7 +22,6 @@ function initMap() {
     );
 
     const data = await response.json();
-    console.log(data.address.Match_addr);
     let userAddress = data.address.Match_addr;
 
     $.ajax({
@@ -36,6 +35,18 @@ function initMap() {
         map,
         title: userAddress,
       });
+
+    var circle = new google.maps.Circle({
+        map: map,
+        strokeColor: "#C3B1E1",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#C3B1E1",
+        fillOpacity: 0.8,
+        radius: 3000,
+      });
+        
+    circle.bindTo('center', marker, 'position');
       
     map.panTo({lat : lat, lng: long}); 
   }

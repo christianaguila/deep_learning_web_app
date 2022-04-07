@@ -52,5 +52,3 @@ def plant_details(request, home_slug):
             'plant_found': False
         })
 
-def phplantmap(request):
-    return render(request, 'home/phmap.html')

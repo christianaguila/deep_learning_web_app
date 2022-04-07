@@ -1,16 +1,15 @@
+import json
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, ImageUploadForm
 from users.models import Post, PredictedPlant, Location
+from django.core import serializers
 
 from django.views.decorators.csrf import csrf_exempt
 
 from home.models import Plantsgallery
 
-from PIL import Image
-
-import os
 import numpy as np
 import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
@@ -79,24 +78,15 @@ def ImageModel(plant_image):
             predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
-    results = {
-            "label": "",
-            "userLoc": "",
-        }
+
     if max >= 0.925:
         label = np.argmax(predictions)
         label = class_names[label]
-        results['label'] = label
-        if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
-            userLoc = Location(latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
-            userLoc.save()
-            results['userLoc'] = userLoc
-        return results
+        return label
 
     else:
-        results['label'] = "Sorry, Plantita cannot recognize the Plant"
-        results['userLoc'] = None
-        return results
+        label = "Sorry, Plantita cannot recognize the Image"
+        return label
 
 
 
@@ -113,11 +103,12 @@ def uploadplant(request):
             instance.save()
             prediction = ImageModel(f'uploads/{str(instance.plant_image)}')
             plant_image = instance.plant_image
-            PredictedPlant.objects.create(prediction_label=prediction['label'], predicted_image=plant_image, post_prediction=instance, post_loc=prediction['userLoc'])
+            userLoc = Location(predicted_plant_label= prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
+            userLoc.save()
+            # PredictedPlant.objects.create(prediction_label=prediction['label'], predicted_image=plant_image, post_prediction=instance, post_loc=prediction['userLoc'])
+            PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
-
-            error_pred = PredictedPlant.objects.filter(prediction_label='Sorry, Plantita cannot recognize by Plantita')
 
              # --------- Gets Total Number of Predictions per User Only ---------------- #
             totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).count()
@@ -134,18 +125,19 @@ def uploadplant(request):
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
             try:
-                pred_loc = prediction['userLoc'].matched_address
+                # pred_loc = prediction['userLoc'].matched_address
+                pred_loc = userLoc.matched_address
             except AttributeError:
                 pred_loc = ""
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
-                        'prediction': prediction['label'], 
+                        # 'prediction': prediction['label'],
+                        'prediction': prediction,  
                         'pred_loc': pred_loc,
                         'complete_pred': complete_pred, 
                         'plant_image': plant_image,
                         'gallery':gallery,
-                        'error_pred': error_pred,
 
                         # --------- Gets Total Number of Predictions per User Only ---------------- #
                         'totalpred': totalpred, 
@@ -217,6 +209,18 @@ def deletepost(request, pk):
         predicted_post.delete()
         return render(request, 'users/upload.html', {'predicted_post':predicted_post})
     return render(request, 'users/delete.html', {'predicted_post':predicted_post})
+
+@login_required
+def phplantmap(request):
+
+    json_serializer = serializers.get_serializer("json")()
+    plants_locations = json_serializer.serialize(Location.objects.all())
+    context = {
+                'plants_locations': plants_locations,
+    }
+    return render(request, 'users/phmap.html', context)
+
+
         
     
 
