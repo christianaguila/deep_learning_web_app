@@ -46,7 +46,3 @@ class PredictedPlant(models.Model):
 
     def __str__(self):
         return f'{self.prediction_label}, {self.post_prediction.author}, {self.post_prediction.date_posted}'
-
-
-
-
