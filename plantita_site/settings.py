@@ -142,7 +142,7 @@ LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+DEFAULT_FILE_STORAGE = 'plantita_site.custom_azure.AzureMediaStorage'
 
 MEDIA_LOCATION = "uploads"
 
