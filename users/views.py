@@ -19,6 +19,18 @@ from tensorflow.keras.models import load_model
 coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
 
+
+#----------Get Coordinates----
+@csrf_exempt
+@login_required
+def coordinates(request):
+    if request.method == 'POST':
+        coords['latitude'] = request.POST['latitude']
+        coords['longitude'] = request.POST['longitude']
+        user_address['address'] = request.POST['address']
+        return render(request, 'users/upload.html' )
+
+
 # Create your views here.
 def register(request):
     if request.method == 'POST':
@@ -36,15 +48,6 @@ def register(request):
 def profile(request):
     return render(request,'users/profile.html')
 
-#----------Get Coordinates----
-@csrf_exempt
-@login_required
-def coordinates(request):
-    if request.method == 'POST':
-        coords['latitude'] = request.POST['latitude']
-        coords['longitude'] = request.POST['longitude']
-        user_address['address'] = request.POST['address']
-        return render(request, 'users/upload.html' )
 
 
 #------------CNN Model--------
