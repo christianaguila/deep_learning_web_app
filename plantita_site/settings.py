@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['plantita.azurewebsites.net']
+ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -131,8 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  
-MEDIA_URL = '/uploads/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')  
+# MEDIA_URL = '/uploads/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -140,3 +141,14 @@ LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
 
+
+DEFAULT_FILE_STORAGE = 'storages.backends.azure_storage.AzureStorage'
+
+MEDIA_LOCATION = "uploads"
+
+AZURE_ACCOUNT_NAME = "plantitastorage"
+AZURE_ACCOUNT_KEY = 'gcQuJCurRiiVlJcbIIinxVXVAPYXX15WVZbh8JaSG/sPMRDfL+w4S1X8NJBluG6eRkpwf9uQv0BWU857xbrESQ=='
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+AZURE_LOCATION = 'uploads'
+AZURE_CONTAINER = 'media'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'

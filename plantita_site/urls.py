@@ -32,4 +32,4 @@ urlpatterns = [
     path('coordinates/', user_views.coordinates, name="coordinates"),
     path('delete_post/<str:pk>/', user_views.deletepost, name="delete_post"),
     path('', include('home.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
