@@ -20,7 +20,6 @@ coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
 
 # Create your views here.
-
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -211,4 +210,4 @@ def deletepost(request, pk):
         return render(request, 'users/upload.html', {'predicted_post':predicted_post})
     return render(request, 'users/delete.html', {'predicted_post':predicted_post})
 
- 
+    
