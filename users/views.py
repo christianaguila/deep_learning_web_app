@@ -210,4 +210,4 @@ def deletepost(request, pk):
         return render(request, 'users/upload.html', {'predicted_post':predicted_post})
     return render(request, 'users/delete.html', {'predicted_post':predicted_post})
 
-    
+   
