@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net'] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
