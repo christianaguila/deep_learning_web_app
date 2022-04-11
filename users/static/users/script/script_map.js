@@ -13,7 +13,7 @@ function initMap(){
           },
       });
 
-    var markers = []; 
+    var markers = [];  
     for(let i = 0; i<marker_locations.length; i++){
         let v = marker_locations[i]['fields']['predicted_plant_label']
         if( v == 'Sorry, Plantita cannot recognize the Plant'){
