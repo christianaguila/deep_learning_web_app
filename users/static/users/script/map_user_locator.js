@@ -4,11 +4,7 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById('mapuserlocator'), {
       center: initialPosition,
       zoom: 9,
-<<<<<<< HEAD
       mapId: "e3a9a0796408a29c",
-=======
-      mapId: 'ba17d8d80d24f5da'
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
       });
   
     if(!navigator.geolocation){
@@ -54,8 +50,4 @@ function initMap() {
       
     map.panTo({lat : lat, lng: long}); 
   }
-<<<<<<< HEAD
 } 
-=======
-} 
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

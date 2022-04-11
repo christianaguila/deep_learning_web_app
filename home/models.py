@@ -8,11 +8,7 @@ class Plantsgallery(models.Model):
     title = models.CharField(max_length=200)
     scientific_name = models.CharField(max_length=200, default='')
     slug = models.SlugField(unique=True)
-<<<<<<< HEAD
     plant_image = models.ImageField(upload_to='gallery_image', default=None)
-=======
-    plant_image = models.ImageField(upload_to='gallery image', default=None)
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
     pronounciation = models.TextField(default='-')
 
     botany = models.TextField(default='-')
@@ -55,7 +51,6 @@ class Plantsgallery(models.Model):
     propagation_method = models.TextField(default='', blank=True)
     references = models.TextField(default='', blank=True)
 
-<<<<<<< HEAD
     gallery_slider_1_image1 = models.ImageField(upload_to='gallery_image', default='-')
     gallery_slider_1_image2 = models.ImageField(upload_to='gallery_image', default='-')
     gallery_slider_1_image3 = models.ImageField(upload_to='gallery_image', default='-')
@@ -63,15 +58,6 @@ class Plantsgallery(models.Model):
     gallery_slider_2_image1 = models.ImageField(upload_to='gallery_image', default='-')
     gallery_slider_2_image2 = models.ImageField(upload_to='gallery_image', default='-')
     gallery_slider_2_image3 = models.ImageField(upload_to='gallery_image', default='-')
-=======
-    gallery_slider_1_image1 = models.ImageField(upload_to='gallery image', default='-')
-    gallery_slider_1_image2 = models.ImageField(upload_to='gallery image', default='-')
-    gallery_slider_1_image3 = models.ImageField(upload_to='gallery image', default='-')
-
-    gallery_slider_2_image1 = models.ImageField(upload_to='gallery image', default='-')
-    gallery_slider_2_image2 = models.ImageField(upload_to='gallery image', default='-')
-    gallery_slider_2_image3 = models.ImageField(upload_to='gallery image', default='-')
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 
     ar_link = models.TextField(default='', blank=True)
 

@@ -33,8 +33,4 @@ urlpatterns = [
     path('delete_post/<str:pk>/', user_views.deletepost, name="delete_post"),
     path('phplantmap', user_views.phplantmap, name="phplantmap"),
     path('', include('home.urls')),
-<<<<<<< HEAD
 ]
-=======
-]
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
