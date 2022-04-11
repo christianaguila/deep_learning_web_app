@@ -51,4 +51,7 @@ def plant_details(request, home_slug):
         {
             'plant_found': False
         })
+<<<<<<< HEAD
+=======
 
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

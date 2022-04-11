@@ -1,5 +1,14 @@
 Django==4.0.3
+<<<<<<< HEAD
+django-storages[azure]
+django-crispy-forms==1.14.0
+imageio==2.16.1
+Pillow==9.0.1
+whitenoise==6.0.0
+tensorflow-cpu==2.8.0
+=======
 django-crispy-forms==1.14.0
 Pillow==9.0.1
 whitenoise==6.0.0
 tensorflow-cpu==2.8.0
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

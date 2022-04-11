@@ -2,7 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from time import ctime
+<<<<<<< HEAD
+=======
 from PIL import Image
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 
 # Create your models here.
 
@@ -46,3 +49,9 @@ class PredictedPlant(models.Model):
 
     def __str__(self):
         return f'{self.prediction_label}, {self.post_prediction.author}, {self.post_prediction.date_posted}'
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

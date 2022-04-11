@@ -12,6 +12,31 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+<<<<<<< HEAD
+import tensorflow as tf
+import tensorflow.compat.v1 as tf
+import tensorflow.compat.v1.keras.backend as K
+from tensorflow.compat.v1.keras.backend import set_session
+from tensorflow.keras.models import load_model
+
+# CNN Model Settings
+def get_session():
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    return tf.Session(config=config)
+
+K.set_session(get_session())
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+SESS = tf.Session(config=config)
+print("CNN Model Loading")
+
+set_session(SESS)
+mobilenet_model=load_model('mobilenetv3large.h5') 
+
+=======
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +51,11 @@ SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+<<<<<<< HEAD
+ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
+=======
 ALLOWED_HOSTS = ['plantita.azurewebsites.net']
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 
 
 # Application definition
@@ -41,8 +70,17 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+<<<<<<< HEAD
+    'storages',
 ]
 
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net'] 
+
+=======
+]
+
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -131,8 +169,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+<<<<<<< HEAD
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')  
+# MEDIA_URL = '/uploads/'
+=======
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')  
 MEDIA_URL = '/uploads/'
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
@@ -140,3 +183,17 @@ LOGIN_REDIRECT_URL = 'index'
 
 LOGIN_URL = 'login'
 
+<<<<<<< HEAD
+
+DEFAULT_FILE_STORAGE = 'plantita_site.custom_azure.AzureMediaStorage'
+
+MEDIA_LOCATION = "uploads"
+
+AZURE_ACCOUNT_NAME = "plantitastorage"
+AZURE_ACCOUNT_KEY = 'gcQuJCurRiiVlJcbIIinxVXVAPYXX15WVZbh8JaSG/sPMRDfL+w4S1X8NJBluG6eRkpwf9uQv0BWU857xbrESQ=='
+AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+AZURE_LOCATION = 'uploads'
+AZURE_CONTAINER = 'media'
+MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+=======
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
