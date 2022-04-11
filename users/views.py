@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -102,8 +103,15 @@ def uploadplant(request):
             blob_url = (f'https://plantitastorage.blob.core.windows.net/media/uploads/{instance.plant_image}')
             prediction = ImageModel(blob_url)
             plant_image = instance.plant_image
-            userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
-            userLoc.save()
+
+            if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
+                userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
+                userLoc.save()
+
+                if bool(userLoc)==True:
+                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
+                else:
+                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
             
             PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
