@@ -35,6 +35,7 @@ function initMap() {
         map,
         title: userAddress,
       });
+<<<<<<< HEAD
 
     var circle = new google.maps.Circle({
         map: map,
@@ -51,3 +52,9 @@ function initMap() {
     map.panTo({lat : lat, lng: long}); 
   }
 } 
+=======
+      
+    map.panTo({lat : lat, lng: long}); 
+  }
+} 
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

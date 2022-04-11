@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block register %}
+<<<<<<< HEAD
 <div class="row justify-content-center content-section" style="padding:50px;">
     <div class="wrap" style="background-color:rgba(164, 143, 6, 0.45);">
         <div class="p-4 p-md-5" style="position:relative">
@@ -29,6 +30,36 @@
                         Log In
                     </a>
                 </small>
+=======
+<div class="row justify-content-center content-section" style="padding:100px;">
+    <div class="col-md-10 col-lg-6">
+        <div class="wrap" style="background-color:rgba(164, 143, 6, 0.45);">
+            <div class="p-4 p-md-5" style="position:relative">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">
+                            Contribute Today
+                        </legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <br>
+                        <button class="btn btn-outline-primary" type="submit">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                <br>
+                <div class="border-top pt-3">
+                    <small class="text-muted">
+                        Already have an account?
+                        <a class="ml-2" href="{% url 'login' %}">
+                            Log In
+                        </a>
+                    </small>
+                </div>
+>>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
             </div>
         </div>
     </div>
