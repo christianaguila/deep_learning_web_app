@@ -33,4 +33,4 @@ urlpatterns = [
     path('delete_post/<str:pk>/', user_views.deletepost, name="delete_post"),
     path('phplantmap', user_views.phplantmap, name="phplantmap"),
     path('', include('home.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
