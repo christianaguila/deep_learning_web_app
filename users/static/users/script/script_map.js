@@ -5,11 +5,7 @@ function initMap(){
     var map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: parseFloat(12.87), lng: parseFloat(121.77)},
         zoom: 7,
-<<<<<<< HEAD
         mapId: "e3a9a0796408a29c",
-=======
-        mapId: "71573f5f2187c47d",
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
         gestureHandling: "cooperative",
         restriction: {
             latLngBounds: {north: parseFloat(18.5), south: parseFloat(4.5), west: parseFloat(115), east: parseFloat(130)},
@@ -17,11 +13,7 @@ function initMap(){
           },
       });
 
-<<<<<<< HEAD
     var markers = []; 
-=======
-    var markers = [];  
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
     for(let i = 0; i<marker_locations.length; i++){
         let v = marker_locations[i]['fields']['predicted_plant_label']
         if( v == 'Sorry, Plantita cannot recognize the Plant'){
@@ -60,11 +52,7 @@ function initMap(){
         }
         let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], icon_url, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
         markers.push(k)
-<<<<<<< HEAD
         
-=======
-        console.log(marker_locations[i]['fields']['predicted_plant_label'])
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
     }
     
     // ------------------ Marker Loop ---------------------//
@@ -118,10 +106,6 @@ function initMap(){
 
             marker.addListener('click', function () {
                 if (infowindow) { infowindow.close();}
-<<<<<<< HEAD
-=======
-                console.log('Gmarker 1 gets pushed');
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
                 infowindow.open(map, marker);
                 map.panTo(this.getPosition());
                 map.setZoom(11);
@@ -145,8 +129,4 @@ function initMap(){
             }
         }
     
-<<<<<<< HEAD
     }
-=======
-    }
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67

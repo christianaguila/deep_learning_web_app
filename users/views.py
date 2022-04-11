@@ -93,7 +93,7 @@ def ImageModel(plant_image):
 def uploadplant(request):
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         
         if predict_form.is_valid():
@@ -113,6 +113,7 @@ def uploadplant(request):
                 else:
                     PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
             
+            PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
 
@@ -133,10 +134,7 @@ def uploadplant(request):
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
             try:
-                if bool(user_address['address']) == True:
-                    pred_loc = user_address['address']
-                else:
-                    pred_loc = None
+                pred_loc = userLoc.matched_address
             except AttributeError:
                 pred_loc = ""
 
