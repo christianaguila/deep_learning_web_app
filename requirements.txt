@@ -1,6 +1,6 @@
 Django==4.0.3
-django-crispy-forms==1.14.0
 django-storages[azure]
+django-crispy-forms==1.14.0
 imageio==2.16.1
 Pillow==9.0.1
 whitenoise==6.0.0
