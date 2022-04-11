@@ -1,0 +1,338 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+
+{% block plant_webpage %}
+    {% if plant_found %}
+            <!-- Main section-->
+            <section class="py-6">
+            
+                    <div class="container px-4 px-lg-5 my-5">
+                        <div class="row gx-4 gx-lg-5 align-items-center">
+                            <div class="col-md-6">
+                                
+                                <img class="card-img-top mb-5 mb-md-0" src="{{ pg.plant_image.url }}" alt="..." />
+                                
+                            </div>
+                            <div class="col-md-6">
+                                
+                                <div class="small mb-1">{{ pg.pronounciation }}</div>
+                                <h1 class="display-5 fw-bolder">{{ pg.title }}</h1>
+                                <div class="fs-5 mb-5">
+                                    <span>{{ pg.scientific_name }}</span>
+                                </div>
+                                <p class="lead">{{ pg.botany }}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+            </section>
+   
+            <!-- Information Section -->
+            <section style="background-color: rgba(210, 169, 17, 0.478);" style="padding-top: 5%; padding-bottom: 5%;">   
+                            <!-- Carousel -->
+                            <!-- Top content -->
+                                <div class="container-sm" style="padding-top: 5%; padding-bottom: 5%;">
+                                    <div class="row justify-content-center" style="margin: 0 2%;">
+                                        <div class="text-center">
+                                            
+                                            <h2 class="section-heading text-uppercase">{{ pg.title }}</h2>
+                                            <h3 class="section-subheading text-muted fs-5 mb-5"><i>{{ pg.scientific_name }}</i></h3>
+                                            
+                                        </div>
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                                            <ol class="carousel-indicators">
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                            </ol>
+                                            <div class="carousel-inner">
+                                            <!-- Slider 1 -->
+                                                <div class="carousel-item active">
+                                                    <div class="row">
+                                                        <div class="gallery-item" style="margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center;">
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_1_image1.url }}" class="d-block w-100" alt="..."></div>
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_1_image2.url }}" class="d-block w-100" alt="..."></div>
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_1_image3.url }}" class="d-block w-100" alt="..."></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <!-- End Slider 1 -->
+                                            <!-- Slider 2 -->
+                                                <div class="carousel-item">
+                                                    <div class="row">
+                                                        <div class="gallery-item" style="margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center;">
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_2_image1.url }}" class="d-block w-100" alt="..."></div>
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_2_image2.url }}" class="d-block w-100" alt="..."></div>
+                                                            <div class="col-sm-4"><img src="{{ pg.gallery_slider_2_image3.url }}" class="d-block w-100" alt="..."></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <!-- End Slider 2 -->
+                                            </div>
+                                            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+            </section>
+
+            <section class="py-6" style="padding-top: 5%; padding-bottom: 8%;">
+                            <!-- Vertical List -->
+                            <div class="container-sm" style="width: auto;">
+                                <div class="bd-info" role="tabpanel">
+                                    <div class="row" style="flex: auto;">
+                                        <!-- List Group -->
+                                        <div class="col-lg-4 col-sm-4 mb-4">
+                                            <div class="list-group" id="myList" role="tablist">
+                                                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#names" role="tab">Names</a>
+                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#local" role="tab">Locality & Seasonality</a>
+                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#conserv" role="tab">Conservation Status & Law</a>
+                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#util" role="tab">Utilization</a>
+                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#care" role="tab">Plant Care and Propagation</a>
+                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#disclaimer" role="tab">Disclaimer & References</a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-sm-6 mb-8" style="padding-left: 8%;">
+                                            <div class="tab-content">
+                                                <!-- Tab Names -->
+                                                <div class="tab-pane show active" id="names" role="tabpanel">
+                                                    <div class="row">
+                                                        <div class="gallery-item" style="margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center;">
+                                                        <div class="col-sm-6">
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    <br>
+                                                                    <h5><strong>COMMON NAMES</strong></h5>
+
+                                                                    <!-- List of Names Philippine -->
+
+                                                                    <li>
+                                                                        &emsp;
+                                                                        In the Philippines:
+                                                                    </li>
+                                                                    <ul style="list-style-type:circle"> 
+                                                                        
+                                                                        <li>{{ pg.common_philippine_name1 }}</li>
+                                                                        <li>{{ pg.common_philippine_name2 }}</li>
+                                                                        <li>{{ pg.common_philippine_name3 }}</li>
+                                                                        
+                                                                    </ul> 
+
+                                                                    <!-- List of Names English-->
+                                                                    <br></br>
+                                                                    <li>
+                                                                        &emsp;
+                                                                        In Foreign Countries:
+                                                                    </li>
+                                                                    <ul style="list-style-type:circle">
+                                                                        
+                                                                        <li>{{ pg.common_foreign_name1 }}</li>
+                                                                        <li>{{ pg.common_foreign_name2 }}</li>
+                                                                        <li>{{ pg.common_foreign_name3 }}</li>
+                                                                        
+                                                                    </ul> 
+
+                                                                    <!---- END List of Names ----->
+                                                                
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="col-sm-6 ">
+                                                            <ul class="list-inline">
+                                                                
+                                                                <li>
+                                                                    <br>
+                                                                    <h5><strong>SCIENTIFIC NAMES</strong></h5>
+
+                                                                    
+                                                                    
+                                                                    <li>
+                                                                        &emsp;
+                                                                        Other Scientific Names:
+                                                                    </li>
+                                                                    <ul style="list-style-type:circle">
+                                                                        
+                                                                        <li>{{ pg.sci_philippine_name1 }}</li>
+                                                                        <li>{{ pg.sci_philippine_name2 }}</li>
+                                                                        <li>{{ pg.sci_philippine_name3 }}</li>
+                                                                        
+                                                                    </ul> 
+
+                                                                    
+                                                                    <br></br>
+                                                                    <li>
+                                                                        &emsp;
+                                                                        Other Scientific Names:
+                                                                    </li>
+                                                                    <ul style="list-style-type:circle"> 
+                                                                        
+                                                                        <li>{{ pg.sci_foreign_name1 }}</li>
+                                                                        <li>{{ pg.sci_foreign_name2 }}</li>
+                                                                        <li>{{ pg.sci_foreign_name3 }}</li>
+                                                                        
+                                                                    </ul> 
+
+                                                                    <!---- END List of Names ----->
+
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Tab Locality & Seasonality -->
+                                                <div class="tab-pane" id="local" role="tabpanel">
+                                                    <h5><strong>WHERE IN THE PHILIPPINES?</strong></h5>
+                                                    <ul class="list-inline" style="list-style-type:circle">
+                                                        <li>
+                                                            <strong>Distribution in Philippines:</strong>
+                                                            
+                                                            {{ pg.distribution }}
+                                                            
+                                                        </li>
+                                                    </ul>
+
+                                                        
+                                                        <!--- The Map  --->  
+                                                </div>
+
+                                                <!-- Tab Conservation Status & Law -->
+                                                <div class="tab-pane" id="conserv" role="tabpanel">
+                                                    <div class="row">
+                                                        <div class="col-sm-10">
+                                                            <ul class="list-inline">
+                                                                <li>
+                                                                    
+                                                                    <h5><strong>CONSERVATION STATUS IN THE PHILIPPINES</strong></h5>
+
+                                                                    <!-- Conservation -->
+
+                                                                    <ul style="list-style-type:circle">
+                                                                    <li>
+                                                                        
+                                                                        <i>{{ pg.scientific_name }}</i> {{ pg.conservation_status }}
+                                                                        
+                                                                    </li>
+                                                                    </ul>
+                                                                    
+                                                                    <!-- Law -->
+                                                                    <br>
+
+                                                                    <h5><strong>PHILIPPINE LAW</strong></h5>
+                                                                    <ul style="list-style-type:circle">
+                                                                    <li>Republic Act No. 9147 - "Wildlife Resources Conservation and Protection Act"</li>
+                                                                        <ul class="list-inline">
+                                                                            <li>
+                                                                                <p>It shall be the policy of the State to conserve the country's wildlife resources and 
+                                                                                their habitats for sustainability. 
+                                                                                <a href="https://lawphil.net/statutes/repacts/ra2001/ra_9147_2001.html" target="_blank">Read More</a>
+                                                                                </p> 
+                                                                            </li>
+                                                                        </ul>
+                                                                    </ul>
+
+                                                                </li>
+                                                                    <!---- END ----->
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Tab Utilization -->
+                                                <div class="tab-pane" id="util" role="tabpanel">
+                                                    <!-- Uses -->
+                                                    <h5><strong>USES</strong></h5>
+                                                    <ul style="list-style-type:circle">
+                                                        
+                                                        <li>{{ pg.use_1 }}</li>
+                                                        <li>{{ pg.use_1 }}</li>
+                                                        <li>{{ pg.use_1 }}</li>
+                                                        
+                                                    </ul>
+
+                                                    <!-- SCIENTIFIC STUDIES -->
+                                                    <br>
+                                                    <h5><strong>SCIENTIFIC STUDIES</strong></h5>
+                                                    <ul style="list-style-type:circle">
+                                                        
+                                                        <li>
+                                                            {{ pg.scientific_studies1 }}
+                                                            <a href="{{pg.scientific_study_link1}}" target="_blank">Know More</a>
+                                                        </li>
+                                                        <li>
+                                                            {{ pg.scientific_studies2 }} 
+                                                            <a href="{{pg.scientific_study_link2}}" target="_blank">Know More</a>
+                                                        </li>
+                                                        <li>
+                                                            {{ pg.scientific_studies3 }} 
+                                                            <a href="{{pg.scientific_study_link3}}" target="_blank">Know More</a>
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Tab Plant Care and Propagation -->
+                                                <div class="tab-pane" id="care" role="tabpanel">
+                                                    <h5><strong>PLANT CARE & PROPAGATION</strong></h5>
+                                                    <ul style="list-style-type:circle">
+                                                        
+                                                        <li>
+                                                            <strong>Light Preference:</strong>
+                                                            {{ pg.light_preference }}
+                                                        </li>
+                                                        <li>
+                                                            <strong>Water Preference:</strong>
+                                                            {{ pg.water_preference }}
+                                                        </li>
+                                                        <li>
+                                                            <strong>Propagation Method:</strong>
+                                                            {{ pg.propagation_preference }}
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+
+                                                <!-- Tab Disclaimer & References -->
+                                                <div class="tab-pane" id="disclaimer" role="tabpanel">
+                                                    <h5><strong>DISCLAIMER</strong></h5>
+                                                    <ul style="list-style-type:circle">
+                                                        <li>
+                                                            The information in this website has been compiled and organized from reliable sources. 
+                                                        </li>
+                                                        <li>
+                                                            Plantita does not purport to provide any medical advice, all information provided is for educational and informational purposes only.
+                                                        </li>
+                                                        <li>
+                                                            You are encouraged to confirm any information obtained from or through this website with other sources, and review all information regarding any medical condition or treatment with your physician.
+                                                        </li>
+                                                        <li>
+                                                            Images presented here are gathered from online resources (websites, documents, etc.) for thesis purposes ONLY. The Plant Images belong to their respective owners/photographers.
+                                                        </li>
+                                                    </ul>
+                                                    <br>
+                                                    <h5><strong>REFERENCES</strong></h5>
+                                                    <ul style="list-style-type:circle">
+                                                        
+                                                        <li>
+                                                            {{ pg.references }}
+                                                        </li>
+                                                        
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            </section>
+    {% endif %}
+{% endblock %} 

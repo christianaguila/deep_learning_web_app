@@ -1,0 +1,15 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block logout %}
+<div class="container justify-content-center" style="padding-bottom: 5%">
+    <h2 style="padding:100px 10px 50px 50px;">You have been logged out</h2>
+    <div class="border-top pt-3" style="padding-left: 50px;">
+        <small class="text-muted">
+            <a href="{% url 'login' %}">
+                Log In Again
+            </a>
+        </small>
+    </div>
+</div>
+{% endblock %}

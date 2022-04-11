@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block profile %}
+<meta name="viewport" content="width=device-width">
+<section style=" background-color: rgba(45, 124, 108, 0.444); padding-bottom: 5%;">
+    <div class="d-flex justify-content-center content-section" style="padding-top: 10%; color: antiquewhite; padding-bottom: 0%;">
+        <div class="media">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <div class="media-body">
+                        <br>
+                        <center>
+                            <h2 class="account-heading" style="font-size:2vw;">{{ user.username }}</h2>
+                        <p class="text-secondary" style="font-size:2vw;">{{ user.email }}</p>
+                        </center> 
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
