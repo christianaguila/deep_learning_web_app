@@ -1,22 +1,43 @@
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from .models import Plantsgallery, Prediction
 
-# Create your views here.
-@csrf_exempt
-def insert(request):
-    if request.method == 'POST':
-        prediction = Prediction(plant = 'Payau', latitude = request.POST['latitude'], longitude = request.POST['longitude'])
-        # prediction.plant = request.POST['plant']
-        # prediction.latitude = request.POST['latitude']
-        # prediction.longitude = request.POST['longitude']
-        prediction.save()
-    #     message = 'insert successful'
-    return render(request, 'home/index.html' )
+from users.models import PredictedPlant
+
+from home.models import Plantsgallery
+
 
 def index(request):
     home = Plantsgallery.objects.all()
-    return render(request, 'home/index.html', {'home':home})
+
+    # Total Predictions of All Users
+    totalpred = PredictedPlant.objects.count()
+
+     # --------- Overall Total Number of Predictions per Plants ---------------- #
+    anhw_totalpred = PredictedPlant.objects.filter(prediction_label = 'Anahaw - Saribus rotundifolius').count()
+    bm_totalpred = PredictedPlant.objects.filter(prediction_label = 'Bagawak Morado - Clerodendrum quadriloculare').count()
+    bgny_totalpred = PredictedPlant.objects.filter(prediction_label = 'Bignay - Antidesma bunius').count()
+    cp_totalpred = PredictedPlant.objects.filter(prediction_label = "Copeland's Pitcher - Nepenthes copelandii").count()
+    klngg_totalpred = PredictedPlant.objects.filter(prediction_label = 'Kalingag - Cinnamomum mercadoi').count()
+    ktmn_totalpred = PredictedPlant.objects.filter(prediction_label = 'Katmon - Dillenia philippinensis').count()
+    krsp_totalpred = PredictedPlant.objects.filter(prediction_label = 'Kris Plant - Alocasia sanderiana').count()
+    payau_totalpred = PredictedPlant.objects.filter(prediction_label = 'Payau - Homalomena philippinensis').count()
+    tngbywk_totalpred = PredictedPlant.objects.filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
+    tybk_totalpred = PredictedPlant.objects.filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+
+    context = {
+                'home':home, 
+                'totalpred': totalpred,
+                'anhw_totalpred': anhw_totalpred, #Anahaw
+                'bm_totalpred': bm_totalpred, #Bagawak Morado
+                'bgny_totalpred': bgny_totalpred, #Bignay
+                'cp_totalpred': cp_totalpred, #Copeland's Pitcher
+                'klngg_totalpred': klngg_totalpred, #Kalingag
+                'ktmn_totalpred': ktmn_totalpred, #Katmon
+                'krsp_totalpred': krsp_totalpred, #Kris Plant
+                'payau_totalpred': payau_totalpred, #Payau
+                'tngbywk_totalpred': tngbywk_totalpred, #Tangisang Bayawak
+                'tybk_totalpred': tybk_totalpred, #Tayabak
+                }
+    return render(request, 'home/index.html', context)
 
 def plant_details(request, home_slug):
     try: 
@@ -31,5 +52,3 @@ def plant_details(request, home_slug):
             'plant_found': False
         })
 
-def phplantmap(request):
-    return render(request, 'home/phmap.html')

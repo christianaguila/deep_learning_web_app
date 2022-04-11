@@ -2,9 +2,13 @@
 *.log
 *.pot
 *.pyc
-__pycache__
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
 db.sqlite3
 media
+home/__pycache__/
+users/__pycache__/
 
 # Backup files # 
 *.bak 
@@ -137,3 +141,4 @@ GitHub.sublime-settings
 .history
 
 */uploads/user_uploads
+

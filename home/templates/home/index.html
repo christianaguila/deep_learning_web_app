@@ -3,7 +3,7 @@
 
 {% block masthead %}
 <!-- hero area -->
-<section class="section">
+<section class="section" style="padding-bottom: 0px;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 text-center mb-5 mb-md-0">
@@ -16,40 +16,98 @@
                         Take a picture of your plant, upload, then wait for the initial
                         identification!
                     </p>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                    <script>
-                        $(document).ready(function(){
-                            $("#upload").click(function(){
-                                if(!navigator.geolocation){
-                                    console.log("Your browser doesn't support geolocation feature")
-                                }else{
-                                    navigator.geolocation.getCurrentPosition(getPosition)
-                                }
-                                
-                                function getPosition(pos){
-                                    let lat = pos.coords.latitude;
-                                    let long = pos.coords.longitude;
-
-                                    $.ajax({
-                                        url: "/insert/",
-                                        data: { latitude: lat, longitude: long },
-                                        type: "POST"
-                                    })
-                                }
-                            })
-                        })
-                    </script>
-
-
-                    <a class="btn btn-main" id="upload" href="#about" role="button">Upload</a>
+                    <a class="btn btn-main" href="{% url 'uploadplant' %}" role="button">Upload</a>
                 </div>
             </div>
         </div><!-- .row close -->
     </div><!-- .container close -->
-</section><!-- header close -->
+</section><!-- header close --> 
 {% endblock %}
 
 {% block register_login %}
+<section style="padding-bottom: 5%;">
+    <div class="container">
+        <div class="container-count">
+            <div class="row">
+                <div class="four col-md-3">
+                    <div class="counter-box colored"><span class="counter">{{totalpred}}</span>
+                        <p>Overall Predicted Plants</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{anhw_totalpred}}</span>
+                        <p>Anahaw</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{bgny_totalpred}}</span>
+                        <p>Bignay</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{klngg_totalpred}}</span>
+                        <p>Kalingag</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{ktmn_totalpred}}</span>
+                        <p>Katmon</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{krsp_totalpred}}</span>
+                        <p>Kris Plant</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{payau_totalpred}}</span>
+                        <p>Payau</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{tybk_totalpred}}</span>
+                        <p>Tayabak</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{tngbywk_totalpred}}</span>
+                        <p>Tangisang Bayawak</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{bm_totalpred}}</span>
+                        <p>Bagawak Morado</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box"><span class="counter">{{cp_totalpred}}</span>
+                        <p>Copeland's Pitcher</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.counter').each(function () {
+                $(this).prop('Counter',0).animate({
+                Counter: $(this).text()}, 
+                    {duration: 2000,
+                    easing: 'swing',
+                    step: function (now) {
+                    $(this).text(Math.ceil(now));
+                    }}
+                );
+            });
+
+        });
+    </script>
+</section>
+
 <section class="feature-list section" style="background-color: rgba(45, 124, 108, 0.444);">
     <div class="container">
         <div class="row">
@@ -109,7 +167,6 @@
                         <br>
                         {% endfor %}
                         </div> <!-- row2 -->
-            
     </div><!-- .container close -->
 </section><!-- header close -->
 {% endblock %}
