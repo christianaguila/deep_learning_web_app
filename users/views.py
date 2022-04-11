@@ -12,7 +12,7 @@ from home.models import Plantsgallery
 import numpy as np
 import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
-from tensorflow.python.keras.models import load_model
+from tensorflow.keras.models import load_model
 
 coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
@@ -39,7 +39,6 @@ def profile(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
-        print(request.POST['address'])
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
@@ -48,13 +47,7 @@ def coordinates(request):
 
 #------------CNN Model--------
 #Load Model
-model_graph = tf.compat.v1.Graph()
-with model_graph.as_default():
-    tf_session = tf.compat.v1.Session()
-    with tf_session.as_default():
-        mobilenet_model=load_model('MobilenetV3Large_FCL0.2FT') 
-        class_names = [
-            'Anahaw - Saribus rotundifolius',
+class_names = ['Anahaw - Saribus rotundifolius',
             'Bagawak Morado - Clerodendrum quadriloculare',
             'Bignay - Antidesma bunius',
             "Copeland's Pitcher - Nepenthes copelandii",
@@ -64,6 +57,7 @@ with model_graph.as_default():
             'Payau - Homalomena philippinensis',
             'Tangisang-Bayawak - Ficus variegata',
             'Tayabak - Strongylodon macrobotrys']
+        
                 
 #Run Model
 def ImageModel(plant_image):
@@ -71,10 +65,8 @@ def ImageModel(plant_image):
     numpy_image = img_to_array(original)
     image_batch = np.expand_dims(numpy_image, axis=0)
     processed_image = image_batch.copy()
-
-    with model_graph.as_default():
-        with tf_session.as_default():
-            predictions=mobilenet_model.predict(processed_image)
+    mobilenet_model=load_model('mobilenetv3large.h5') 
+    predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
 
