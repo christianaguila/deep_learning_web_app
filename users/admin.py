@@ -6,6 +6,7 @@ from .models import Post, PredictedPlant, Location
 class PostAdmin(admin.ModelAdmin):
     list_display = [
         'author',
+        'plant_image',
         'date_posted',
     ]
     search_fields = [
@@ -28,11 +29,19 @@ class PredictedPlantAdmin(admin.ModelAdmin):
     ]
     search_fields = [
         'prediction_label',
+        'post_loc',
     ]
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
     list_display = [
+        'predicted_plant_label',
+        'latitude',
+        'longitude',
+        'matched_address',
+    ]
+    readonly_fields = [
+        'predicted_plant_label',
         'latitude',
         'longitude',
         'matched_address',

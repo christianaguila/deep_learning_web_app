@@ -1,0 +1,207 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block masthead %}
+<!-- Masthead-->
+<header class="mastheadOther">
+    <div class="container justify-content-center">
+        <div class="mastheadOther-heading text-uppercase" style="padding-top: 5%;">
+            <h1 style="text-align: center;">Philippine Plant Map</h1>
+        </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block map %}
+<section style="padding: 0rem;">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <!--- PH Plant Map  --->
+            <div class="col-md-8">
+                <!--- The Map  --->
+                <!-- <p id="neatdata"></p> -->
+                <script>
+                    var marker_locations = JSON.parse('{{ plants_locations|escapejs }}');
+                </script>
+                <div id="map" style=" height: 600px;"></div>
+                
+                
+                <script src="{% static 'users/script/script_map.js' %}"></script>
+                <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+                <script
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_pvTRvQ3VGTJQnWOXF2CvoNAcx42JHgs&callback=initMap&libraries=&v=weekly"
+                    async
+                ></script>
+            </div>
+
+            <div class="col-md-4 align-items-center">
+
+                <!-- - Category Filter  -->
+                <div class="row align-items-center" style="margin-top: 2%;"> 
+                    <div class="col-md-12" style="margin: 2% auto; width: 340px;">
+                        <select class="form-select" style="text-align: center;" onchange="filterMarkers(this.value);">
+                            <option value="">Filter by Category</option>
+                            <option value="Anahaw - Saribus rotundifolius">Anahaw</option>
+                            <option value="Bagawak Morado - Clerodendrum quadriloculare">Bagawak Morado</option>
+                            <option value="Bignay - Antidesma bunius">Bignay</option>
+                            <option value="Copeland's Pitcher - Nepenthes copelandii">Copeland's Pitcher</option>
+                            <option value="Kalingag - Cinnamomum mercadoi">Kalingag</option>
+                            <option value="Katmon - Dillenia philippinensis">Katmon</option>
+                            <option value="Kris Plant - Alocasia sanderiana">Kris Plant</option>
+                            <option value="Payau - Homalomena philippinensis">Payau</option>
+                            <option value="Tangisang-Bayawak - Ficus variegata">Tangisang-Bayawak</option>
+                            <option value="Tayabak - Strongylodon macrobotrys">Tayabak</option>
+                            <option value="Sorry, Plantita cannot recognize the Plant">Unknown</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Legend Card -->
+                <div class="row gx-6 gx-lg-5 align-items-center" style="margin-top: 2%;"> 
+                    <div class="card card-with-shadow card-rounded-max card-without-border" style="width: auto;">
+                        <div class="card-body text-center" style="padding-top: 5%; height: auto;">                                
+                            <h5>Legend</h5>
+                            <hr style="border: solid 2px round;">
+                            <div class="row gx-4 gx-lg-5 align-items-center" style="margin: 0; font-size: 14px;">
+                                
+                                <!-- -- Anahaw Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_anahaw.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Anahaw</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_bagawakmorado.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Bagawak Morado</p>
+                                </div>
+
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_bignay.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Bignay</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_pitcher.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Copeland's Pitcher</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_katmon.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Katmon</p>
+                                </div>
+        
+                                <!-- Bignay Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_Kalingag.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Kalingag</p>
+                                </div>
+        
+                                <!-- Kris Plant Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_krisplant.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Kris Plant</p>
+                                </div>
+
+                                <!-- Tangisang-Bayawak Legend -->
+                                <div class="col-md-6" style="text-align: center;">
+                                    <img src="{% static 'users/icons/map_tangisang_bayawak.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center;">
+                                    <p>Tangisang-Bayawak</p>
+                                </div>
+        
+                                <!-- Tayabak Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_tayabak.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Tayabak</p>
+                                </div>
+
+                                <!-- Tayabak Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_unknown.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Unknown</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Legend Card -->
+            </div>
+
+            
+
+            <!-- User Guide -->
+            <div style="margin: 2% 2%;">
+                <h5>PLANTITA GUIDE</h5>
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <!-- Question 1  -->
+                    <div class="col-md-12" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            1. Why are plants' locations are <b>NOT EXACT</b>? 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                                (Bakit hindi husto ang kinaroroonan ng mga halaman?)
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            In order to protect the plants from threats such as overexploitation, its exact location cannot be disclosed to the public. 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                            (Upang mapangalagaan ang mga halaman mula sa mga banta sa buhay nito katulad ng labis na pagsasamantala, 
+                            ang kinaroroonan nito ay hindi maaaring ihayag sa publiko.)
+                            </i>
+                        </p>
+                    </div>
+                    <!-- End Question 1  -->
+
+                    <!-- Question 2  -->
+                    <div class="col-md-12" style="text-align: justify; margin-top: 1%;">
+                        <p style="line-height: 0.3in;">
+                            2. Does the PLANTITA site also shows the indigenous plants of other countries? 
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                                (Kaya ba ng PLANTITA site na maipakita ang indigenous plants ng ibang bansa?)
+                            </i>
+                        </p>
+                    </div>
+                    <div class="col-md-10 offset-md-1" style="text-align: justify;">
+                        <p style="line-height: 0.3in;">
+                            No, the PLANTITA site is solely for the indigenous plants that can be found in the <b>Philippines</b>.
+                            <br>
+                            <i style="color: rgba(109, 100, 100, 0.842);">
+                            (Hindi, ang PLANTITA site ay para lamang sa indigenous plants na makikita sa Pilipinas.)
+                            </i>
+                        </p>
+                    </div>
+                <!-- End Question 2  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %} 

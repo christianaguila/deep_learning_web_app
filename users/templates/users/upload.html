@@ -83,12 +83,10 @@
                             <p style="align-items: center;">The plant is identified as
                                 <br> 
                                 <b>{{prediction}}</b>
-                                {% if error_pred %}
-                                <p>Check your Image</p>
-                                {% endif %}
                                 {% if pred_loc %}
                                 <p>Found at {{pred_loc}}</p>
                                 {% endif %}
+                                <a href=""><small>Is my plant didn't get recognize? Why?</small></a>
                             </p>
                         </div>
                     </div>
@@ -227,7 +225,7 @@
                                                     <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
                                                 </li>
                                                 <li class="list-group-item"><small class="text-muted">
-                                                    <b>Identification:</b> <br> {{ k.prediction_label }} </small>
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
                                                 </li>
                                                 <li class="list-group-item">
                                                     <a href="{% url 'delete_post' k.id %}">Delete Post</a>

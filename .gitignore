@@ -7,6 +7,8 @@
 */__pycache__/
 db.sqlite3
 media
+home/__pycache__/
+users/__pycache__/
 
 # Backup files # 
 *.bak 
