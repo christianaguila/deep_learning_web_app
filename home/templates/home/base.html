@@ -50,10 +50,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'index'%}">HOME</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" id="" href="{% url 'phplantmap'%}">PH PLANT MAP</a>
                         </li>
-                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'uploadplant' %}">UPLOAD & IDENTIFY</a>
                         </li>
@@ -146,8 +146,5 @@
             </div>
         </section>
     </footer>
-
-   
-    
 </body>
 </html>

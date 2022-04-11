@@ -31,5 +31,6 @@ urlpatterns = [
     path('uploadplant/', user_views.uploadplant, name="uploadplant"),
     path('coordinates/', user_views.coordinates, name="coordinates"),
     path('delete_post/<str:pk>/', user_views.deletepost, name="delete_post"),
+    path('phplantmap', user_views.phplantmap, name="phplantmap"),
     path('', include('home.urls')),
 ]
