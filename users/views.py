@@ -47,7 +47,6 @@ def coordinates(request):
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
-        print(coords)
         return render(request, 'users/upload.html' )
 
 
@@ -92,7 +91,6 @@ def ImageModel(plant_image):
 #post predictions
 @login_required
 def uploadplant(request):
-    print(coords)
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
     if request.method == 'POST':
@@ -216,12 +214,10 @@ def uploadplant(request):
 
 def deletepost(request, pk):
     predicted_post = PredictedPlant.objects.filter(post_prediction__author=request.user).get(id=pk)
-    print(predicted_post)
-    if request.method == 'POST':
+    if request.method == 'POST' and 'deleteconfirm' in request.POST:
         predicted_post.delete()
-        return render(request, 'users/upload.html', {'predicted_post':predicted_post})
-    else:
-        return render(request, 'users/delete.html', {'predicted_post':predicted_post})
+        return redirect('uploadplant')
+    return render(request, 'users/delete.html', {'predicted_post':predicted_post})
 
 @login_required
 def phplantmap(request):
