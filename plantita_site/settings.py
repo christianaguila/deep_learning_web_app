@@ -12,6 +12,28 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import tensorflow as tf
+import tensorflow.compat.v1 as tf
+import tensorflow.compat.v1.keras.backend as K
+from tensorflow.compat.v1.keras.backend import set_session
+from tensorflow.keras.models import load_model
+
+# CNN Model Settings
+def get_session():
+    config = tf.ConfigProto()
+    config.gpu_options.allow_growth = True
+    return tf.Session(config=config)
+
+K.set_session(get_session())
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+SESS = tf.Session(config=config)
+print("CNN Model Loading")
+
+set_session(SESS)
+mobilenet_model=load_model('mobilenetv3large.h5') 
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +65,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
 ]
+
+CSRF_COOKIE_SECURE = True
+CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net', ''] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -152,3 +177,4 @@ AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 AZURE_LOCATION = 'uploads'
 AZURE_CONTAINER = 'media'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+

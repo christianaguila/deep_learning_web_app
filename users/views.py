@@ -1,20 +1,22 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from .forms import UserRegisterForm, ImageUploadForm
 from users.models import Post, PredictedPlant, Location
 
 from django.views.decorators.csrf import csrf_exempt
-
 from home.models import Plantsgallery
+from django.conf import settings
+from plantita_site.settings import mobilenet_model
+from tensorflow.python.keras.backend import set_session
+import imageio
 
 from PIL import Image
 
-import os
 import numpy as np
-import tensorflow as tf
 from keras.preprocessing.image import load_img, img_to_array
-from tensorflow.keras.models import load_model
+
 
 coords = {'latitude': [], 'longitude': []}
 user_address = {'address': []}
@@ -44,6 +46,7 @@ def coordinates(request):
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
+
         return render(request, 'users/upload.html' )
 
 
@@ -62,12 +65,16 @@ class_names = ['Anahaw - Saribus rotundifolius',
         
                 
 #Run Model
+
 def ImageModel(plant_image):
-    original = load_img(plant_image, target_size=(224, 224))
-    numpy_image = img_to_array(original)
-    image_batch = np.expand_dims(numpy_image, axis=0)
+    input_img = imageio.imread(plant_image)
+    input_img = Image.fromarray(input_img).resize((224,224))
+    img_array = img_to_array(input_img)
+    # original = load_img(plant_image, target_size=(224, 224))
+    image_batch = np.expand_dims(img_array, axis=0)
     processed_image = image_batch.copy()
-    mobilenet_model=load_model('mobilenetv3large.h5') 
+    
+    set_session(settings.SESS)
     predictions=mobilenet_model.predict(processed_image)
 
     max = predictions.max()
@@ -91,7 +98,6 @@ def ImageModel(plant_image):
         return results
 
 
-
 #post predictions
 @login_required
 def uploadplant(request):
@@ -99,11 +105,15 @@ def uploadplant(request):
     gallery = Plantsgallery.objects.all()
     if request.method == 'POST':
         predict_form = ImageUploadForm(request.POST, request.FILES)
+        
+        
+
         if predict_form.is_valid():
             instance = predict_form.save(commit=False)
             instance.author = request.user
             instance.save()
-            prediction = ImageModel(f'uploads/{str(instance.plant_image)}')
+            blob_url = (f'https://plantitastorage.blob.core.windows.net/media/uploads/{instance.plant_image}')
+            prediction = ImageModel(blob_url)
             plant_image = instance.plant_image
             PredictedPlant.objects.create(prediction_label=prediction['label'], predicted_image=plant_image, post_prediction=instance, post_loc=prediction['userLoc'])
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
