@@ -5,7 +5,7 @@ function initMap(){
     var map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: parseFloat(12.87), lng: parseFloat(121.77)},
         zoom: 7,
-        mapId: "71573f5f2187c47d",
+        mapId: "e3a9a0796408a29c",
         gestureHandling: "cooperative",
         restriction: {
             latLngBounds: {north: parseFloat(18.5), south: parseFloat(4.5), west: parseFloat(115), east: parseFloat(130)},
@@ -52,7 +52,7 @@ function initMap(){
         }
         let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], icon_url, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
         markers.push(k)
-        console.log(marker_locations[i]['fields']['predicted_plant_label'])
+        
     }
     
     // ------------------ Marker Loop ---------------------//
@@ -106,7 +106,6 @@ function initMap(){
 
             marker.addListener('click', function () {
                 if (infowindow) { infowindow.close();}
-                console.log('Gmarker 1 gets pushed');
                 infowindow.open(map, marker);
                 map.panTo(this.getPosition());
                 map.setZoom(11);
