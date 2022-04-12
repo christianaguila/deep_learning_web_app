@@ -4,15 +4,16 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById('mapuserlocator'), {
       center: initialPosition,
       zoom: 9,
-      mapId: 'ba17d8d80d24f5da'
+      mapId: "e3a9a0796408a29c",
       });
   
     if(!navigator.geolocation){
       console.log("Your browser doesn't support geolocation feature")
     }else{
-      navigator.geolocation.getCurrentPosition(getPosition)
+      navigator.geolocation.getCurrentPosition(getPosition, showError)
     }
-
+  
+  
   async function getPosition(pos){
     let lat = pos.coords.latitude
     let long = pos.coords.longitude
@@ -28,14 +29,13 @@ function initMap() {
       url: "/coordinates/",
       data: { latitude: lat, longitude: long , address: userAddress},
       type: "POST"
-  })
+  });
 
     marker = new google.maps.Marker({
         position: {lat: lat, lng: long},
         map,
         title: userAddress,
       });
-<<<<<<< HEAD
 
     var circle = new google.maps.Circle({
         map: map,
@@ -51,10 +51,36 @@ function initMap() {
       
     map.panTo({lat : lat, lng: long}); 
   }
-} 
-=======
-      
-    map.panTo({lat : lat, lng: long}); 
-  }
-} 
->>>>>>> c4cdfef43cd79a5a1e91e18e38a7f4c3f3656c67
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+      case error.POSITION_UNAVAILABLE:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+      case error.TIMEOUT:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+      break;
+      case error.UNKNOWN_ERROR:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+    }
+}}

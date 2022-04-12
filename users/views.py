@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -16,7 +15,7 @@ import imageio
 from PIL import Image
 import json
 import numpy as np
-from keras.preprocessing.image import load_img, img_to_array
+from keras.preprocessing.image import img_to_array
 from django.core import serializers
 
 coords = {'latitude': [], 'longitude': []}
@@ -93,7 +92,7 @@ def ImageModel(plant_image):
 def uploadplant(request):
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         
         if predict_form.is_valid():
@@ -132,13 +131,14 @@ def uploadplant(request):
             payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+            
             try:
                 if bool(user_address['address']) == True:
                     pred_loc = user_address['address']
                 else:
                     pred_loc = None
             except AttributeError:
-                pred_loc = ""
+                pred_loc = None
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
@@ -209,6 +209,9 @@ def uploadplant(request):
                     'tngbywk_totalpred': tngbywk_totalpred, #Tangisang Bayawak
                     'tybk_totalpred': tybk_totalpred, #Tayabak
                     }
+        coords['latitude'] = None
+        coords['longitude'] = None
+        user_address['address'] = None
     return render(request, 'users/upload.html', context)
 
 
