@@ -4,7 +4,7 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById('mapuserlocator'), {
       center: initialPosition,
       zoom: 9,
-      mapId: 'e3a9a0796408a29c'
+      mapId: "e3a9a0796408a29c",
       });
   
     if(!navigator.geolocation){

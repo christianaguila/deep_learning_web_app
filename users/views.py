@@ -93,7 +93,7 @@ def ImageModel(plant_image):
 def uploadplant(request):
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         
         if predict_form.is_valid():
