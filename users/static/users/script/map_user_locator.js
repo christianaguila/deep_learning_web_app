@@ -10,9 +10,10 @@ function initMap() {
     if(!navigator.geolocation){
       console.log("Your browser doesn't support geolocation feature")
     }else{
-      navigator.geolocation.getCurrentPosition(getPosition)
+      navigator.geolocation.getCurrentPosition(getPosition, showError)
     }
-
+  
+  
   async function getPosition(pos){
     let lat = pos.coords.latitude
     let long = pos.coords.longitude
@@ -28,7 +29,7 @@ function initMap() {
       url: "/coordinates/",
       data: { latitude: lat, longitude: long , address: userAddress},
       type: "POST"
-  })
+  });
 
     marker = new google.maps.Marker({
         position: {lat: lat, lng: long},
@@ -50,4 +51,36 @@ function initMap() {
       
     map.panTo({lat : lat, lng: long}); 
   }
-} 
+
+  function showError(error) {
+    switch(error.code) {
+      case error.PERMISSION_DENIED:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+      case error.POSITION_UNAVAILABLE:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+      case error.TIMEOUT:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+      break;
+      case error.UNKNOWN_ERROR:
+        $.ajax({
+          url: "/coordinates/",
+          data: { latitude: null, longitude: null , address: null},
+          type: "POST"
+      })
+        break;
+    }
+}}
