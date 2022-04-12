@@ -28,7 +28,7 @@
 				<form action="{% url 'delete_post' predicted_post.id  %}" method="POST">
 					{% csrf_token %}
 					<a class="btn btn-warning" href="{% url 'uploadplant' %}">Cancel</a>
-					<input class="btn btn-danger" type="submit" name="Confirm">
+					<input class="btn btn-danger" type="submit" name="deleteconfirm">
 				</form>
 			</div>
 		</div>

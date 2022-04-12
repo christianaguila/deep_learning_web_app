@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -46,7 +47,6 @@ def coordinates(request):
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
-
         return render(request, 'users/upload.html' )
 
 
@@ -93,7 +93,7 @@ def ImageModel(plant_image):
 def uploadplant(request):
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
-    if request.method == 'POST':
+    if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         
         if predict_form.is_valid():
@@ -103,10 +103,16 @@ def uploadplant(request):
             blob_url = (f'https://plantitastorage.blob.core.windows.net/media/uploads/{instance.plant_image}')
             prediction = ImageModel(blob_url)
             plant_image = instance.plant_image
-            userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
-            userLoc.save()
+
+            if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
+                userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
+                userLoc.save()
+
+                if bool(userLoc)==True:
+                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
+                else:
+                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
             
-            PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
 
@@ -127,7 +133,10 @@ def uploadplant(request):
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
             try:
-                pred_loc = userLoc.matched_address
+                if bool(user_address['address']) == True:
+                    pred_loc = user_address['address']
+                else:
+                    pred_loc = None
             except AttributeError:
                 pred_loc = ""
 
@@ -204,11 +213,10 @@ def uploadplant(request):
 
 
 def deletepost(request, pk):
-    predicted_post =  complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user).get(id=pk)
-    print(predicted_post)
-    if request.method == 'POST':
+    predicted_post = PredictedPlant.objects.filter(post_prediction__author=request.user).get(id=pk)
+    if request.method == 'POST' and 'deleteconfirm' in request.POST:
         predicted_post.delete()
-        return render(request, 'users/upload.html', {'predicted_post':predicted_post})
+        return redirect('uploadplant')
     return render(request, 'users/delete.html', {'predicted_post':predicted_post})
 
 @login_required

@@ -46,7 +46,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
 
@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 ]
 
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net', ''] 
+CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net'] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
