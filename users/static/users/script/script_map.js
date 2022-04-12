@@ -5,7 +5,7 @@ function initMap(){
     var map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: parseFloat(12.87), lng: parseFloat(121.77)},
         zoom: 7,
-        mapId: "71573f5f2187c47d",
+        mapId: "e3a9a0796408a29c",
         gestureHandling: "cooperative",
         restriction: {
             latLngBounds: {north: parseFloat(18.5), south: parseFloat(4.5), west: parseFloat(115), east: parseFloat(130)},
