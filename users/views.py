@@ -58,7 +58,7 @@ class_names = ['Anahaw - Saribus rotundifolius',
             'Kalingag - Cinnamomum mercadoi',
             'Katmon - Dillenia philippinensis',
             'Kris Plant - Alocasia sanderiana',
-            'Payau - Homalomena philippinensis',
+            'Payau - Homalomena philippinensis',    
             'Tangisang-Bayawak - Ficus variegata',
             'Tayabak - Strongylodon macrobotrys']
         
@@ -94,7 +94,6 @@ def uploadplant(request):
     gallery = Plantsgallery.objects.all()
     if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
-        
         if predict_form.is_valid():
             instance = predict_form.save(commit=False)
             instance.author = request.user
@@ -103,14 +102,10 @@ def uploadplant(request):
             prediction = ImageModel(blob_url)
             plant_image = instance.plant_image
 
-            if bool(coords['latitude']) == True & bool(coords['longitude']) == True:
+            if prediction in class_names and bool(coords['latitude']) == True and bool(coords['longitude']) == True:
                 userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
                 userLoc.save()
-
-                if bool(userLoc)==True:
-                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
-                else:
-                    PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance)
+                PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
             
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
