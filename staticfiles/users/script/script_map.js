@@ -1,4 +1,3 @@
-
 var gmarkers =[];
 
 function initMap(){
@@ -13,44 +12,46 @@ function initMap(){
           },
       });
 
+    
+    var img = new Image()
     var markers = []; 
     for(let i = 0; i<marker_locations.length; i++){
-        let v = marker_locations[i]['fields']['predicted_plant_label']
+        let v = marker_locations[i]['fields']['predicted_plant_label'];
         if( v == 'Sorry, Plantita cannot recognize the Plant'){
-            icon_url = "/static/users/icons/map_unknown.png"
+            img.src = "{% static 'users/icons/map_unknown.png' %}"
         }else{
             if (v == 'Anahaw - Saribus rotundifolius') {
-                icon_url = "/static/users/icons/map_anahaw.png"
-              }
+                img.src = "{% static 'users/icons/map_anahaw.png' %}"
+              };
               if (v == 'Bagawak Morado - Clerodendrum quadriloculare') {
-                icon_url = "/static/users/icons/map_bagawakmorado.png"
-              }
+                img.src = "{% static 'users/icons/map_bagawakmorado.png' %}"
+              };
               if (v == 'Bignay - Antidesma bunius') {
-                icon_url = "/static/users/icons/map_bignay.png"
-              }
+                img.src = "{% static 'users/icons/map_bignay.png' %}"
+              };
               if (v == "Copeland's Pitcher - Nepenthes copelandii") {
-                icon_url = "/static/users/icons/map_pitcher.png"
-              }
+                img.src = "{% static 'users/icons/map_pitcher.png' %}"
+              };
               if (v == 'Kalingag - Cinnamomum mercadoi') {
-                icon_url = "/static/users/icons/map_kalingag.png"
-              }
+                img.src = "{% static 'users/icons/map_kalingag.png' %}"
+              };
               if (v == 'Katmon - Dillenia philippinensis') {
-                icon_url = "/static/users/icons/map_katmon.png"
-              }
+                img.src = "{% static 'users/icons/map_katmon.png' %}"
+              };
               if (v == 'Kris Plant - Alocasia sanderiana') {
-                icon_url = "/static/users/icons/map_krisplant.png"
-              }
+                img.src = "{% static 'users/icons/map_krisplant.png' %}"
+              };
               if (v == 'Payau - Homalomena philippinensis') {
-                icon_url = "/static/users/icons/map_payau.png"
-              }
+                img.src = "{% static 'users/icons/map_payau.png' %}"
+              };
               if (v == 'Tangisang-Bayawak - Ficus variegata') {
-                icon_url = "/static/users/icons/map_tangisang_bayawak.png"
-              }
+                img.src = "{% static 'users/icons/map_tangisang_bayawak.png' %}"
+              };
               if (v == 'Tayabak - Strongylodon macrobotrys') {
-                icon_url = "/static/users/icons/map_tayabak.png"
-              }
+                img.src = "{% static 'users/icons/map_tayabak.png' %}"
+              };
         }
-        let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], icon_url, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
+        let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], img, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
         markers.push(k)
         
     }
