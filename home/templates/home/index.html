@@ -149,13 +149,13 @@
                                 <h3 class="card-header">{{ home_item.title }}</h3>
                                 <div class="card-body" style="padding-bottom: 0%;">
                                     <p><small><i>{{ home_item.scientific_name }}</i></small></p>
+                                    <img class="img-thumbnail" src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}"/> 
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
+                                        <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
+                                        <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
+                                    </ul>
                                 </div>
-                                <img class="img-thumbnail" src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}"/> 
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
-                                    <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
-                                    <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
-                                  </ul>
                             </div>
                         </div>
                     </div>
