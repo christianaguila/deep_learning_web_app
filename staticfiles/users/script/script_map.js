@@ -51,7 +51,7 @@ function initMap(){
                 img.src = "{% static 'users/icons/map_tayabak.png' %}"
               };
         }
-        let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], img, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
+        let k = [marker_locations[i]['fields']['matched_address'], marker_locations[i]['fields']['latitude'] , marker_locations[i]['fields']['longitude'], img.src, 30, 30, marker_locations[i]['fields']['predicted_plant_label']]
         markers.push(k)
         
     }
