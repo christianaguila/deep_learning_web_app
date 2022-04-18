@@ -120,6 +120,14 @@
                                     <p>Kris Plant</p>
                                 </div>
 
+                                <!-- Payau Legend -->
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <img src="{% static 'users/icons/map_payau.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
+                                </div>
+                                <div class="col-md-6" style="text-align: center; margin-top: 2%;">
+                                    <p>Payau</p>
+                                </div>
+
                                 <!-- Tangisang-Bayawak Legend -->
                                 <div class="col-md-6" style="text-align: center;">
                                     <img src="{% static 'users/icons/map_tangisang_bayawak.png' %}" class="img-fluid" style="height: 60px; width: 60px;">
@@ -151,15 +159,61 @@
             </div>
 
             
+            <!-- User Guide -->
+
+            <div class="accordion accordion-flush" id="accordionExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Why are plants' locations NOT EXACT ?  
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>Bakit hindi husto ang kinaroroonan ng mga halaman?</strong> 
+                      <br>
+                      <br>
+                      <p>In order to protect the plants from threats such as overexploitation, its exact location cannot be disclosed to the public. </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Does PLANTITA show indigenous plants of other countries? 
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>Kaya ba ng PLANTITA site na maipakita ang indigenous plants ng ibang bansa?</strong> 
+                      <br>
+                      <br>
+                      <p>No, the PLANTITA site is solely for the indigenous plants that can be found in the <b>Philippines</b>.</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Accordion Item #3
+                    </button>
+                  </h2>
+                  <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    </div>
+                  </div>
+                </div> -->
+              </div>
 
             <!-- User Guide -->
-            <div style="margin: 2% 2%;">
+            <!-- <div style="margin: 2% 2%;">
                 <h5>PLANTITA GUIDE</h5>
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <!-- Question 1  -->
+                    
                     <div class="col-md-12" style="text-align: justify;">
                         <p style="line-height: 0.3in;">
-                            1. Why are plants' locations are <b>NOT EXACT</b>? 
+                            1. Why are plants' locations <b>NOT EXACT</b>? 
                             <br>
                             <i style="color: rgba(109, 100, 100, 0.842);">
                                 (Bakit hindi husto ang kinaroroonan ng mga halaman?)
@@ -176,9 +230,9 @@
                             </i>
                         </p>
                     </div>
-                    <!-- End Question 1  -->
+                    
 
-                    <!-- Question 2  -->
+                    
                     <div class="col-md-12" style="text-align: justify; margin-top: 1%;">
                         <p style="line-height: 0.3in;">
                             2. Does the PLANTITA site also shows the indigenous plants of other countries? 
@@ -197,9 +251,9 @@
                             </i>
                         </p>
                     </div>
-                <!-- End Question 2  -->
+                
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 
