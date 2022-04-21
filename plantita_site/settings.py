@@ -48,7 +48,7 @@ SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
+ALLOWED_HOSTS = ['plantitav2.azurewebsites.net', '127.0.0.1']
 
 
 # Application definition
@@ -67,7 +67,7 @@ INSTALLED_APPS = [
 ]
 
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net'] 
+CSRF_TRUSTED_ORIGINS=['https://plantitav2.azurewebsites.net'] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
