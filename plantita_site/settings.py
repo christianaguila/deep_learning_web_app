@@ -48,7 +48,7 @@ SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
+ALLOWED_HOSTS = ['plantita.azurewebsites.net']
 
 
 # Application definition
