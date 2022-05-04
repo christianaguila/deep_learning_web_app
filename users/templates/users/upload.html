@@ -55,7 +55,7 @@
                         <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{predict_form|crispy}}
-                            <button class="btn btn-upload btn-dark my-4" type="submit" name="predconfirm">Submit</button>
+                            <button class="btn btn-dark my-4" type="submit" name="predconfirm">Submit</button>
                         </form>
                     </div>
                 </div>
