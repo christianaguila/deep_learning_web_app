@@ -1,6 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail, BadHeaderError
+from django.http import HttpResponse
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.db.models.query_utils import Q
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from httplib2 import Http
 
 from .forms import UserRegisterForm, ImageUploadForm
 from users.models import Post, PredictedPlant, Location
@@ -46,6 +56,7 @@ def coordinates(request):
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']
+        print(coords['latitude'], coords['longitude'], user_address['address'])
         return render(request, 'users/upload.html' )
 
 
@@ -90,8 +101,10 @@ def ImageModel(plant_image):
 #post predictions
 @login_required
 def uploadplant(request):
+    print(coords['latitude'], coords['longitude'], user_address['address'])
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
+    pred_loc = None # Empty prediction location 
     if request.method == 'POST' and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         if predict_form.is_valid():
@@ -106,7 +119,11 @@ def uploadplant(request):
                 userLoc = Location(predicted_plant_label = prediction,latitude = coords['latitude'], longitude = coords['longitude'], matched_address = user_address['address'])
                 userLoc.save()
                 PredictedPlant.objects.create(prediction_label=prediction, predicted_image=plant_image, post_prediction=instance, post_loc=userLoc)
-            
+                pred_loc = user_address['address']
+            else:
+                pred_loc = None
+
+
             complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
             gallery = Plantsgallery.objects.all()
 
@@ -127,13 +144,13 @@ def uploadplant(request):
             tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
             tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
             
-            try:
-                if bool(user_address['address']) == True:
-                    pred_loc = user_address['address']
-                else:
-                    pred_loc = None
-            except AttributeError:
-                pred_loc = None
+            # try:
+            #     if bool(user_address['address']) == True:
+            #         pred_loc = user_address['address']
+            #     else:
+            #         pred_loc = None
+            # except AttributeError:
+            #     pred_loc = None
 
             context = {'predict_form':predict_form, 
                         'postsss': postsss, 
@@ -160,7 +177,10 @@ def uploadplant(request):
                         'tybk_totalpred': tybk_totalpred, #Tayabak
                         }
             messages.success(request, f'Image Succesfully Uploaded')
-            return render(request, 'users/upload.html', context)
+        coords['latitude'] = None
+        coords['longitude'] = None
+        user_address['address'] = None         
+        return render(request, 'users/upload.html', context)
             
     else:
         predict_form = ImageUploadForm()
@@ -206,8 +226,8 @@ def uploadplant(request):
                     }
         coords['latitude'] = None
         coords['longitude'] = None
-        user_address['address'] = None
-    return render(request, 'users/upload.html', context)
+        user_address['address'] = None 
+        return render(request, 'users/upload.html', context)
 
 
 def deletepost(request, pk):
@@ -227,3 +247,36 @@ def phplantmap(request):
     }
     return render(request, 'users/phmap.html', context)
     
+def password_reset_request(request):
+    if request.method == 'POST':
+        password_form = PasswordResetForm(request.POST)
+        if password_form.is_valid():
+            data = password_form.cleaned_data.get('email')
+            user_email = User.objects.filter(Q(email=data))
+            if user_email.exists():
+                for user in user_email:
+                    subject = 'Password Request'
+                    email_template_name = 'users/password_message.txt'
+                    parameters = {
+                        'email': user.email,
+                        'domain': 'www.plantitaph.com',
+                        'site_name': 'Plantita',
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'https',
+                        'user': user,
+                    }
+                    email = render_to_string(email_template_name, parameters)
+                    try:
+                        send_mail(subject, email, '', [user.email], fail_silently=False)
+                    except:
+                        return HttpResponse('Invalid Header')
+                    
+                    return redirect('password_reset_done')
+            messages.error(request, 'An invalid email has been entered.')
+    else:
+        password_form = PasswordResetForm()
+    context = {
+        'password_form': password_form,
+    }
+    return render(request, 'users/password_reset.html', context)

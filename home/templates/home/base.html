@@ -20,7 +20,6 @@
 
     <!-- Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'home/plugins/themefisher-fonts/themefisher-fonts.css' %}">
     <link rel="stylesheet" href="{% static 'home/plugins/magnific-popup/magnific-popup.css' %}">
@@ -37,6 +36,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+    <style>
+        #preloader {
+            background: #fff url("{% static 'home/images/plant_preloader.gif' %}") no-repeat center center;
+            background-size: 15%;
+            height: 100vh;
+            width: 100%;
+            position: fixed;
+            z-index: 100;
+        }
+    </style>
+    <div id="preloader">
+    </div>
+
     <header>
         <div class="container" id="page-top">
             <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -76,58 +88,8 @@
                         </div>
                 </div>
             </nav>
-                
-            
     </header>
 
-    <!-- <header>
-        
-        <div class="container" id="page-top">
-            <nav class="navbar navbar-expand-lg navbar-light bg-white">
-                <a class="navbar-brand" href="#page-top"><img src="{% static 'home/images/word-logo.png'%}" style="width: 30vw;" alt="Plantita Logo"></a>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                
-                <div class="collapse navbar-collapse nav justify-content-end" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto text-center text-lg-left">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'index'%}">HOME</a>
-                        </li>
-                        {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" id="" href="{% url 'phplantmap'%}">PH PLANT MAP</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'uploadplant' %}">UPLOAD & IDENTIFY</a>
-                        </li>
-                        <li class="nav-item">
-                            <div class="dropdown ml-auto text-center">
-                                <button class="btn dropdown-toggle nav-link ml-auto text-center" style="border-radius: 20px; background-color: blanchedalmond;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{user.username}}
-                                </button>
-                                <div class="dropdown-menu" style="background-color: rgba(255, 235, 205, 0.485);" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                                </div>
-                            </div>
-                            {% else %}
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'register' %}">REGISTER</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'login' %}">LOGIN</a>
-                                </li>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </header> -->
     <div class="row justify-content-center" style="display: center;">
         <div class="col-md-10">
             {% if messages %}
@@ -176,6 +138,11 @@
     {% block upload_photo %}
     {% endblock %}
     
+    <!-- users/password_reset.html -->
+    {% block password_reset %}
+    {% endblock %}
+
+    
     <!-- Footer -->
     <footer>
         <section class="py-5" style="background-color: gray; margin-top: 5%; color: antiquewhite;"> 
@@ -193,5 +160,12 @@
             </div>
         </section>
     </footer>
+
+    <script>
+        var loader = document.getElementById("preloader")
+        window.addEventListener("load", function(){
+            loader.style.display = "none";
+        })
+    </script>
 </body>
 </html>

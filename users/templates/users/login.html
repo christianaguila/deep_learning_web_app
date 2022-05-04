@@ -3,29 +3,33 @@
 {% load static %}
 
 {% block login %}
-    <div class="row justify-content-center content-section" style="padding:50px; color: rgb(253, 247, 239);">
-        <div class="wrap" style="background-color: rgba(45, 124, 108, 0.444);">
-            <div class="p-4 p-md-5" style="position:relative">
+    <div class="container-fluid" style="padding:50px; color: rgb(1, 0, 3);">
+        <div class="row justify-content-center">
+            <div class="p-4 p-md-5 col-md-6 rounded" style="background-color: rgba(255, 255, 255, 0.444);">
                 <form method="POST">
                     {% csrf_token %}
                     <fieldset class="form-group">
                         <legend class="border-bottom mb-4">
-                            Log In
+                            <strong>Log In to Plantita</strong>
+                            
                         </legend>
                         {{ form|crispy }}
                     </fieldset>
                     <div class="form-group">
                         <br>
-                        <button class="btn btn-outline-primary" type="submit">
+                        <button class="btn btn-main btn-main-sm" type="submit">
                             Log In
                         </button>
                     </div>
                 </form>
                 <br>
+                <div class="my-3 fs-6 fw-normal">
+                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                </div>
                 <div class="border-top pt-3">
-                    <small class="text-muted">
+                    <small class="text-muted fs-6 fw-normal">
                         Need an account?
-                        <a class="ml-2" href="{% url 'register' %}">
+                        <a class="ml-2 fs-6 fw-normal" href="{% url 'register' %}">
                             Register Now
                         </a>
                     </small>

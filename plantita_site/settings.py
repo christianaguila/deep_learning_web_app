@@ -48,7 +48,7 @@ SECRET_KEY = 'django-insecure-)ijkr(8zowe2-m=4l#!7&o#md^(42t+(xsl*7f1k@xjw4t%z3!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['plantita.azurewebsites.net', '127.0.0.1']
+ALLOWED_HOSTS = ['plantita.azurewebsites.net', 'plantitaph.com', 'www.plantitaph.com', '127.0.0.1']
 
 
 # Application definition
@@ -63,11 +63,14 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'crispy_bootstrap5',
     'storages',
 ]
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS=['https://plantita.azurewebsites.net'] 
+CSRF_TRUSTED_ORIGINS=['https://plantitaph.com', 'https://www.plantitaph.com','https://plantita.azurewebsites.net'] 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -171,7 +174,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')  
 # MEDIA_URL = '/uploads/'
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 LOGIN_REDIRECT_URL = 'index'
 
@@ -188,3 +193,12 @@ AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
 AZURE_LOCATION = 'uploads'
 AZURE_CONTAINER = 'media'
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'plantita.help@gmail.com'
+EMAIL_HOST_PASSWORD = 'wypemjxgdokscryy'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Plantita Team <noreply@plantitaph.com>'
