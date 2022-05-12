@@ -3,7 +3,41 @@
 {% load static %}
 
 {% block register %}
-<div class="row justify-content-center content-section" style="padding:50px;">
+
+<div class="container-lg" style="padding:50px; color: rgb(1, 0, 3);">
+    <div class="row justify-content-center">
+        <div class="p-4 p-md-5 col-sm-6 rounded" style="background-color: rgba(255, 255, 255, 0.444);">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">
+                        <strong>
+                            Contribute Today
+                        </strong>
+                    </legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <br>
+                    <button class="btn btn-main btn-main-sm" type="submit">
+                        Register
+                    </button>
+                </div>
+            </form>
+            <br>
+            <div class="border-top pt-3">
+                <small class="text-muted fs-6 fw-normal">
+                    Already have an account?
+                    <a class="ml-2 fs-6 fw-normal" href="{% url 'login' %}">
+                        LOG IN
+                    </a>
+                </small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row justify-content-center content-section" style="padding:50px;">
     <div class="wrap" style="background-color:rgba(164, 143, 6, 0.45);">
         <div class="p-4 p-md-5" style="position:relative">
             <form method="POST">
@@ -32,5 +66,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 {% endblock %}

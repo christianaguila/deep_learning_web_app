@@ -105,7 +105,7 @@ def uploadplant(request):
     postsss = Post.objects.all()
     gallery = Plantsgallery.objects.all()
     pred_loc = None # Empty prediction location 
-    if request.method == 'POST' and 'predconfirm' in request.POST:
+    if request.method == 'POST': # and 'predconfirm' in request.POST:
         predict_form = ImageUploadForm(request.POST, request.FILES)
         if predict_form.is_valid():
             instance = predict_form.save(commit=False)

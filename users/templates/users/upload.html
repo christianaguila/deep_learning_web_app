@@ -48,14 +48,99 @@
                     ></script>
                 </div>
                 
+                <script>
+                    $(document).ready(function() {
+                        $("#upload_btn").on('click', function(e) {
+                            var uploadFile = document.getElementById("id_plant_image");
+                            var filePath = uploadFile.value;
+                            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.bmp)$/i;
+                            if (!uploadFile.value) {
+                                e.preventDefault();
+                                $("#nofileModal").modal("show");
+                            }else{
+                                if(!allowedExtensions.exec(filePath)) {
+                                    e.preventDefault();
+                                    $("#invalidfileModal").modal("show");
+                                }else{
+                                    $(this).prop("disabled", true);
+                                    $(this).html(
+                                        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Uploading...`
+                                    );
+                                    $("#submitModal").modal("show");
+                                    $("#upload_form").submit();
+                                };
+                            };
+                        });
+                    });
+                </script>
+                
+                <!-- Modal for No File Selected -->
+                <div class="modal fade" id="nofileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><strong>Please select an image file.</strong></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>  
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn1" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+
+                <!-- Modal for Submitting Plant Image by User -->
+                <div class="modal fade" id="submitModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            
+                            <div class="modal-body">
+                                <div class="d-flex align-items-center">
+                                    <h3><strong>Please Wait...</strong></h3>
+                                    
+                                    <!-- <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div> -->
+                                    <div class="spinner-grow text-success ms-auto" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-success" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <div class="spinner-grow text-success" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn1" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal for No File Selected -->
+                <div class="modal fade" id="invalidfileModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><strong>Invalid File Type!</strong></h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>  
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn1" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                   
+                
                 <!-- Form Submit Plant Image by User  -->
                 <div class="col-xs-12 mt-2" style="margin: auto;">
                     <div class="container" style="margin: auto;">
                         <br>
-                        <form action="{% url 'uploadplant'  %}" method="post" enctype="multipart/form-data">
+                        <form action="{% url 'uploadplant'  %}" id="upload_form" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{predict_form|crispy}}
-                            <button class="btn btn-dark my-4" type="submit" name="predconfirm">Submit</button>
+                            <button class="btn btn-upload my-4" id="upload_btn" type="submit" name="predconfirm">Submit</button>
                         </form>
                     </div>
                 </div>

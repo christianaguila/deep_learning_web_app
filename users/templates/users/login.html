@@ -3,9 +3,9 @@
 {% load static %}
 
 {% block login %}
-    <div class="container-fluid" style="padding:50px; color: rgb(1, 0, 3);">
+    <div class="container-lg" style="padding:50px; color: rgb(1, 0, 3);">
         <div class="row justify-content-center">
-            <div class="p-4 p-md-5 col-md-6 rounded" style="background-color: rgba(255, 255, 255, 0.444);">
+            <div class="p-4 p-md-5 col-sm-6 rounded" style="background-color: rgba(255, 255, 255, 0.444);">
                 <form method="POST">
                     {% csrf_token %}
                     <fieldset class="form-group">
