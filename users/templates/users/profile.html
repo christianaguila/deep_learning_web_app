@@ -2,22 +2,488 @@
 {% load static %}
 
 {% block profile %}
-<meta name="viewport" content="width=device-width">
-<section style=" background-color: rgba(45, 124, 108, 0.444); padding-bottom: 5%;">
-    <div class="d-flex justify-content-center content-section" style="padding-top: 10%; color: antiquewhite; padding-bottom: 0%;">
-        <div class="media">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <div class="media-body">
-                        <br>
-                        <center>
-                            <h2 class="account-heading" style="font-size:2vw;">{{ user.username }}</h2>
-                        <p class="text-secondary" style="font-size:2vw;">{{ user.email }}</p>
-                        </center> 
-                        <hr>
-                    </div>
-                </div>
-            </div>
+
+
+<section class="feature-list section" style="padding-top: 5%;">
+    <div class="container">
+        <h1 style="text-align: center; font-weight: bold; color:rgba(3, 139, 3, 0.849);">PROFILE</h1>
+    <h2 style="text-align: center;">YOUR PLANTS</h2>
+    <hr>
+    </div>
+    <br>
+    <div class="row container">
+        <div class="col-lg-4 col-sm-4 mb-4 order-md-1 order-1 text-md-left">
+        <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action counter-box colored" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+                <span class="counter">{{ user.username }}</span>
+                <p>{{ user.email }}</p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box1" id="list-anahaw-list" data-toggle="list" href="#list-anahaw" role="tab" aria-controls="anahaw">
+                <span class="counter">{{anhw_totalpred}}</span>
+                <br>
+                <p>Anahaw
+                    <br><small>Saribus rotundifolius</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box2" id="list-bagawak-morado-list" data-toggle="list" href="#list-bagawak-morado" role="tab" aria-controls="bagawak-morado">
+                <span class="counter">{{bm_totalpred}}</span>
+                <br>
+                <p>Bagawak Morado
+                    <br><small>Clerodendrum quadriloculare</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box3" id="list-bignay-list" data-toggle="list" href="#list-bignay" role="tab" aria-controls="bignay">
+                <span class="counter">{{bgny_totalpred}}</span>
+                <br>
+                <p>Bignay
+                    <br><small>Antidesma bunius</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box4" id="list-copeland-list" data-toggle="list" href="#list-copeland" role="tab" aria-controls="copeland">
+                <span class="counter">{{cp_totalpred}}</span>
+                <br>
+                <p>Copeland's Pitcher
+                    <br><small>Nepenthes copelandii</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box5" id="list-kris-plant-list" data-toggle="list" href="#list-kris-plant" role="tab" aria-controls="kris-plant">
+                <span class="counter">{{krsp_totalpred}}</span>
+                <br>
+                <p>Kris Plant
+                    <br><small>Alocasia sanderiana</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box6" id="list-kalingag-list" data-toggle="list" href="#list-kalingag" role="tab" aria-controls="kalingag">
+                <span class="counter">{{klngg_totalpred}}</span>
+                <br>
+                <p>Kalingag
+                    <br><small>Cinnamomum mercadoi</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box7" id="list-katmon-list" data-toggle="list" href="#list-katmon" role="tab" aria-controls="katmon">
+                <span class="counter">{{ktmn_totalpred}}</span>
+                <br>
+                <p>Katmon
+                    <br><small>Dillenia philippinensis</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box8" id="list-payau-list" data-toggle="list" href="#list-payau" role="tab" aria-controls="payau">
+                <span class="counter">{{payau_totalpred}}</span>
+                <br>
+                <p>Payau
+                    <br><small>Homalomena philippinensis</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box9" id="list-tangisang-bayawak-list" data-toggle="list" href="#list-tangisang-bayawak" role="tab" aria-controls="tangisang-bayawak">
+                <span class="counter">{{tngbywk_totalpred}}</span>
+                <br>
+                <p>Tangisang-Bayawak
+                    <br><small>Ficus variegata</small>
+                </p>
+            </a>
+            <a class="list-group-item list-group-item-action counter-box10" id="list-tayabak-list" data-toggle="list" href="#list-tayabak" role="tab" aria-controls="tayabak">
+                <span class="counter">{{tybk_totalpred}}</span>
+                <br>
+                <p>Tayabak
+                    <br><small>Strongylodon macrobotrys</small>
+                </p>
+            </a>
+        </div>
+        </div>
+
+
+        <div class="col-lg-8 col-sm-6 mb-8 order-md-2 order-2 text-md-left">
+        <div class="tab-content" id="nav-tabContent">
+            <!-- Div Content 1  - Profile -->
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                <br>
+                <h3>TOTAL PREDICTED PLANTS</h3>
+                <!------------- Users History Predictions --------->
+                   <div class="row mt-5" style="text-align: center;">
+                       {% for k in complete_pred %}
+                                   <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                       <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                           <div class="card" style="width: 18rem;">
+                                                   <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                               <ul class="list-group list-group-flush">
+                                                   <li class="list-group-item">
+                                                       <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                       <br> 
+                                                       <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                   </li>
+                                                   <li class="list-group-item"><small class="text-muted">
+                                                       <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                   </li>
+                                                   <li class="list-group-item">
+                                                       <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                   </li>
+                                               </ul>  
+                                           </div>
+                                       </div>
+                                   </div>
+                               {% if forloop.counter|divisibleby:4 %}
+               </div><!-- .row close -->
+
+                           <div class="row mt-2" style="text-align: center;">
+                               {% endif %}
+                               <br>
+                               
+                       {% endfor %}
+                           </div><!-- row2 -->
+           </div> <!-- End Div Content 1 - Anahaw -->
+
+            <!-- Div Content 2  - Anahaw -->
+            <div class="tab-pane fade" id="list-anahaw" role="tabpanel" aria-labelledby="list-anahaw-list">
+                <br>
+                <h3>ANAHAW</h3>
+                 <!------------- Users History Predictions --------->
+                 {% if anhw_totalpred %}
+                    <div class="row mt-5" style="text-align: center;">
+                        {% for k in anhw_pred_only %}
+                                    <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                        <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                            <div class="card" style="width: 18rem;">
+                                                    <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                        <br> 
+                                                        <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                    </li>
+                                                    <li class="list-group-item"><small class="text-muted">
+                                                        <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                    </li>
+                                                </ul>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% if forloop.counter|divisibleby:4 %}
+                </div><!-- .row close -->
+
+                            <div class="row mt-2" style="text-align: center;">
+                                {% endif %}
+                                <br>
+                                
+                        {% endfor %}
+                            </div><!-- row2 -->
+                            {% endif %}
+            </div> <!-- End Div Content 2 - Anahaw -->
+
+            <!-- Div Content 3  - Bagawak Morado -->
+            <div class="tab-pane fade" id="list-bagawak-morado" role="tabpanel" aria-labelledby="list-bagawak-morado-list">
+                <br>
+                <h3>BAGAWAK MORADO</h3>
+                <!------------- Users History Predictions --------->
+                {% if bm_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in bm_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 3 - Bagawak Morado-->
+
+            <!-- Div Content 4  - Bignay -->
+            <div class="tab-pane fade" id="list-bignay" role="tabpanel" aria-labelledby="list-bignay-list">
+                <br>
+                <h3>BIGNAY</h3>
+                {% if bgny_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in bgny_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 4 - Bignay-->
+
+            <!-- Div Content 5  - Kris Plant -->
+            <div class="tab-pane fade" id="list-kris-plant" role="tabpanel" aria-labelledby="list-kris-plant-list">
+                <br>
+                <h3>KRIS PLANT</h3>
+                {% if krsp_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in krsp_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 5 - Kris Plant -->
+
+            <!-- Div Content 6  - Kalingag -->
+            <div class="tab-pane fade" id="list-kalingag" role="tabpanel" aria-labelledby="list-kalingag-list">
+                <br>
+                {% if klngg_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in klngg_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 6 - Kalingag -->
+
+            <!-- Div Content 7  - Katmon -->
+            <div class="tab-pane fade" id="list-katmon" role="tabpanel" aria-labelledby="list-katmon-list">
+                <br>
+                <h3>KATMON</h3>
+                {% if ktmn_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in ktmn_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 7 - Katmon -->
+
+            <!-- Div Content 8  - Payau -->
+            <div class="tab-pane fade" id="list-payau" role="tabpanel" aria-labelledby="list-payau-list">
+                <br>
+                <h3>PAYAU</h3>
+                {% if payau_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in payau_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 8 - Payau -->
+
+            <!-- Div Content 9  - TANGISANG BAYAWAK -->
+            <div class="tab-pane fade" id="list-tangisang-bayawak" role="tabpanel" aria-labelledby="list-tangisang-bayawak-list">
+                <br>
+                <h3>TANGISANG BAYAWAK</h3>
+                {% if tngbywk_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in tngbywk_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 9 - TANGISANG BAYAWAK -->
+
+            <!-- Div Content 10  - TAYABAK -->
+            <div class="tab-pane fade" id="list-tangisang-bayawak" role="tabpanel" aria-labelledby="list-tangisang-bayawak-list">
+                <br>
+                <h3>TAYABAK</h3>
+                {% if tybk_totalpred %}
+                <div class="row mt-5" style="text-align: center;">
+                    {% for k in tybk_pred_only %}
+                                <div class="col-lg-3 col-sm-6 col-xs-12  mb-sm-0">
+                                    <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
+                                        <div class="card" style="width: 18rem;">
+                                                <img class="card-img-top" src="{{ k.post_prediction.plant_image.url }}" style="object-fit: cover; width: auto; height: 40vh;" alt="Card image cap">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">
+                                                    <small class="text-muted">Posted by: {{ k.post_prediction.author }} | {{ k.post_prediction.date_posted|date:"F d, Y" }} </small>
+                                                    <br> 
+                                                    <small class="text-muted"><b>Place Found: <br> {{ k.post_loc.matched_address }}</b></small>
+                                                </li>
+                                                <li class="list-group-item"><small class="text-muted">
+                                                    <b>Identification:</b> <br> {{ k.prediction_label }}</small>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <a href="{% url 'delete_post' k.id %}">Delete Post</a>
+                                                </li>
+                                            </ul>  
+                                        </div>
+                                    </div>
+                                </div>
+                            {% if forloop.counter|divisibleby:4 %}
+            </div><!-- .row close -->
+
+                        <div class="row mt-2" style="text-align: center;">
+                            {% endif %}
+                            <br>
+                            
+                    {% endfor %}
+                        </div><!-- row2 -->
+                        {% endif %}
+            </div> <!-- End Div Content 9 - TANGISANG BAYAWAK -->
+        </div>
         </div>
     </div>
 </section>

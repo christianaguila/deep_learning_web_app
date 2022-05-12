@@ -25,7 +25,7 @@
 {% endblock %}
 
 {% block register_login %}
-<section style="padding-bottom: 5%;">
+<section style="padding-bottom: 5%; ">
     <div class="container">
         <div class="container-count">
             <div class="row">
@@ -35,59 +35,62 @@
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{anhw_totalpred}}</span>
+                    <div class="counter-box1"><span class="counter">{{anhw_totalpred}}</span>
                         <p>Anahaw</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{bgny_totalpred}}</span>
+                    <div class="counter-box2"><span class="counter">{{bgny_totalpred}}</span>
                         <p>Bignay</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{klngg_totalpred}}</span>
-                        <p>Kalingag</p>
+                    <div class="counter-box3"><span class="counter">{{bm_totalpred}}</span>
+                        <p>Bagawak Morado</p>
                     </div>
                 </div>
             </div>
             <div class="row mt-2">
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{ktmn_totalpred}}</span>
+                    <div class="counter-box4"><span class="counter">{{cp_totalpred}}</span>
+                        <p>Copeland's Pitcher</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box5"><span class="counter">{{klngg_totalpred}}</span>
+                        <p>Kalingag</p>
+                    </div>
+                </div>
+                <div class="four col-md-3">
+                    <div class="counter-box6"><span class="counter">{{ktmn_totalpred}}</span>
                         <p>Katmon</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{krsp_totalpred}}</span>
+                    <div class="counter-box7"><span class="counter">{{krsp_totalpred}}</span>
                         <p>Kris Plant</p>
                     </div>
                 </div>
+                
+                
+            </div>
+            <div class="row mt-2">
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{payau_totalpred}}</span>
+                    <div class="counter-box8"><span class="counter">{{payau_totalpred}}</span>
                         <p>Payau</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{tybk_totalpred}}</span>
-                        <p>Tayabak</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-2">
-                <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{tngbywk_totalpred}}</span>
+                    <div class="counter-box9"><span class="counter">{{tngbywk_totalpred}}</span>
                         <p>Tangisang Bayawak</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{bm_totalpred}}</span>
-                        <p>Bagawak Morado</p>
+                    <div class="counter-box10"><span class="counter">{{tybk_totalpred}}</span>
+                        <p>Tayabak</p>
                     </div>
                 </div>
-                <div class="four col-md-3">
-                    <div class="counter-box"><span class="counter">{{cp_totalpred}}</span>
-                        <p>Copeland's Pitcher</p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
@@ -96,7 +99,7 @@
             $('.counter').each(function () {
                 $(this).prop('Counter',0).animate({
                 Counter: $(this).text()}, 
-                    {duration: 2000,
+                    {duration: 5000,
                     easing: 'swing',
                     step: function (now) {
                     $(this).text(Math.ceil(now));
@@ -106,30 +109,6 @@
 
         });
     </script>
-</section>
-
-<section class="feature-list section" style="background-color: rgba(45, 124, 108, 0.444);">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6 order-md-1 order-2 align-self-center text-center text-md-left">
-                <div class="content">
-                    <h4 class="subheading">Be a contributor and help the Philippine flora grow.</h4>
-                    <p>Save your plant photos and landmarks, register now!</p>
-                    <div class="row">
-                        <div class="col">
-                            <a id="register" href="{% url 'register' %}" class="btn btn-main btn-main-sm">Register</a>
-                        </div>
-                        <div class="col">
-                            <a href="{% url 'login' %}" class="btn btn-main btn-main-sm">Login</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 order-md-2 order-1 text-center mb-5 mb-lg-0">
-                <img class="img-fluid" src="{% static '/home/images/phone.png' %}" alt="">
-            </div>
-        </div>
-    </div>
 </section>
 {% endblock %}
 
@@ -168,5 +147,140 @@
                         {% endfor %}
                         </div> <!-- row2 -->
     </div><!-- .container close -->
+    <img class="design" src="{% static 'home/images/design-left.png' %}">
 </section><!-- header close -->
+
+
+<section class="feature-list section" style="background-color: #c4d5a7;">
+    <div class="container">
+        <img class="design" src="{% static 'home/images/design-right.png' %}" style="right: 0;">
+        <div class="heading">
+            <h2 class="align-self-center text-center" style="font-weight: bold; color: rgb(255, 254, 252);">TUTORIALS</h2>
+            <p class="align-self-center text-center">Watch Clima the Pinoy Cat, to show you how Plantita works!</p>
+        </div>
+        <div class="row">
+            <div class="col order-md-1 order-1 align-self-center text-center text-md-left embed-responsive embed-responsive-21by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p>How to View 3D Plant Models using Augmented Reality?</p>
+            </div>
+            <div class="col order-md-2 order-2 text-center mb-5 mb-lg-0 text-md-left embed-responsive ">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p>How to Identify Plants using Plantita?</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 
+        Services Start
+        ==================== -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="heading">
+                    <h2>Service</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-40 text-center text-md-left">
+                    <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:analytics-outline"></span>
+                    <h4 class="font-weight-bold mb-2">Easy Identification</h4>
+                    <p>Plantita uses Convolutional Neural Network to identify the uploaded Plant Images with 92% threshold.</p>
+                </div>
+                <div class="mb-40 text-center text-md-left">
+                    <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:information-circle-outline"></span>
+                    <h4 class="font-weight-bold mb-2">Realiable Information</h4>
+                    <p>Relevant plant information are supported with Published Scientific Studies.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center align-self-center mb-4 mb-md-0">
+                <img class="img-fluid" src="{% static 'home/images/plant-center.png' %}" alt="">
+            </div>
+            <div class="col-md-4">
+                <div class="mb-40 text-center text-md-left">
+                    <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:water-outline"></span>
+                    <h4 class="font-weight-bold mb-2">Grow Philippine Flora</h4>
+                    <p>Plantita focuses on the flora that can be originally found in the Philippines.</p>
+                </div>
+                <div class="mb-40 text-center text-md-left">
+                    <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:aperture-outline"></span>
+                    <h4 class="font-weight-bold mb-2">Augmented Reality Plants</h4>
+                    <p>View Philippine plants in your grasps, virtually!</p>
+                </div>
+            </div>
+        </div>
+    </div><!-- .container close -->
+
+<img class="design" src="{% static 'home/images/design-right2.png' %}" style="right: 0;">
+</section><!-- #service close -->
+
+<!--###### The team Section #####------>
+<section class="feature-list section" style="background-color: #c4d5a7;">
+    <div class="heading">
+        <h2 style="color: rgb(255, 254, 252);">The Team</h2>
+    </div>
+<div class="site-section bg-left-half mb-5">
+    <div class="container owl-2-style">   
+      <div class="owl-carousel owl-2">
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/christian.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Christian Rhomel Aguila</a></h3>
+          <p>Co-Founder & Developer</p>
+        </div>
+
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/mark.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Mark Niño Carmen</a></h3>
+          <p>Co-Founder & Augmented Reality Developer</p>
+        </div>
+
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/lara.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Lara Jane Labutong</a></h3>
+          <p>Co-Founder & Developer</p>
+        </div>
+
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/ivan.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Mark Ivan Necesito</a></h3>
+          <p>Co-Founder & Back-End Developer</p>
+        </div>
+
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/audrey.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Audrey Solis</a></h3>
+          <p>Co-Founder & 3D Developer</p>
+        </div>
+
+        <div class="media-29101">
+          <img src="{% static 'home/images/team/send.png' %}" alt="Image" class="img-fluid">
+          <h3><a href="#">Contact Us</a></h3>
+          <p>Be in touch with us through e-mail
+              <br>
+              clima.thesis@gmail.com</p>
+        </div>
+      </div>
+    </div>
+    <img class="design" src="{% static 'home/images/design-left.png' %}">
+  </div>
+</div>
+</section>
+<!--###### END The team Section #####------>
+
+<section class="feature-list section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 order-md-1 order-2 align-self-center text-center text-md-left">
+                <div class="content">
+                    <h4 class="subheading">Here at Plantita</h4>
+                    <p>We Keep Going, We Keep Growing</p>
+                </div>
+            </div>
+            <div class="col-md-6 order-md-2 order-1 text-center mb-5 mb-lg-0">
+                <img class="img-fluid" src="{% static '/home/images/word-logo.png' %}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

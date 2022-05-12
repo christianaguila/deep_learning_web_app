@@ -45,9 +45,60 @@ h4,
   font-weight: 400;
 }
 
+.plantita-logo{
+  width: 80%;
+}
+
 p {
   font-size: 18px;
-  line-height: 25px;
+  line-height: 22px;
+}
+
+.img-map-icon{
+  height: 40px;
+  width: 40px;
+}
+
+@media(max-width:610px) {
+  h1,
+  .h1 {
+    font-size: 34px;
+    line-height: 46px;
+  }
+
+  h2,
+  .h2 {
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  h3,
+  .h3 {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  h4,
+  .h4 {
+    font-size: 15px;
+    line-height: 19px;
+    font-weight: 300;
+  }
+
+  p {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .img-map-icon{
+    height: 25px;
+    width: 25px;
+  }
+
+  .plantita-logo{
+    width: 50vw;
+  }
+
 }
 
 ul {
@@ -366,7 +417,6 @@ a:active {
   margin-top: 15px;
 }
 
-
 /*--
   Gallery start
 --*/
@@ -669,15 +719,153 @@ a:active {
 
 .counter-box {
   display: block;
-  background: #f6f6f6;
+  color: #ffffff;
+  font-weight: bold;
   padding: 40px 20px 37px;
-  text-align: center
+  text-align: center;
+}
+
+/* Anahaw */
+.counter-box1 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://c1.wallpaperflare.com/preview/137/960/838/plant-nature-symmetry-lines.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Bagawak Morado */
+.counter-box2 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://i.pinimg.com/originals/72/ac/73/72ac738f22f98a1ea4aa5e1ff60f7d92.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Bignay */
+.counter-box3 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://live.staticflickr.com/482/20313727300_b016a44206_b.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Copelands Pitcher */
+.counter-box4 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://upload.wikimedia.org/wikipedia/commons/d/d2/Nepenthes_copelandii1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Kris Plant */
+.counter-box5 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://candide.com/img/3e3dbbba-2b18-47d1-95f5-c67ed13b4f4d/cropped/600x480');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Kalingag */
+.counter-box6 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://binhi.ph/wp-content/uploads/2018/11/Cinnamomum-mercadoi_Kidapawan_Alexis-d-Manuel-20151014_091931.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Katmon */
+.counter-box7 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url('https://upload.wikimedia.org/wikipedia/commons/9/9c/Dillenia_philippinensis_1.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Payau */
+.counter-box8 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://www.thespruce.com/thmb/tBRuGciJi5_SkbM55xfsJvpCpyg=/2121x1414/filters:no_upscale():max_bytes(150000):strip_icc()/HomalomenarubescensAmphawanChanunphaGettyImages-1091731492-144db48b0fcf4c1f96eb69cb5d51c089.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Tangisang Bayawak */
+.counter-box9 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://www.agriculture.com.ph/wp-content/uploads/2020/05/73TibigTree_April2020.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+/* Tayabak */
+.counter-box10 {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://www.gannett-cdn.com/presto/2021/02/15/NCOD/cf3f2cdc-bba0-42b5-97e1-87638414e8b5-Jade_Vine_sg.jpg?width=660&height=440&fit=crop&format=pjpg&auto=webp');
+  background-position: center;
+  background-size: cover;
+}
+
+.counter-box11 {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 40px 20px 37px;
+  text-align: center;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1607513746994-51f730a44832?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8Mnx8fGVufDB8fHx8&w=1000&q=80');
+  background-position: center;
+  background-size: cover;
+}
+
+.counter-box:hover, .counter-box1:hover, .counter-box2:hover, .counter-box3:hover, .counter-box4:hover, .counter-box5:hover,
+.counter-box6:hover, .counter-box7:hover, .counter-box8:hover, .counter-box9:hover, .counter-box10:hover, .counter-box11:hover{
+  background-image: url('https://www.stockvault.net/data/2020/10/02/279352/preview16.jpg');
 }
 
 .counter-box p {
   margin: 5px 0 0;
   padding: 0;
-  color: #909090;
+  color: #ffffff;
   font-size: 18px;
   font-weight: 500
 }
@@ -692,7 +880,7 @@ a:active {
   display: block;
   font-size: 32px;
   font-weight: 700;
-  color: #666;
+  color: rgb(255, 255, 255);
   line-height: 28px
 }
 
@@ -703,7 +891,65 @@ a:active {
 .counter-box.colored p,
 .counter-box.colored i,
 .counter-box.colored .counter {
-  color: #fff
+  color: #ffff;
+}
+
+.design{
+  z-index: 1; 
+  position: absolute;
+}
+
+@media (max-width: 575px) {
+  .design{
+    height: 40vh;
+  }
+}
+
+.media-29101 {
+  text-align: center; }
+  .media-29101 img {
+    margin-bottom: 20px;
+    border-radius: 50%;
+    width: 80px !important;
+    margin: 0 auto 40px auto; }
+  .media-29101 h3 {
+    font-size: 18px;
+    font-weight: 900 !important;
+    margin-bottom: 30px; }
+    .media-29101 h3 a {
+      color: #6c757d; }
+
+.owl-2-style .owl-nav {
+  display: none; }
+
+.owl-2-style .owl-dots {
+  text-align: center;
+  position: relative;
+  bottom: -30px; }
+  .owl-2-style .owl-dots .owl-dot {
+    display: inline-block; }
+    .owl-2-style .owl-dots .owl-dot span {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 0px;
+      background: #cccccc;
+      -webkit-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      -o-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      margin: 3px;
+      border-radius: 50%; }
+    .owl-2-style .owl-dots .owl-dot.active span {
+      background: #ffffff; }
+    .owl-2-style .owl-dots .owl-dot:active, .owl-2-style .owl-dots .owl-dot:focus {
+      outline: none; }
+
+.back_to_top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: none;
+  background-color: #f9a743;
 }
 
 .btn1 {
@@ -726,4 +972,3 @@ a:active {
   background-color: #198754;
   box-shadow: 0 15px 40px rgba(119, 249, 68, 0.5); 
 }
-

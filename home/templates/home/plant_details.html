@@ -96,12 +96,12 @@
                                         <!-- List Group -->
                                         <div class="col-lg-4 col-sm-4 mb-4">
                                             <div class="list-group" id="myList" role="tablist">
-                                                <a class="list-group-item list-group-item-action active" data-toggle="list" href="#names" role="tab">Names</a>
-                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#local" role="tab">Locality & Seasonality</a>
-                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#conserv" role="tab">Conservation Status & Law</a>
-                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#util" role="tab">Utilization</a>
-                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#care" role="tab">Plant Care and Propagation</a>
-                                                <a class="list-group-item list-group-item-action" data-toggle="list" href="#disclaimer" role="tab">Disclaimer & References</a>
+                                                <a class="list-group-item list-group-item-action active fs-5" data-toggle="list" href="#names" role="tab"><strong>Names</strong></a>
+                                                <a class="list-group-item list-group-item-action fs-5 " data-toggle="list" href="#local" role="tab"> <strong>Locality & Seasonality</strong></a>
+                                                <a class="list-group-item list-group-item-action fs-5 " data-toggle="list" href="#conserv" role="tab"> <strong>Conservation Status & Law</strong></a>
+                                                <a class="list-group-item list-group-item-action fs-5 " data-toggle="list" href="#util" role="tab"><strong>Utilization </strong></a>
+                                                <a class="list-group-item list-group-item-action fs-5" data-toggle="list" href="#care" role="tab"><strong>Plant Care and Propagation</strong></a>
+                                                <a class="list-group-item list-group-item-action fs-5" data-toggle="list" href="#disclaimer" role="tab"><strong>Disclaimer & References</strong></a>
                                             </div>
                                         </div>
                                         <div class="col-lg-8 col-sm-6 mb-8" style="padding-left: 8%;">
@@ -113,34 +113,33 @@
                                                         <div class="col-sm-6">
                                                             <ul class="list-inline">
                                                                 <li>
-                                                                    <br>
-                                                                    <h5><strong>COMMON NAMES</strong></h5>
+                                                                    <h5><strong class="fs-4">COMMON NAMES</strong></h5>
 
                                                                     <!-- List of Names Philippine -->
 
-                                                                    <li>
+                                                                    <li class="fs-6 fst-italic">
                                                                         &emsp;
                                                                         In the Philippines:
                                                                     </li>
                                                                     <ul style="list-style-type:circle"> 
                                                                         
-                                                                        <li>{{ pg.common_philippine_name1 }}</li>
-                                                                        <li>{{ pg.common_philippine_name2 }}</li>
-                                                                        <li>{{ pg.common_philippine_name3 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_philippine_name1 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_philippine_name2 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_philippine_name3 }}</li>
                                                                         
                                                                     </ul> 
 
                                                                     <!-- List of Names English-->
                                                                     <br></br>
-                                                                    <li>
+                                                                    <li class="fs-6">
                                                                         &emsp;
                                                                         In Foreign Countries:
                                                                     </li>
                                                                     <ul style="list-style-type:circle">
                                                                         
-                                                                        <li>{{ pg.common_foreign_name1 }}</li>
-                                                                        <li>{{ pg.common_foreign_name2 }}</li>
-                                                                        <li>{{ pg.common_foreign_name3 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_foreign_name1 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_foreign_name2 }}</li>
+                                                                        <li class="fs-5 fst-normal">{{ pg.common_foreign_name3 }}</li>
                                                                         
                                                                     </ul> 
 
@@ -153,26 +152,25 @@
                                                             <ul class="list-inline">
                                                                 
                                                                 <li>
-                                                                    <br>
-                                                                    <h5><strong>SCIENTIFIC NAMES</strong></h5>
+                                                                    <h5><strong class="fs-4">SCIENTIFIC NAMES</strong></h5>
 
                                                                     
                                                                     
-                                                                    <li>
+                                                                    <li class="fs-6">
                                                                         &emsp;
                                                                         Other Scientific Names:
                                                                     </li>
                                                                     <ul style="list-style-type:circle">
                                                                         
-                                                                        <li>{{ pg.sci_philippine_name1 }}</li>
-                                                                        <li>{{ pg.sci_philippine_name2 }}</li>
-                                                                        <li>{{ pg.sci_philippine_name3 }}</li>
+                                                                        <li class="fs-5">{{ pg.sci_philippine_name1 }}</li>
+                                                                        <li class="fs-5">{{ pg.sci_philippine_name2 }}</li>
+                                                                        <li class="fs-5">{{ pg.sci_philippine_name3 }}</li>
                                                                         
                                                                     </ul> 
 
                                                                     
                                                                     <br></br>
-                                                                    <li>
+                                                                    <li class="fs-6">
                                                                         &emsp;
                                                                         Other Scientific Names:
                                                                     </li>
@@ -196,9 +194,9 @@
                                                 
                                                 <!-- Tab Locality & Seasonality -->
                                                 <div class="tab-pane" id="local" role="tabpanel">
-                                                    <h5><strong>WHERE IN THE PHILIPPINES?</strong></h5>
+                                                    <h5><strong class="fs-4">WHERE IN THE PHILIPPINES?</strong></h5>
                                                     <ul class="list-inline" style="list-style-type:circle">
-                                                        <li>
+                                                        <li class="fs-5">
                                                             <strong>Distribution in Philippines:</strong>
                                                             
                                                             {{ pg.distribution }}
@@ -217,12 +215,12 @@
                                                             <ul class="list-inline">
                                                                 <li>
                                                                     
-                                                                    <h5><strong>CONSERVATION STATUS IN THE PHILIPPINES</strong></h5>
+                                                                    <h5><strong class="fs-4">CONSERVATION STATUS IN THE PHILIPPINES</strong></h5>
 
                                                                     <!-- Conservation -->
 
                                                                     <ul style="list-style-type:circle">
-                                                                    <li>
+                                                                    <li class="fs-5">
                                                                         
                                                                         <i>{{ pg.scientific_name }}</i> {{ pg.conservation_status }}
                                                                         
@@ -232,14 +230,14 @@
                                                                     <!-- Law -->
                                                                     <br>
 
-                                                                    <h5><strong>PHILIPPINE LAW</strong></h5>
+                                                                    <h5><strong class="fs-4">PHILIPPINE LAW</strong></h5>
                                                                     <ul style="list-style-type:circle">
-                                                                    <li>Republic Act No. 9147 - "Wildlife Resources Conservation and Protection Act"</li>
+                                                                    <li class="fs-5">Republic Act No. 9147 - "Wildlife Resources Conservation and Protection Act"</li>
                                                                         <ul class="list-inline">
-                                                                            <li>
+                                                                            <li class="fs-5">
                                                                                 <p>It shall be the policy of the State to conserve the country's wildlife resources and 
                                                                                 their habitats for sustainability. 
-                                                                                <a href="https://lawphil.net/statutes/repacts/ra2001/ra_9147_2001.html" target="_blank">Read More</a>
+                                                                                <a href="https://lawphil.net/statutes/repacts/ra2001/ra_9147_2001.html" target="_blank" class="fw-normal">Read More</a>
                                                                                 </p> 
                                                                             </li>
                                                                         </ul>
@@ -255,31 +253,31 @@
                                                 <!-- Tab Utilization -->
                                                 <div class="tab-pane" id="util" role="tabpanel">
                                                     <!-- Uses -->
-                                                    <h5><strong>USES</strong></h5>
+                                                    <h5><strong class="fs-4">USES</strong></h5>
                                                     <ul style="list-style-type:circle">
                                                         
-                                                        <li>{{ pg.use_1 }}</li>
-                                                        <li>{{ pg.use_1 }}</li>
-                                                        <li>{{ pg.use_1 }}</li>
+                                                        <li class="fs-5">{{ pg.use_1 }}</li>
+                                                        <li class="fs-5">{{ pg.use_2 }}</li>
+                                                        <li class="fs-5">{{ pg.use_3 }}</li>
                                                         
                                                     </ul>
 
                                                     <!-- SCIENTIFIC STUDIES -->
                                                     <br>
-                                                    <h5><strong>SCIENTIFIC STUDIES</strong></h5>
+                                                    <h5><strong class="fs-4">SCIENTIFIC STUDIES</strong></h5>
                                                     <ul style="list-style-type:circle">
                                                         
-                                                        <li>
+                                                        <li class="fs-5">
                                                             {{ pg.scientific_studies1 }}
-                                                            <a href="{{pg.scientific_study_link1}}" target="_blank">Know More</a>
+                                                            <a href="{{pg.scientific_study_link1}}" target="_blank"><strong>Know More</strong></a>
                                                         </li>
-                                                        <li>
+                                                        <li class="fs-5">
                                                             {{ pg.scientific_studies2 }} 
-                                                            <a href="{{pg.scientific_study_link2}}" target="_blank">Know More</a>
+                                                            <a href="{{pg.scientific_study_link2}}" target="_blank"><strong>Know More</strong></a>
                                                         </li>
-                                                        <li>
+                                                        <li class="fs-5">
                                                             {{ pg.scientific_studies3 }} 
-                                                            <a href="{{pg.scientific_study_link3}}" target="_blank">Know More</a>
+                                                            <a href="{{pg.scientific_study_link3}}" target="_blank"><strong>Know More</strong></a>
                                                         </li>
                                                         
                                                     </ul>
@@ -287,7 +285,7 @@
 
                                                 <!-- Tab Plant Care and Propagation -->
                                                 <div class="tab-pane" id="care" role="tabpanel">
-                                                    <h5><strong>PLANT CARE & PROPAGATION</strong></h5>
+                                                    <h5><strong class="fs-4">PLANT CARE & PROPAGATION</strong></h5>
                                                     <ul style="list-style-type:circle">
                                                         
                                                         <li>
@@ -308,7 +306,7 @@
 
                                                 <!-- Tab Disclaimer & References -->
                                                 <div class="tab-pane" id="disclaimer" role="tabpanel">
-                                                    <h5><strong>DISCLAIMER</strong></h5>
+                                                    <h5><strong class="fs-4">DISCLAIMER</strong></h5>
                                                     <ul style="list-style-type:circle">
                                                         <li>
                                                             The information in this website has been compiled and organized from reliable sources. 
@@ -324,7 +322,7 @@
                                                         </li>
                                                     </ul>
                                                     <br>
-                                                    <h5><strong>REFERENCES</strong></h5>
+                                                    <h5><strong class="fs-4">REFERENCES</strong></h5>
                                                     <ul style="list-style-type:circle">
                                                         
                                                         <li>

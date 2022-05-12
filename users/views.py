@@ -44,9 +44,6 @@ def register(request):
         form = UserRegisterForm()
     return render(request, 'users/register.html', {'form':form})
 
-@login_required
-def profile(request):
-    return render(request,'users/profile.html')
 
 #----------Get Coordinates----
 @csrf_exempt
@@ -239,12 +236,24 @@ def deletepost(request, pk):
 
 @login_required
 def phplantmap(request):
-
     json_serializer = serializers.get_serializer("json")()
     plants_locations = json_serializer.serialize(Location.objects.all())
-    context = {
-                'plants_locations': plants_locations,
-    }
+
+    home = Plantsgallery.objects.all()
+    complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
+  
+     # --------- Gets Total Number of Predictions per User Only ---------------- #
+    totalpred = PredictedPlant.objects.count()
+
+
+    context ={
+        'plants_locations': plants_locations,
+        'home':home,
+        'complete_pred': complete_pred,
+
+        # --------- Gets Total Number of Predictions per User Only ---------------- #
+        'totalpred': totalpred, 
+       }
     return render(request, 'users/phmap.html', context)
     
 def password_reset_request(request):
@@ -280,3 +289,64 @@ def password_reset_request(request):
         'password_form': password_form,
     }
     return render(request, 'users/password_reset.html', context)
+
+@login_required
+def profile(request):
+    complete_pred = PredictedPlant.objects.filter(post_prediction__author=request.user)
+    anhw_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Anahaw - Saribus rotundifolius')
+    bm_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bagawak Morado - Clerodendrum quadriloculare')
+    bgny_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bignay - Antidesma bunius')
+    cp_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = "Copeland's Pitcher - Nepenthes copelandii")
+    klngg_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kalingag - Cinnamomum mercadoi')
+    ktmn_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Katmon - Dillenia philippinensis')
+    krsp_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kris Plant - Alocasia sanderiana')
+    payau_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis')
+    tngbywk_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata')
+    tybk_pred_only = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys')
+
+     # --------- Gets Total Number of Predictions per User Only ---------------- #
+    totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).count()
+
+    # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+    anhw_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Anahaw - Saribus rotundifolius').count()
+    bm_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bagawak Morado - Clerodendrum quadriloculare').count()
+    bgny_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Bignay - Antidesma bunius').count()
+    cp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = "Copeland's Pitcher - Nepenthes copelandii").count()
+    klngg_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kalingag - Cinnamomum mercadoi').count()
+    ktmn_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Katmon - Dillenia philippinensis').count()
+    krsp_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Kris Plant - Alocasia sanderiana').count()
+    payau_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Payau - Homalomena philippinensis').count()
+    tngbywk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tangisang-Bayawak - Ficus variegata').count()
+    tybk_totalpred = PredictedPlant.objects.filter(post_prediction__author=request.user).filter(prediction_label = 'Tayabak - Strongylodon macrobotrys').count()
+
+    context ={
+        'complete_pred': complete_pred,
+
+
+        'anhw_pred_only':anhw_pred_only,
+        'bm_pred_only': bm_pred_only,
+        'bgny_pred_only': bgny_pred_only,
+        'cp_pred_only': cp_pred_only,
+        'klngg_pred_only': klngg_pred_only,
+        'ktmn_pred_only': ktmn_pred_only,
+        'krsp_pred_only':krsp_pred_only,
+        'payau_pred_only':payau_pred_only,
+        'tngbywk_pred_only': tngbywk_pred_only,
+        'tybk_pred_only':tybk_pred_only,
+
+        # --------- Gets Total Number of Predictions per User Only ---------------- #
+        'totalpred': totalpred, 
+
+        # --------- Gets Total Number of Predictions per User % per Plants ---------------- #
+        'anhw_totalpred': anhw_totalpred, #Anahaw
+        'bm_totalpred': bm_totalpred, #Bagawak Morado
+        'bgny_totalpred': bgny_totalpred, #Bignay
+        'cp_totalpred': cp_totalpred, #Copeland's Pitcher
+        'klngg_totalpred': klngg_totalpred, #Kalingag
+        'ktmn_totalpred': ktmn_totalpred, #Katmon
+        'krsp_totalpred': krsp_totalpred, #Kris Plant
+        'payau_totalpred': payau_totalpred, #Payau
+        'tngbywk_totalpred': tngbywk_totalpred, #Tangisang Bayawak
+        'tybk_totalpred': tybk_totalpred, #Tayabak
+       }
+    return render(request,'users/profile.html', context)
