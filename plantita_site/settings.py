@@ -67,8 +67,8 @@ INSTALLED_APPS = [
     'storages',
 ]
 
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS=['https://plantitaph.com', 'https://www.plantitaph.com', 'https://plantita.azurewebsites.net'] 
 
@@ -107,23 +107,23 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'plantitadb',
-#         'USER': 'climatita',
-#         'PASSWORD': 'P7@ntita01',
-#         'HOST': 'plantitamysql.mysql.database.azure.com',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'plantitadb',
+        'USER': 'climatita',
+        'PASSWORD': 'P7@ntita01',
+        'HOST': 'plantitamysql.mysql.database.azure.com',
+        'PORT': '3306',
+    }
+}
 
 
 # Password validation
