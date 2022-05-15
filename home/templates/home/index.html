@@ -12,7 +12,7 @@
             <div class="col-md-6 align-self-center text-center text-md-start">
                 <div class="block">
                     <h1 class="fw-bold mb-4 font-size-60">Know Your <span style="color:rgba(3, 139, 3, 0.849)">Plant</span> Better</h1>
-                    <p class="mb-4">
+                    <p class="fw-normal mb-4">
                         Take a picture of your plant, upload, then wait for the initial
                         identification!
                     </p>
@@ -125,14 +125,14 @@
                         <!-- gallery item 1-->
                         <div class="gallery-item" style="margin-left: auto; margin-right: auto; max-width: 26rem; display: flex; align-items: center; justify-content: center;">
                             <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-                                <h3 class="card-header">{{ home_item.title }}</h3>
+                                <h3 class="fw-normal card-header">{{ home_item.title }}</h3>
                                 <div class="card-body" style="padding-bottom: 0%;">
-                                    <p><small><i>{{ home_item.scientific_name }}</i></small></p>
+                                    <p class="fw-normal fs-6"><small><i>{{ home_item.scientific_name }}</i></small></p>
                                     <img class="img-thumbnail" src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}"/> 
                                     <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
-                                        <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
-                                        <li class="list-group-item list-group-item-action"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
+                                        <li class="fw-normal fs-6 list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
+                                        <li class="fs-6 list-group-item list-group-item-action"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
+                                        <li class="fs-6 list-group-item list-group-item-action"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
                                     </ul>
                                 </div>
                             </div>
@@ -148,26 +148,28 @@
                         </div> <!-- row2 -->
     </div><!-- .container close -->
     <img class="design" src="{% static 'home/images/design-left.png' %}">
+
 </section><!-- header close -->
 
 
 <section class="feature-list section" style="background-color: #c4d5a7;">
     <div class="container">
-        <img class="design" src="{% static 'home/images/design-right.png' %}" style="right: 0;">
+        
         <div class="heading">
             <h2 class="align-self-center text-center" style="font-weight: bold; color: rgb(255, 254, 252);">TUTORIALS</h2>
-            <p class="align-self-center text-center">Watch Clima the Pinoy Cat, to show you how Plantita works!</p>
+            <p class="fw-normal align-self-center text-center">Watch Clima the Pinoy Cat, to show you how Plantita works!</p>
         </div>
         <div class="row">
             <div class="col order-md-1 order-1 align-self-center text-center text-md-left embed-responsive embed-responsive-21by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>How to View 3D Plant Models using Augmented Reality?</p>
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e-jSORVXlXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p class="fw-normal">How to View 3D Plant Models using Augmented Reality?</p>
             </div>
             <div class="col order-md-2 order-2 text-center mb-5 mb-lg-0 text-md-left embed-responsive ">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p>How to Identify Plants using Plantita?</p>
+                <p class="fw-normal">How to Identify Plants using Plantita?</p>
             </div>
         </div>
+        
     </div>
 </section>
 
@@ -185,28 +187,28 @@
             <div class="col-md-4">
                 <div class="mb-40 text-center text-md-left">
                     <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:analytics-outline"></span>
-                    <h4 class="font-weight-bold mb-2">Easy Identification</h4>
-                    <p>Plantita uses Convolutional Neural Network to identify the uploaded Plant Images with 92% threshold.</p>
+                    <h4 class="fw-bold fs-4 mb-2">Easy Identification</h4>
+                    <p class="fw-normal">Plantita uses Convolutional Neural Network to identify the uploaded Plant Images with 92% threshold.</p>
                 </div>
                 <div class="mb-40 text-center text-md-left">
                     <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:information-circle-outline"></span>
-                    <h4 class="font-weight-bold mb-2">Realiable Information</h4>
-                    <p>Relevant plant information are supported with Published Scientific Studies.</p>
+                    <h4 class="fw-bold fs-4 mb-2">Realiable Information</h4>
+                    <p class="fw-normal">Relevant plant information are supported with Published Scientific Studies.</p>
                 </div>
             </div>
-            <div class="col-md-4 text-center align-self-center mb-4 mb-md-0">
+            <div class="container-fluid col-md-4 text-center align-self-center mb-4 mb-md-0">
                 <img class="img-fluid" src="{% static 'home/images/plant-center.png' %}" alt="">
             </div>
             <div class="col-md-4">
                 <div class="mb-40 text-center text-md-left">
                     <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:water-outline"></span>
-                    <h4 class="font-weight-bold mb-2">Grow Philippine Flora</h4>
-                    <p>Plantita focuses on the flora that can be originally found in the Philippines.</p>
+                    <h4 class="fw-bold fs-4 mb-2">Grow Philippine Flora</h4>
+                    <p class="fw-normal">Plantita focuses on the flora that can be originally found in the Philippines.</p>
                 </div>
                 <div class="mb-40 text-center text-md-left">
                     <span class="d-inlin-block h2 mb-10 iconify" data-icon="ion:aperture-outline"></span>
-                    <h4 class="font-weight-bold mb-2">Augmented Reality Plants</h4>
-                    <p>View Philippine plants in your grasps, virtually!</p>
+                    <h4 class="fw-bold fs-4 mb-2">Augmented Reality Plants</h4>
+                    <p class="fw-normal">View Philippine plants in your grasps, virtually!</p>
                 </div>
             </div>
         </div>
@@ -225,38 +227,38 @@
       <div class="owl-carousel owl-2">
         <div class="media-29101">
           <img src="{% static 'home/images/team/christian.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Christian Rhomel Aguila</a></h3>
-          <p>Co-Founder & Developer</p>
+          <h3><a class="fw-normal" href="#">Christian Rhomel Aguila</a></h3>
+          <p class="fw-normal">Co-Founder & Developer</p>
         </div>
 
         <div class="media-29101">
           <img src="{% static 'home/images/team/mark.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Mark Niño Carmen</a></h3>
-          <p>Co-Founder & Augmented Reality Developer</p>
+          <h3><a class="fw-normal" href="#">Mark Niño Carmen</a></h3>
+          <p class="fw-normal">Co-Founder & Augmented Reality Developer</p>
         </div>
 
         <div class="media-29101">
           <img src="{% static 'home/images/team/lara.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Lara Jane Labutong</a></h3>
-          <p>Co-Founder & Developer</p>
+          <h3><a class="fw-normal" href="#">Lara Jane Labutong</a></h3>
+          <p class="fw-normal">Co-Founder & Developer</p>
         </div>
 
         <div class="media-29101">
           <img src="{% static 'home/images/team/ivan.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Mark Ivan Necesito</a></h3>
-          <p>Co-Founder & Back-End Developer</p>
+          <h3><a class="fw-normal" href="#">Mark Ivan Necesito</a></h3>
+          <p class="fw-normal">Co-Founder & Back-End Developer</p>
         </div>
 
         <div class="media-29101">
           <img src="{% static 'home/images/team/audrey.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Audrey Solis</a></h3>
-          <p>Co-Founder & 3D Developer</p>
+          <h3><a class="fw-normal" href="#">Audrey Solis</a></h3>
+          <p class="fw-normal">Co-Founder & 3D Developer</p>
         </div>
 
         <div class="media-29101">
           <img src="{% static 'home/images/team/send.png' %}" alt="Image" class="img-fluid">
-          <h3><a href="#">Contact Us</a></h3>
-          <p>Be in touch with us through e-mail
+          <h3><a class="fw-normal" href="#">Contact Us</a></h3>
+          <p class="fw-normal">Be in touch with us through e-mail
               <br>
               clima.thesis@gmail.com</p>
         </div>
@@ -274,7 +276,7 @@
             <div class="col-md-6 order-md-1 order-2 align-self-center text-center text-md-left">
                 <div class="content">
                     <h4 class="subheading">Here at Plantita</h4>
-                    <p>We Keep Going, We Keep Growing</p>
+                    <p class="fw-normal">We Keep Going, We Keep Growing</p>
                 </div>
             </div>
             <div class="col-md-6 order-md-2 order-1 text-center mb-5 mb-lg-0">

@@ -4,11 +4,11 @@
 {% block masthead %}
 <!-- Masthead-->
 <header class="mastheadOther">
-    <div class="justify-content-center">
+    <div class="container-fluid justify-content-center">
         <div class="mastheadOther-heading" style="padding-top: 5%;">
-            <h1 class=" text-uppercase" style="text-align: center;">
+            <h1 class=" text-uppercase fw-bold" style="text-align: center;">
                 Philippine
-                <span class="fw-bold" style="color:rgba(3, 139, 3, 0.849)">
+                <span style="color:rgba(3, 139, 3, 0.849)">
                     Plant 
                 </span>
                 Map
@@ -30,7 +30,7 @@
                 <script>
                     var marker_locations = JSON.parse('{{ plants_locations|escapejs }}');
                 </script>
-                <div id="map" style=" height: 50vh;"></div>
+                <div id="map" class="shadow-lg p-3 mb-5 bg-body rounded" style=" height: 50vh;"></div>
             
                 
                 <script src="{% static 'users/script/script_map.js' %}"></script>
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Legend Card -->
-    <div class="container">
+    <div class="container-fluid">
         <div class="row gx-6 gx-lg-5 align-items-center justify-content-center">
             <div class="col-lg-6 col-sm-4 mb-6">
                 <div class="card card-with-shadow card-rounded-max card-without-border">
@@ -124,16 +124,32 @@
                 <!-- User Guide -->
                 <div class="accordion accordion-flush" id="accordionExample" style="padding-top: 5%;">
                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                What do plant icons represent on the map?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p class="fw-normal">The plant icons represents all  image plants that has been identified using Plantita, uploaded by all the users throughout the Philippines.</p>
+                                <hr>
+                                <p>Ano ang nirerepresenta ng mga icon sa mapa?</p>
+                                <p>Ang mga icon sa mapa ang nagrerepresenta ng lahat ng imahe ng halaman na nakilala ng Plantita.</p>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Why are the plants' locations do not show coordinates?  
+                            May I know the exact locations or coordinates of the plants?  
                         </button>
                     </h2>
                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                        <p>In order to protect the plants from threats such as overexploitation, its exact location cannot be disclosed to the public. </p>
-                        <p><strong class="text-mute">Bakit hindi ipinapakita ang coordinates ng mga halaman?</strong></p> 
-                        <p><small class="text-mute">Upang mapangalagaan ang mga halaman mula sa lubos na pagkuha ng mga ito, ang eksaktong location ay hindi maaaring ipagbigay alam sa publiko ng basta-basta.</small></p>
+                        <p class="fw-normal">Sorry, Plantita cannot disclose such information. In order to protect the plants from threats such as overexploitation, its exact location cannot be disclosed to the public. </p>
+                        <hr>
+                        <p>Maaari ko bang malaman ang eksaktong lokasyon ng mga halaman?</p> 
+                        <p>Upang mapangalagaan ang mga halaman mula sa lubos na pagkuha ng mga ito, ang eksaktong lokasyon ay hindi maaaring ipagbigay alam sa publiko ng basta-basta.</p>
                         </div>
                     </div>
                     </div>
@@ -145,24 +161,14 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
-                        <p>No, the Plantita site is solely for the indigenous plants that can be found in the <b>Philippines</b>.</p>
-                        <p><strong class="text-mute">Kaya ba ng Plantita site na maipakita ang indigenous plants ng ibang bansa?</strong></p>
-                        <p><small class="text-mute">Hindi, sapagkat ang mga halaman lamang na galing at natural na namumunga sa Pilipinas ang ipinapakita sa Plantita.</small></p>
+                        <p class="fw-normal">No, the Plantita site is solely for the indigenous plants that can be found in the <b>Philippines</b>.</p>
+                        <hr>
+                        <p>Kaya ba ng Plantita site na maipakita ang indigenous plants ng ibang bansa?</p>
+                        <p>Hindi, sapagkat ang mga halaman lamang na galing at natural na namumunga sa Pilipinas ang ipinapakita sa Plantita.</p>
                         </div>
                     </div>
                     </div>
-                    <!-- <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
-                    </div> -->
+
                     
                 </div> <!-- End Div accordion -->
             </div> <!-- End Div col-6 -->
@@ -180,7 +186,7 @@
         <div class="media-29101">
           <img src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}" class="img-fluid">
           <h3><a href="{% url 'plant_details' home_item.slug %}">{{ home_item.title }}</a></h3>
-          <p>{{ home_item.scientific_name }}</p>
+          <p class="fw-normal">{{ home_item.scientific_name }}</p>
         </div>
         {% if forloop.counter|divisibleby:10 %}
 

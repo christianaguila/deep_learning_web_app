@@ -4,70 +4,33 @@
 
 {% block masthead %}
 <!-- Masthead-->
-<header class="mastheadOther">
-    <div class="justify-content-center">
-        <div class="mastheadOther-heading" style="padding-top: 5%;">
-            <h1 class=" text-uppercase" style="text-align: center;">
-                Upload
-                <span class="font-weight-bold" style="color:rgba(3, 139, 3, 0.849)">
-                    Plant 
-                </span>
-                Photo
-            </h1>
+<div class="container-fluid">
+    <header class="mastheadOther">
+        <div class="justify-content-center">
+            <div class="mastheadOther-heading" style="padding-top: 5%;">
+                <h1 class=" text-uppercase fw-bold" style="text-align: center;">
+                    Upload
+                    <span style="color:rgba(3, 139, 3, 0.849)">
+                        Plant 
+                    </span>
+                    Photo
+                </h1>
+            </div>
         </div>
-    </div>
-</header>
+        <h3 class="pt-4 text-center">
+            PLANTITA utilizes Convolutional Neural Network Model to identify the features of Philippine Indigenous Plants and classify it.
+        </h3>
+    </header>
+</div>
+
 {% endblock %}
 
 
 {% block upload_photo %}
-<section class="py-5">
-    <div class="text-center" style="line-height: 0.5rem;">
-        <p class="lead" style="font-size: 1rem;">           
-            PLANTITA utilizes Convolutional Neural Network Models to identify 
-            the features of Philippine Indigenous Plants and classify it.
-        </p>
-        <a href="#user_guide" style="scroll-behavior: smooth; text-decoration: none;">
-            <small class="text-muted" style="font-size: 0.5rem; text-decoration: underline;">
-                What to Upload?
-            </small>  
-        </a>
-    </div> 
-    <br>
-    <hr class="solid" style="border-top: 4px solid gray;  margin: 0 20%;">
-
-    <!-- Modal -->
-    <div class="modal fade" id="ModalWhatUpload" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Oops!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            <p>Image cannot be identified maybe due to the following reasons:</p>
-                <ol class="list-group list-group-numbered">
-                    <li class="list-group-item">The image is too dark to recognize.</li>
-                    <li class="list-group-item">The image is too blurry.</li>
-                    <li class="list-group-item">The image does not show the plant's physical characteristics.</li>
-                </ol>
-            <a href="#user_guide" style="scroll-behavior: smooth; text-decoration: none;">
-                <small class="text-muted" style="font-size: 0.5rem; text-decoration: underline;">
-                    What to Upload?
-                </small>  
-            </a>
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        </div>
-    </div>
-</section>
+<br>
 <section>
     <div class="container px-4 px-lg-5 my-5">
+        <hr style="color: rgb(0, 126, 63); border-top: 5px solid;">  
         <div class="container px-4 px-lg-5 my-5">
             <h5> Plant Location </h5>
             <br>
@@ -135,7 +98,7 @@
                             
                             <div class="modal-body">
                                 <div class="d-flex align-items-center">
-                                    <h3><strong>Please Wait...</strong></h3>
+                                    <h3><strong>Please wait. Processing...</strong></h3>
                                     
                                     <!-- <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div> -->
                                     <div class="spinner-grow text-success ms-auto" role="status">
@@ -182,18 +145,15 @@
                         </form>
                     </div>
                 </div>
+                
             </div>
         </div>
     </div>
-
-    <!-- Design Left -->
-    <img class="design" src="{% static 'home/images/design-left.png' %}">
-            <br>
             
     <!-- Previews Plant Image by User & Prediction -->
     <div class="container px-4 px-lg-5 my-5">
-        <hr style="height: 1px; background-color: gray; width: 80%;">  
-        <h2 style="padding-top: 2%; text-align: center;"> Plant Identification Result </h3>
+        <hr style="color: rgb(0, 126, 63); border-top: 5px solid;">  
+        <h2 style="padding-top: 2%; text-align: center;" class="fw-bold">Plant Identification Result </h2>
         <br>
         <div class="row">
             {% if prediction %}
@@ -201,15 +161,17 @@
                 <div class="container">
                     <div class="card">
                         <div class="card-body" style="text-align: center;">
-                            <p style="align-items: center;">The plant is identified as
+                            <p class="fs-4 fw-normal lh-base" style="align-items: center;">The plant is identified as
                                 <br>
-                                <span class="fw-bold" style="color:rgba(3, 139, 3, 0.849)">
+                                <span class="fw-bold fs-3" style="color:rgba(3, 139, 3, 0.849)">
                                     <b>{{prediction}}</b>
                                 </span>
                                 {% if pred_loc %}
-                                <p>Found at {{pred_loc}}</p>
+                                <p class="fs-5 fw-normal">Found at {{pred_loc}}</p>
                                 {% endif %}
-                                <a data-toggle="modal" data-target="#ModalCantIdnetify" style="text-decoration: underline;"><small>My plant can't be identified? Why?</small></a>
+                                <br>
+                                <a class="fs-6 fw-normal" data-bs-toggle="modal" href="#cantidentifyModal" role="button"> <u>My plant can't be identified? Why?</u> </a>       
+                                <!-- <a data-toggle="modal" data-target="#Modal" style="text-decoration: underline;"><small>My plant can't be identified? Why?</small></a> -->
                             </p>
                         </div>
                     </div>
@@ -220,55 +182,67 @@
                 <div class="content">
                     <div class="container justify-content-center text-center">
                         {% if plant_image %}
-                            <img class="img-fluid" src="{{ plant_image.url }}" alt="{{ plant_image.title }}" style="object-fit: cover; width: auto; height: 40vh; align-items: center;"/> 
+                            <img class="img-fluid rounded" src="{{ plant_image.url }}" alt="{{ plant_image.title }}" style="object-fit: cover; width: auto; height: 40vh; align-items: center;"/> 
                         {% endif %}
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="ModalCantIdnetify" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <!-- Image not predicted modal -->
+        <div class="modal fade" id="cantidentifyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Oops!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                  <h5 class="modal-title fs-5 fw-bold" id="exampleModalToggleLabel">Oops</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                <p>Image cannot be identified maybe due to the following reasons:</p>
+                    <p class="fw-normal">Image cannot be identified maybe due to the following reasons:</p>
                     <ol class="list-group list-group-numbered">
-                        <li class="list-group-item">The image is too dark to recognize.</li>
-                        <li class="list-group-item">The image is too blurry.</li>
-                        <li class="list-group-item">The image does not show the plant's physical characteristics.</li>
+                        <li class="list-group-item fs-5 fw-normal">The image is too dark to recognize.</li>
+                        <li class="list-group-item fs-5 fw-normal">The image is too blurry.</li>
+                        <li class="list-group-item fs-5 fw-normal">The image does not show the plant's physical characteristics.</li>
                     </ol>
-                <a href="#user_guide" style="scroll-behavior: smooth; text-decoration: none;">
-                    <small class="text-muted" style="font-size: 0.5rem; text-decoration: underline;">
-                        What to Upload?
-                    </small>  
-                </a>
                 </div>
                 <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-main" data-target="#ModalWhatUpload">What to Upload?</button>
+                  <button class="btn btn-upload" data-bs-target="#instructionsModal" data-bs-toggle="modal">What to upload?</button>
                 </div>
+              </div>
             </div>
+          </div>
+          <div class="modal fade" id="instructionsModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-5 fw-bold" id="exampleModalToggleLabel2">What to upload?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video" allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn1" data-bs-dismiss="modal">Go Back</button>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
+          
     
-    
+        
         <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+            <hr style="color: rgb(0, 126, 63); border-top: 5px solid;">  
             <div class="col">
             <div class="gallery-item" style="align-items: center; justify-content: center;">
                 <div class="card" style="width: 18rem; margin: auto; align-items: center;">    
-                        <p style="padding-top: 5%;">Indigenous Plants</p>
-                        <p><small class="text-muted">Click for More Info</small></p>
+                        <p style="padding-top: 5%;" class="fs-4 fw-normal">Indigenous Plants</p>
+                        <p class="fs-4 fw-normal"><small class="text-muted">Click for More Info</small></p>
                         {% for g in gallery %}
                         <div class="row">
                             <div class="col">
-                                <a style="padding-bottom: 5%; color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
+                                <a class="fw-normal " style="padding-bottom: 5%; color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
                             </div>
                         </div>
                     {% endfor %}
@@ -278,20 +252,20 @@
         </div>
         {% else %}
     </div>  <!----- end .row prediction result ----->
-
+    
  <!-- Design right -->
- <img class="design" src="{% static 'home/images/design-right.png' %}" style="right: 0;">
     <!-- <div class="container px-4 px-lg-5 my-5">  -->
-    <div class="row gx-4 gx-lg-5 align-items-center" style="padding-top: 2%;">
+    <hr style="color: rgb(0, 126, 63); border-top: 5px solid;">  
+    <div class="row gx-4 gx-lg-5 align-items-center">
         <div class="col">
         <div class="gallery-item" style="align-items: center; justify-content: center;">
             <div class="card" style="width: 18rem; margin: auto; align-items: center;">    
-                    <p>Indigenous Plants</p>
-                    <p><small class="text-muted">Click for More Info</small></p>
+                    <p class="fs-4 fw-normal pt-4">Indigenous Plants</p>
+                    <p class="fs-5 fw-normal"><small class="text-muted">Click for More Info</small></p>
                     {% for g in gallery %}
                     <div class="row">
                         <div class="col">
-                            <a style="color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
+                            <a class="fs-5" style="color: #f9a743;" href="{% url 'plant_details' g.slug %}">{{g.title}}</a></b>
                         </div>
                     </div>
                 {% endfor %}
