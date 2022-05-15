@@ -10,7 +10,6 @@ from django.db.models.query_utils import Q
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from httplib2 import Http
 
 from .forms import UserRegisterForm, ImageUploadForm
 from users.models import Post, PredictedPlant, Location
