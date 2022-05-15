@@ -67,8 +67,10 @@ INSTALLED_APPS = [
     'storages',
 ]
 
+
+CSRF_COOKIE_DOMAIN = '.plantitaph.com'
 # SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 CSRF_TRUSTED_ORIGINS=['https://plantitaph.com', 'https://www.plantitaph.com', 'https://plantita.azurewebsites.net'] 
 
