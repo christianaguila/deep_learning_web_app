@@ -49,6 +49,9 @@ def register(request):
 @login_required
 def coordinates(request):
     if request.method == 'POST':
+        coords['latitude'] = None
+        coords['longitude'] = None
+        user_address['address'] = None 
         coords['latitude'] = request.POST['latitude']
         coords['longitude'] = request.POST['longitude']
         user_address['address'] = request.POST['address']

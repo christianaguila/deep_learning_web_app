@@ -40,13 +40,13 @@
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box2"><span class="counter">{{bgny_totalpred}}</span>
-                        <p>Bignay</p>
+                    <div class="counter-box2"><span class="counter">{{bm_totalpred}}</span>
+                        <p>Bagawak Morado</p>
                     </div>
                 </div>
                 <div class="four col-md-3">
-                    <div class="counter-box3"><span class="counter">{{bm_totalpred}}</span>
-                        <p>Bagawak Morado</p>
+                    <div class="counter-box3"><span class="counter">{{bgny_totalpred}}</span>
+                        <p>Bignay</p>
                     </div>
                 </div>
             </div>
@@ -92,6 +92,9 @@
                 </div>
 
             </div>
+            <p class="fw-normal mb-4 py-3 text-center">
+                Predicted plants from all PLANTITA users
+            </p>
         </div>
     </div>
     <script>
@@ -129,7 +132,7 @@
                                 <div class="card-body" style="padding-bottom: 0%;">
                                     <p class="fw-normal fs-6"><small><i>{{ home_item.scientific_name }}</i></small></p>
                                     <img class="img-thumbnail" src="{{ home_item.plant_image.url }}" alt="{{ home_item.title }}"/> 
-                                    <ul class="list-group list-group-flush">
+                                    <ul class="list-group py-3 bg-light">
                                         <li class="fw-normal fs-6 list-group-item"><small>{{ home_item.common_foreign_name1 }}, {{ home_item.common_foreign_name2 }}</small></li>
                                         <li class="fs-6 list-group-item list-group-item-action"><b><a style="color: #f9a743;" href="{% url 'plant_details' home_item.slug %}">More Info</a></b></li>
                                         <li class="fs-6 list-group-item list-group-item-action"><b><a style="color: #f9a743;" target="_blank" href="{{ home_item.ar_link }}">View Augmented Reality</a></b></li>
@@ -147,25 +150,68 @@
                         {% endfor %}
                         </div> <!-- row2 -->
     </div><!-- .container close -->
-    <img class="design" src="{% static 'home/images/design-left.png' %}">
+    <!-- <img class="design" src="{% static 'home/images/design-left.png' %}"> -->
 
 </section><!-- header close -->
 
+<!-- Plant Landscape -->
+<!-- <section>
+    <div class="container py-5">
+        <div class="heading">
+            <h2>Plant Landscape</h2>
+            <p class="fw-normal mb-4 text-center">
+                Explore plants with different environment using Augmented Reality
+            </p>
+        </div>
+        <div class="row row-cols-1 row-cols-md-3 g-4 p-3">
+            <div class="col">
+              <div class="card h-100 text-dark bg-light mb-3">
+                <img src="{% static 'home/images/word-logo.png'%}" class="card-img-top" alt="...">
+                <div class="card-body mx-auto">
+                  <a href="{{ 'https://forest-plant-environment.netlify.app/' }}" class="btn btn-outline-dark" role="button" target="_blank">Forest</a>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-dark bg-light mb-3">
+                <img src="{% static 'home/images/word-logo.png'%}" class="card-img-top" alt="...">
+                <div class="card-body mx-auto">
+                  <button href="#" class="btn btn-outline-dark" type="button">River</button>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 text-dark bg-light mb-3">
+                <img src="{% static 'home/images/word-logo.png'%}" class="card-img-top" alt="...">
+                <div class="card-body mx-auto">
+                  <button href="#" class="btn btn-outline-dark" type="button">Road</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</section> -->
 
 <section class="feature-list section" style="background-color: #c4d5a7;">
     <div class="container">
         
         <div class="heading">
             <h2 class="align-self-center text-center" style="font-weight: bold; color: rgb(255, 254, 252);">TUTORIALS</h2>
-            <p class="fw-normal align-self-center text-center">Watch Clima the Pinoy Cat, to show you how Plantita works!</p>
+            <p class="fw-normal align-self-center text-center">Learn how Plantita works!</p>
         </div>
         <div class="row">
             <div class="col order-md-1 order-1 align-self-center text-center text-md-left embed-responsive embed-responsive-21by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/e-jSORVXlXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                <p class="fw-normal">How to View 3D Plant Models using Augmented Reality?</p>
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/OCCDTlVC4Q0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p class="fw-normal">How to Use Augmented Reality? (Apple Device)</p>
             </div>
-            <div class="col order-md-2 order-2 text-center mb-5 mb-lg-0 text-md-left embed-responsive ">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/QOV2Xw9kYx0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="col order-md-2 order-2 align-self-center text-center text-md-left embed-responsive">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/tF1HSIUyrUU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p class="fw-normal">How to Use Augmented Reality? (Android Device)</p>
+            </div>
+            <div class="col order-md-3 order-3 text-center mb-5 mb-lg-0 text-md-left embed-responsive ">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/V-_QwK4s6pc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p class="fw-normal">How to Identify Plants using Plantita?</p>
             </div>
         </div>
@@ -181,7 +227,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="heading">
-                    <h2>Service</h2>
+                    <h2>Services</h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -213,9 +259,9 @@
             </div>
         </div>
     </div><!-- .container close -->
-
 <img class="design" src="{% static 'home/images/design-right2.png' %}" style="right: 0;">
 </section><!-- #service close -->
+
 
 <!--###### The team Section #####------>
 <section class="feature-list section" style="background-color: #c4d5a7;">
